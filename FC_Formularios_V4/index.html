@@ -1,0 +1,2861 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FC Formularios | RELMA</title>
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="FC Formularios: consulta, compara y prepara fórmulas de color.">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FC Formularios">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<script src="dymo.connect.framework.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+<style>
+  :root {
+    --fondo: #0f172a; --fondo-suave: #1e293b; --borde: #334155;
+    --txt: #e2e8f0; --txt-suave: #94a3b8; --primario: #0ea5e9; --exito: #22c55e; --alerta: #ef4444;
+  }
+  body.light-mode {
+    --fondo: #f1f5f9; --fondo-suave: #ffffff; --borde: #cbd5e1;
+    --txt: #0f172a; --txt-suave: #475569; --primario: #0284c7; --exito: #16a34a; --alerta: #dc2626;
+  }
+  * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
+  body { background: var(--fondo); color: var(--txt); padding: 20px; margin: 0; display: flex; justify-content: center; min-height: 100vh; transition: background 0.3s; }
+  .contenedor { background: var(--fondo-suave); border: 1px solid var(--borde); border-radius: 16px; padding: 24px; width: 100%; max-width: 1200px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+  
+  .header-app { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .header-app h2 { margin: 0; color: var(--primario); }
+  
+  .tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid var(--borde); padding-bottom: 10px; flex-wrap: wrap; }
+  .tab-btn { background: transparent; color: var(--txt-suave); border: none; padding: 10px 20px; font-size: 1rem; font-weight: bold; cursor: grab; border-radius: 8px; transition: 0.2s; user-select: none; }
+  .tab-btn:active { cursor: grabbing; }
+  .tab-btn:hover { background: rgba(128,128,128,0.1); }
+  .tab-btn.activo { background: var(--primario); color: white; }
+  
+  .tab-content { display: none; }
+  .tab-content.activo { display: block; animation: fadeIn 0.3s; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  h2, h3, h4 { color: var(--primario); margin-top: 0; }
+  .panel { background: rgba(128,128,128,0.05); border: 1px solid var(--borde); padding: 15px; border-radius: 10px; margin-bottom: 20px; }
+  .fila { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 15px; }
+  label { display: flex; flex-direction: column; font-size: 0.85rem; color: var(--txt-suave); flex: 1; min-width: 120px; }
+  select, input[type="text"], textarea, input[type="file"], input[type="number"], input[type="date"] { background: var(--fondo); border: 1px solid var(--borde); color: var(--txt); padding: 10px; border-radius: 8px; font-size: 0.95rem; margin-top: 5px; outline: none; }
+  select:focus, input:focus, textarea:focus { border-color: var(--primario); }
+  textarea { resize: vertical; min-height: 80px; font-family: monospace; width: 100%; }
+  .btn { background: var(--primario); color: white; border: none; padding: 10px 16px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; justify-content: center; gap: 5px; text-decoration: none;}
+  .btn:hover { filter: brightness(1.1); }
+  .btn.secundario { background: var(--borde); color: var(--txt); }
+  .btn.exito { background: var(--exito); color: white; }
+  .btn.peligro { background: var(--alerta); color: white; }
+  
+  .resultado-caja { background: #000; border: 1px solid var(--exito); border-radius: 8px; padding: 15px; margin-top: 15px; font-family: monospace; font-size: 1.1rem; color: #4ade80; white-space: pre-wrap; min-height: 60px; }
+  body.light-mode .resultado-caja { background: #1e293b; color: #4ade80; }
+
+  .item-resultado { border-bottom: 1px solid var(--borde); padding: 15px 0; }
+  .item-resultado:last-child { border-bottom: none; }
+  .historial-tabla { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.9rem; }
+  .historial-tabla th, .historial-tabla td { border: 1px solid var(--borde); padding: 8px; text-align: left; }
+  .historial-tabla th { background: rgba(128,128,128,0.1); }
+  
+  .badge-na { background: var(--alerta); color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; margin-left: 10px; }
+  .badge-base { background: #f59e0b; color: #000; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 0.85rem; margin-right: 10px;}
+  .badge-tipo-conv { background: #f59e0b; color: #000; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; margin-left: 6px; letter-spacing: 0.5px; }
+  .badge-tipo-prep { background: var(--primario); color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; margin-left: 6px; letter-spacing: 0.5px; }
+
+  .prep-item { border-bottom: 1px solid var(--borde); padding: 15px 0; }
+  .prep-item:last-child { border-bottom: none; }
+  .prep-titulo { color: var(--primario); font-size: 1.1rem; font-weight: bold; margin-bottom: 5px; }
+  .prep-sub { font-size: 0.9rem; color: var(--txt-suave); margin-bottom: 10px; display: flex; align-items: center; flex-wrap: wrap; gap: 8px;}
+  
+  .prep-opciones { margin-bottom: 15px; }
+  .prep-opciones label { display: flex; flex-direction: row; align-items: center; gap: 10px; cursor: pointer; margin-bottom: 15px; font-weight: bold; color: var(--txt); }
+  .prep-botones { display: flex; gap: 10px; flex-wrap: wrap; }
+  
+  .prep-detalle { display: none; background: rgba(0,0,0,0.2); border: 1px solid var(--borde); padding: 15px; border-radius: 8px; margin-top: 15px; }
+  .prep-detalle.activo { display: block; }
+  .prep-formula-txt { display: flex; flex-direction: column; gap: 15px; margin-bottom: 15px; padding: 10px 0; }
+  .formula-item { display: flex; justify-content: space-between; align-items: center; background: #011b177c; padding: 12px 20px; border-radius: 8px; border-left: 6px solid var(--primario); box-shadow: 0 4px 6px rgba(2, 154, 214, 0.466); }
+  body.light-mode .formula-item { background: #f8fafc; border-left-color: var(--primario); }
+  .formula-tinta { font-size: 1.1rem; font-weight: bold; }
+  .formula-cantidad { font-size: 1.8rem; font-family: "Consolas", monospace; font-weight: bold; }
+  .formula-header { display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.3); border: 1px solid var(--borde); border-radius: 8px; padding: 15px 0; margin-bottom: 20px; }
+  body.light-mode .formula-header { background: #f8fafc; }
+  
+  .header-item { display: flex; flex-direction: column; align-items: center; flex: 1; }
+  .header-item:not(:last-child) { border-right: 1px solid var(--borde); }
+  .header-label { font-size: 0.75rem; color: var(--txt-suave); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 5px; font-weight: bold; }
+  .header-value { font-size: 1.2rem; font-weight: bold; color: var(--txt); text-transform: uppercase; }
+  body.light-mode .header-linea { background: #e0f2fe; color: #0284c7; }
+  body.light-mode .header-base { background: #fef3c7; color: #b45309; }
+  body.light-mode .formula-cantidad { color: #16a34a; }
+
+  .comparativa-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px; }
+  .comparativa-col { background: var(--fondo); padding: 15px; border-radius: 8px; border: 1px solid var(--borde); }
+  .tinta-row { display: flex; justify-content: space-between; border-bottom: 1px dashed var(--borde); padding: 4px 0; font-size: 0.85rem; }
+
+  #preview-etiqueta { display: none; background: white; color: black; width: 4in; height: 2.31in; padding: 0.1in; box-sizing: border-box; font-family: Arial, sans-serif; flex-direction: column; margin: 20px auto; border: 1px solid #ccc; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+  .et-header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #000; padding-bottom: 5px; margin-bottom: 5px; }
+  .et-logo svg { height: 35px; }
+  .et-producto { font-weight: bold; font-size: 16px; text-align: center; flex: 1; text-transform: uppercase; line-height: 1.1; }
+  .et-fecha { text-align: center; font-size: 9px; margin-bottom: 5px; }
+  .et-color { text-align: center; font-weight: bold; font-size: 14px; margin-bottom: 5px; }
+  .et-formula { font-size: 8px; text-align: center; font-family: monospace; margin-bottom: 5px; display: none; }
+  .et-footer { display: flex; justify-content: space-between; font-size: 9px; align-items: flex-end; margin-top: auto; }
+  .et-contador { font-size: 22px; font-weight: bold; line-height: 1; }
+  .et-contacto { text-align: right; line-height: 1.2; }
+
+  @media print {
+    @page { size: 4in 2.31in; margin: 0; }
+    body * { visibility: hidden; }
+    #preview-etiqueta, #preview-etiqueta * { visibility: visible; }
+    #preview-etiqueta { position: absolute; left: 0; top: 0; width: 4in; height: 2.31in; background: white !important; color: black !important; display: flex !important; flex-direction: column; padding: 0.1in; box-sizing: border-box; margin: 0 !important; border: none !important; box-shadow: none !important; }
+    #modalEtiqueta { background: transparent !important; position: static !important; }
+  }
+
+  .config-group { background: rgba(128,128,128,0.05); border: 1px solid var(--borde); border-radius: 8px; margin-bottom: 15px; overflow: hidden; }
+  .config-group summary { padding: 15px; font-weight: bold; font-size: 1.05rem; color: var(--primario); cursor: pointer; list-style: none; display: flex; align-items: center; user-select: none; }
+  .config-group summary::-webkit-details-marker { display: none; }
+  .config-group summary::before { content: '▶'; font-size: 0.8rem; margin-right: 10px; transition: transform 0.3s; }
+  .config-group[open] summary::before { transform: rotate(90deg); }
+  .config-group summary:hover { background: rgba(128,128,128,0.1); }
+  .config-content { padding: 15px; border-top: 1px solid var(--borde); background: var(--fondo-suave); }
+
+  .toast-exito { position: fixed; bottom: 30px; right: 30px; background: var(--exito); color: white; padding: 15px 25px; border-radius: 8px; font-weight: bold; font-size: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 9999; display: none; animation: slideIn 0.3s ease-out; }
+  @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+  
+  /* ==================== ADAPTACIÓN A CELULARES (RESPONSIVE) ==================== */
+  @media (max-width: 768px) {
+    body { padding: 10px; }
+    .contenedor { padding: 15px; border-radius: 10px; }
+    .header-app { flex-direction: column; gap: 10px; text-align: center; }
+    .tabs { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; padding-bottom: 10px; -webkit-overflow-scrolling: touch; }
+    .tab-btn { padding: 8px 15px; font-size: 0.9rem; white-space: nowrap; }
+    .fila { flex-direction: column; gap: 10px; }
+    label { min-width: 100%; }
+    .formula-header { flex-direction: column; gap: 10px; padding: 10px 0; }
+    .header-item:not(:last-child) { border-right: none; border-bottom: 1px solid var(--borde); padding-bottom: 10px; }
+    .formula-item { flex-direction: column; text-align: center; gap: 5px; }
+    .formula-cantidad { font-size: 1.5rem; }
+    .historial-tabla { display: block; overflow-x: auto; white-space: nowrap; }
+    #preview-etiqueta { transform: scale(0.8); transform-origin: top center; margin: 0 auto 20px auto; }
+    #modalEtiqueta h2 { font-size: 1.2rem; margin-bottom: 5px; }
+    #modalEtiqueta > div[style*="margin-top:20px"] { flex-direction: column; gap: 10px; }
+  }
+
+  /* ==================== MEJORAS VISUALES PESTAÑA BASE DE DATOS ==================== */
+  .db-upload-box { background: rgba(128,128,128,0.05); border: 2px dashed var(--borde); border-radius: 12px; padding: 20px; text-align: center; transition: 0.3s; margin-bottom: 20px; }
+  .db-upload-box:hover { border-color: var(--primario); background: rgba(14, 165, 233, 0.05); }
+  .db-upload-label { display: inline-flex; flex-direction: column; align-items: center; cursor: pointer; color: var(--primario); font-weight: bold; font-size: 1.1rem; }
+  .db-upload-label span { font-size: 2.5rem; margin-bottom: 10px; }
+  .db-upload-input { display: none; }
+  .db-total-banner { background: var(--fondo); border-left: 6px solid var(--exito); padding: 15px 20px; border-radius: 8px; font-size: 1.2rem; font-weight: bold; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+  .db-total-banner span { color: var(--exito); font-size: 1.5rem; }
+  .db-grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
+  .db-card { background: var(--fondo); border: 1px solid var(--borde); border-radius: 10px; padding: 15px; position: relative; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s; }
+  .db-card:hover { transform: translateY(-3px); }
+  .db-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--primario); }
+  .db-card-title { font-size: 0.8rem; color: var(--txt-suave); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; font-weight: bold; }
+  .db-card-count { font-size: 1.8rem; font-weight: 900; color: var(--txt); }
+  .db-card-count small { font-size: 0.9rem; font-weight: normal; color: var(--txt-suave); }
+
+  /* Estilos para el modal de ajuste y el badge de modificado */
+  .badge-modificado { background: #f59e0b; color: #000; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; margin-left: 5px; letter-spacing: 0.5px; animation: pulse 2s infinite; }
+  @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
+  .modal-ajuste { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px; }
+  .modal-ajuste-content { background: var(--fondo-suave); border: 1px solid var(--borde); border-radius: 12px; padding: 25px; width: 100%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+</style>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<div class="contenedor">
+  <div class="header-app">
+    <div class="header-brand"><h2>🧪 FC Formularios</h2><span class="version-chip">RELMA · V4</span></div>
+    <div class="header-actions">
+      <span id="estadoConexion" class="status-chip">● Listo</span>
+      <button class="btn secundario" id="btnInstalarApp" onclick="instalarAplicacion()">📲 Instalar / Ayuda</button>
+      <button class="btn secundario" onclick="toggleTema()">🌓 Tema</button>
+    </div>
+  </div>
+
+  <div class="tabs" id="tabsContainer">
+    <button class="tab-btn activo" draggable="false" data-target="tab-inicio" onclick="cambiarTab('tab-inicio', this)">🏠 Inicio</button>
+    <button class="tab-btn" draggable="true" data-target="tab-prep" onclick="cambiarTab('tab-prep', this)">🎨 Preparar</button>
+    <button class="tab-btn" draggable="true" data-target="tab-conv" onclick="cambiarTab('tab-conv', this)">🧪 Convertidor</button>
+    <button class="tab-btn" draggable="true" data-target="tab-comp" onclick="cambiarTab('tab-comp', this)">⚖️ Comparar</button>
+    <button class="tab-btn" draggable="true" data-target="tab-rgb" onclick="cambiarTab('tab-rgb', this)">🎯 Buscar RGB</button>   
+    <button class="tab-btn" draggable="true" data-target="tab-hist" onclick="cambiarTab('tab-hist', this)">📋 Historial</button>
+    <button class="tab-btn" draggable="true" data-target="tab-db" onclick="cambiarTab('tab-db', this)">💾 Base de Datos</button>
+    <button class="tab-btn" draggable="true" data-target="tab-config" onclick="cambiarTab('tab-config', this)">⚙️ Configuración</button>  
+  </div>
+
+
+  <!-- PANEL PRINCIPAL -->
+  <div id="tab-inicio" class="tab-content activo">
+    <div class="welcome-panel">
+      <div><span class="eyebrow">CENTRO DE OPERACIONES</span><h2>Bienvenido a FC Formularios</h2><p>Consulta fórmulas, prepara colores y controla tu historial desde un solo lugar.</p></div>
+      <div class="welcome-actions"><button class="btn" onclick="irATab('tab-prep')">🎨 Preparar color</button><button class="btn secundario" onclick="irATab('tab-conv')">🔄 Convertir fórmula</button></div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card"><span>Fórmulas en catálogo</span><strong id="dashTotalFormulas">0</strong><small>Base cargada en este dispositivo</small></div>
+      <div class="stat-card"><span>Registros en historial</span><strong id="dashTotalHistorial">0</strong><small>Preparaciones, conversiones y ajustes</small></div>
+      <div class="stat-card"><span>Preparaciones de hoy</span><strong id="dashHoy">0</strong><small>Según fecha local</small></div>
+      <div class="stat-card"><span>Marcas disponibles</span><strong id="dashMarcas">0</strong><small>Marcas con fórmulas cargadas</small></div>
+    </div>
+    <div class="dashboard-columns">
+      <div class="panel"><h3>⚡ Accesos rápidos</h3><div class="quick-grid">
+        <button class="quick-action" onclick="irATab('tab-prep')"><span>🎨</span><b>Preparar</b><small>Ver fórmula y etiqueta</small></button>
+        <button class="quick-action" onclick="irATab('tab-conv')"><span>🔄</span><b>Convertidor</b><small>Escalar cantidades</small></button>
+        <button class="quick-action" onclick="irATab('tab-comp')"><span>⚖️</span><b>Comparar</b><small>Detectar diferencias</small></button>
+        <button class="quick-action" onclick="irATab('tab-rgb')"><span>🎯</span><b>Buscar RGB</b><small>Encontrar tonos cercanos</small></button>
+        <button class="quick-action" onclick="irATab('tab-hist')"><span>📋</span><b>Historial</b><small>Consultar tickets</small></button>
+        <button class="quick-action" onclick="irATab('tab-db')"><span>💾</span><b>Catálogo</b><small>Importar y administrar</small></button>
+      </div></div>
+      <div class="panel"><h3>🧭 Estado del sistema</h3><div id="dashboardEstado" class="system-list"></div><p class="small-note">Los datos de esta versión se guardan localmente en cada dispositivo. Para usar el mismo catálogo en otro equipo, importa el mismo archivo JSON o la carpeta de catálogo.</p></div>
+    </div>
+  </div>
+
+  <!-- PESTAÑA CONVERTIDOR -->
+  <div id="tab-conv" class="tab-content">
+    <div class="panel">
+      <h3>🔍 Buscar Fórmula</h3>
+      <div class="fila">
+        <label style="flex: 2;">Buscar color:
+          <input type="text" id="inputBuscarSW" placeholder="Ej. SW6868 o REAL RED" style="text-transform: uppercase;">
+        </label>
+        <label style="flex: 1;">Marca:
+          <select id="filtroMarcaBusqueda">
+            <option value="TODAS">Todas</option>
+            <option value="SHERWIN WILLIAMS">Sherwin Williams</option>
+            <option value="COMEX">Comex</option>
+            <option value="BEREL">Berel</option>
+          </select>
+        </label>
+        <label style="flex: 1;">Línea:
+          <select id="filtroLineaBusqueda">
+            <option value="TODAS">Todas</option>
+            <option value="BASE AGUA">Base Agua</option>
+            <option value="BASE SOLVENTE">Base Solvente</option>
+          </select>
+        </label>
+        <label style="justify-content: flex-end; flex: 1;">
+          <button class="btn" onclick="buscarSW()" style="width: 100%;">Buscar</button>
+        </label>
+      </div>
+      <div id="msgBusqueda" style="color: var(--alerta); font-size: 0.9rem; margin-top: 5px;"></div>
+      <div id="resultadoBusqueda" style="display: none; margin-top: 10px; border-top: 1px solid var(--borde); padding-top: 10px;"></div>
+    </div>
+    <div class="panel">
+      <div class="fila">
+        <label>Origen <select id="capOrigen"><option value="1">1 LT</option><option value="4">4 LT (Galón)</option><option value="19">19 LT (Cubeta)</option><option value="custom">Otros...</option></select></label>
+        <label>Destino <select id="capDestino"><option value="1">1 LT</option><option value="4">4 LT (Galón)</option><option value="19">19 LT (Cubeta)</option><option value="custom">Otros...</option></select></label>
+        <label>Máquina <select id="maquinaConv"><option value="64">Arquitectónica (64)</option><option value="32">Industrial (32)</option></select></label>
+      </div>
+      <div class="fila oculto" id="customCapFila">
+        <label>Origen Custom <input type="number" id="capOrigenCustom" step="0.1" min="0.1"></label>
+        <label>Destino Custom <input type="number" id="capDestinoCustom" step="0.1" min="0.1"></label>
+      </div>
+      <label style="flex-direction: row; align-items: center; gap: 10px; margin-bottom: 10px; cursor: pointer;">
+        <input type="checkbox" id="convExacto"> Fracciones exactas (1/256, 1/512)
+      </label>
+      <label style="flex-direction: row; align-items: center; gap: 10px; margin-bottom: 10px; cursor: pointer;">
+        <input type="checkbox" id="convMostrarML"> Mostrar Mililitros (ML)
+      </label>
+
+      <label>Fórmula a convertir:
+        <textarea id="entradaConv" placeholder="Ejemplo:&#10;NEGRO=1/64&#10;AZUL=2 HOZ + 12/32"></textarea>
+      </label>
+
+      <div class="fila" style="margin-top: 15px;">
+        <button class="btn" onclick="ejecutarConversion()">🔄 Convertir</button>
+        <button class="btn exito" onclick="guardarEnHistorialConv()">💾 Guardar Conversión</button>
+      </div>
+      <div id="salidaConv" class="resultado-caja">(Escribe las tintas arriba)</div>
+    </div>
+  
+  <div id="panelDatosEtiquetaConv" class="panel" style="display: none; margin-top: 15px; border: 2px solid var(--primario);">
+  <h4 style="margin-top: 0; color: var(--primario);">🏷️ Datos para la Etiqueta</h4>
+  <p style="font-size: 0.85rem; color: var(--txt-suave); margin: 0 0 12px 0;">
+    Completa los datos y envía la fórmula convertida a <b>Preparar</b> para imprimir.
+  </p>
+
+  <div class="fila">
+    <label style="flex: 1;">Código SW (opcional):
+      <input type="text" id="convCodigo" placeholder="Ej. SW7010" style="text-transform: uppercase;">
+    </label>
+    <label style="flex: 2;">Nombre del Color:
+      <input type="text" id="convNombre" placeholder="Ej. WHITE DUCK" style="text-transform: uppercase;">
+    </label>
+    <label>Marca:
+      <select id="convMarca">
+        <option value="SHERWIN WILLIAMS">Sherwin Williams</option>
+        <option value="COMEX">Comex</option>
+        <option value="BEREL">Berel</option>
+        <option value="OTRA">Otra</option>
+      </select>
+    </label>
+    <label>Base:
+      <select id="convBase">
+        <option value="BASE AGUA">Base Agua</option>
+        <option value="BASE SOLVENTE">Base Solvente</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="fila">
+    <label style="flex: 2;">Producto:
+      <select id="convProducto">
+        <option value="">— Selecciona —</option>
+      </select>
+    </label>
+    <label class="oculto" id="convProdCustomLabel" style="flex: 1;">Nuevo Producto:
+      <input type="text" id="convProdCustom" placeholder="Ej. PINTURA ESPECIAL">
+    </label>
+    <label>Tamaño:
+      <select id="convTamano">
+        <option value="1">1 LT</option>
+        <option value="4">4 LT (Galón)</option>
+        <option value="19">19 LT (Cubeta)</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="fila">
+    <label style="flex: 1;">Comentarios:
+      <input type="text" id="convComentarios" placeholder="Opcional">
+    </label>
+    <label style="flex: 1;">👤 Operador:
+      <select id="convOperador" style="font-weight: bold;">
+        <option value="">— ¿Quién prepara? —</option>
+        <option value="JONATHAN">JONATHAN</option>
+        <option value="DAVID">DAVID</option>
+        <option value="YESI">YESI</option>
+        <option value="JOVANY">JOVAN</option>
+        <option value="JULIO">JULIO</option>
+        <option value="RODOLFO">RODOLFO</option>
+        <option value="KEVIN">KEVIN</option>
+        <option value="MIROS">MIROS</option>
+      </select>
+    </label>
+  </div>
+
+  <button class="btn exito" onclick="generarEtiquetaDirectoDesdeConversor()">🖨️ Generar Etiqueta</button>
+</div> <!-- Cierra el panel -->
+</div> <!-- Cierra tab-conv -->
+
+  <!-- PESTAÑA COMPARAR -->
+  <div id="tab-comp" class="tab-content">
+    <div class="panel">
+      <h3>⚖️ Comparar Fórmulas</h3>
+      
+      <datalist id="listaFormulas"></datalist>
+
+      <div class="fila">
+        <label>Marca:
+          <select id="compFiltroMarca">
+            <option value="TODAS">Todas</option>
+            <option value="SHERWIN WILLIAMS">Sherwin Williams</option>
+            <option value="COMEX">Comex</option>
+            <option value="BEREL">Berel</option>
+          </select>
+        </label>
+        <label>Filtro Base:
+          <select id="compFiltroBase">
+            <option value="TODAS">Todas</option>
+            <option value="BASE AGUA">Base Agua</option>
+            <option value="BASE SOLVENTE">Base Solvente</option>
+          </select>
+        </label>
+        <label>Tamaño a comparar:
+          <select id="compTamano">
+            <option value="1">1 LT</option>
+            <option value="4" selected>4 LT (Galón)</option>
+            <option value="19">19 LT (Cubeta)</option>
+          </select>
+        </label>
+        <label style="justify-content: flex-end;">
+          <button class="btn secundario" onclick="agregarCampoComparacion()">➕ Agregar otra Fórmula</button>
+        </label>
+      </div>
+      
+      <div id="inputsComparacion">
+        <div class="fila input-comp" id="comp-row-1">
+          <label style="flex: 1;">Fórmula 1 (Referencia) 
+            <input type="text" class="comp-codigo" list="listaFormulas" placeholder="Código o Nombre">
+          </label>
+          <label style="flex: 1;">Fórmula 2 
+            <input type="text" class="comp-codigo" list="listaFormulas" placeholder="Código o Nombre">
+          </label>
+        </div>
+      </div>
+      
+      <button class="btn exito" onclick="hacerComparacion()" style="margin-top: 10px;">⚖️ Comparar Fórmulas</button>
+      
+      <div id="comparativaResultado" class="comparativa-grid"></div>
+      <div id="diferenciasResultado" style="margin-top: 20px;"></div>
+    </div>
+  </div>
+
+  <!-- PESTAÑA PREPARAR -->
+  <div id="tab-prep" class="tab-content">
+    <div id="panelFormulaConversor" style="display: none;"></div>
+    <div class="panel">
+      <h3>🎨 Preparar Color y Generar Etiqueta</h3>
+      <div class="fila">
+        <label style="flex: 2;">Buscar código o nombre:
+          <input type="text" id="prepBuscar" placeholder="Ej. SW-7010 o WHITE DUCK" style="text-transform: uppercase;">
+        </label>
+        <label>Marca:
+          <select id="prepFiltroMarca">
+            <option value="TODAS">Todas</option>
+            <option value="SHERWIN WILLIAMS">Sherwin Williams</option>
+            <option value="COMEX">Comex</option>
+            <option value="BEREL">Berel</option>
+          </select>
+        </label>
+        <label>Base:
+          <select id="prepFiltroBase">
+            <option value="TODAS">Ambas</option>
+            <option value="BASE AGUA">Base Agua</option>
+            <option value="BASE SOLVENTE">Base Solvente</option>
+          </select>
+        </label>
+        <label style="justify-content: flex-end;">
+          <button class="btn" onclick="buscarParaPreparar()" style="width: 100%;">Buscar</button>
+        </label>
+      </div>
+      <div id="prepResultados" style="margin-top: 15px;"></div>
+    </div>
+  </div>
+
+  <!-- PESTAÑA BUSCAR RGB -->
+  <div id="tab-rgb" class="tab-content">
+    <div class="panel">
+      <h3>🎯 Buscar Color por Código RGB</h3>
+      <p style="font-size: 0.9rem; color: var(--txt-suave);">Introduce un color y te mostraremos los más parecidos en la base de datos.</p>
+      
+      <div class="fila" style="align-items: flex-end;">
+        <label style="flex: 1;">Color a buscar:
+          <input type="color" id="inputRGBColor" value="#ff0000" style="width: 100%; height: 50px; cursor: pointer; padding: 2px;">
+        </label>
+        <label style="flex: 1;">Marca:
+          <select id="rgbFiltroMarca">
+            <option value="TODAS">Todas</option>
+            <option value="SHERWIN WILLIAMS">Sherwin Williams</option>
+            <option value="COMEX">Comex</option>
+            <option value="BEREL">Berel</option>
+          </select>
+        </label>
+        <label style="flex: 2;">
+          <button class="btn" onclick="buscarPorRGB()" style="width: 100%; height: 50px; font-size: 1.1rem;">🔍 Buscar Similares</button>
+        </label>
+      </div>
+      <div id="resultadosRGB" style="margin-top: 20px;"></div>
+    </div>
+  </div>
+
+  <!-- PESTAÑA HISTORIAL -->
+  <div id="tab-hist" class="tab-content">
+    <div class="panel">
+      <h3>📋 Historial de Registros</h3>
+      
+      <div class="fila">
+        <label style="flex: 2;">Buscar (Ticket, Producto, Color):
+          <input type="text" id="histBuscar" placeholder="Ej. 0054, METALEX..." onkeypress="if(event.key === 'Enter') aplicarFiltrosHistorial()">
+        </label>
+        <label style="justify-content: flex-end; flex: 0.5;">
+          <button class="btn" onclick="aplicarFiltrosHistorial()" style="width: 100%;">🔍 Buscar</button>
+        </label>
+        <label>Tipo:
+          <select id="histFiltroTipo" onchange="aplicarFiltrosHistorial()">
+            <option value="TODOS">Todos</option>
+            <option value="PREPARACION">Solo Preparaciones</option>
+            <option value="CONVERSION">Solo Conversiones</option>
+          </select>
+        </label>
+      </div>
+      
+      <div class="fila">
+        <label>Desde: <input type="date" id="histFechaInicio" onchange="aplicarFiltrosHistorial()"></label>
+        <label>Hasta: <input type="date" id="histFechaFin" onchange="aplicarFiltrosHistorial()"></label>
+        <label>Producto:
+          <select id="histFiltroProducto" onchange="aplicarFiltrosHistorial()"><option value="TODOS">Todos</option></select>
+        </label>
+        <label>Marca:
+          <select id="histFiltroMarca" onchange="aplicarFiltrosHistorial()">
+            <option value="TODAS">Todas</option>
+            <option value="SHERWIN WILLIAMS">Sherwin Williams</option>
+            <option value="COMEX">Comex</option>
+            <option value="BEREL">Berel</option>
+            <option value="OTRA">Otra</option>
+          </select>
+        </label>
+        <label>Base:
+          <select id="histFiltroBase" onchange="aplicarFiltrosHistorial()">
+            <option value="TODAS">Todas</option>
+            <option value="BASE AGUA">Base Agua</option>
+            <option value="BASE SOLVENTE">Base Solvente</option>
+          </select>
+        </label>
+        <label>Tamaño:
+          <select id="histFiltroTamano" onchange="aplicarFiltrosHistorial()">
+            <option value="TODOS">Todos</option>
+            <option value="1 LT">1 LT</option>
+            <option value="4 LT">Galón (4 LT)</option>
+            <option value="19 LT">Cubeta (19 LT)</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="fila" style="margin-bottom: 0;">
+        <button class="btn secundario" onclick="limpiarFiltrosHistorial()">🔄 Limpiar Filtros</button>
+        <button class="btn exito" onclick="exportarExcel()">⬇️ Exportar a Excel (CSV)</button>
+        <button class="btn peligro" onclick="borrarHistorialPrep()">🗑 Borrar Historial</button>
+      </div>
+
+      <div style="overflow-x: auto; margin-top: 15px;">
+        <table class="historial-tabla">
+          <thead>
+            <tr>
+              <th width="30"></th>
+              <th>Ticket</th>
+              <th>Operador</th>
+              <th>Marca</th>
+              <th>Tipo</th>
+              <th>Fecha</th>
+              <th>Código / Color</th>
+              <th>Producto</th>
+              <th>Tamaño</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyHistorial"></tbody>
+        </table>
+      </div>
+
+      <div class="fila" style="justify-content: space-between; align-items: center; margin-top: 15px; border-top: 1px solid var(--borde); padding-top: 15px;">
+        <div>
+          <label style="flex-direction: row; align-items: center; gap: 5px;">
+            Mostrar 
+            <select id="histRowsPorPagina" onchange="aplicarFiltrosHistorial()" style="padding: 5px; width: auto;">
+              <option value="10">10</option>
+              <option value="25" selected>25</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select> 
+            registros
+          </label>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <button class="btn secundario" onclick="cambiarPaginaHistorial(-1)" id="btnPrevHist">⬅️ Anterior</button>
+          <span id="lblPaginaHistorial" style="font-weight: bold; font-size: 0.9rem;">Página 1</span>
+          <button class="btn secundario" onclick="cambiarPaginaHistorial(1)" id="btnNextHist">Siguiente ➡️</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PESTAÑA BASE DE DATOS -->
+  <div id="tab-db" class="tab-content">
+
+    <div class="panel db-source-panel">
+      <h3>📁 Cargar catálogo desde carpeta o explorador</h3>
+      <p class="small-note">Puedes seleccionar una carpeta con uno o varios JSON de fórmulas, o elegir directamente un archivo JSON. La aplicación combinará las fórmulas sin mezclar marcas distintas.</p>
+      <div class="db-source-actions">
+        <button class="btn" onclick="seleccionarCarpetaCatalogo()">📂 Seleccionar carpeta</button>
+        <button class="btn secundario" onclick="actualizarDesdeCarpeta()" id="btnActualizarCarpeta" disabled>🔄 Actualizar desde carpeta</button>
+        <label class="btn secundario file-button">📄 Elegir JSON<input type="file" id="archivoCatalogoJSON" accept=".json,application/json" onchange="importarCatalogoDesdeArchivo(event)"></label>
+        <label class="btn secundario file-button">🗂 Elegir carpeta (compatible)<input type="file" id="carpetaCatalogoFallback" accept=".json,application/json" webkitdirectory directory multiple onchange="importarCatalogoDesdeCarpetaFallback(event)"></label>
+      </div>
+      <div id="estadoCatalogoCarpeta" class="import-status">No hay carpeta seleccionada. También puedes elegir un JSON desde el explorador.</div>
+      <div id="resultadoImportacionCatalogo" class="import-result" hidden></div>
+    </div>
+    <div class="panel db-manage-panel">
+      <div class="section-heading"><div><h3>🛠️ Administrar fórmulas</h3><p class="small-note">Busca, agrega, corrige o elimina fórmulas individuales.</p></div><button class="btn exito" onclick="editarFormulaCatalogo(null)">＋ Nueva fórmula</button></div>
+      <div class="fila"><label>Filtrar catálogo:<input id="gestorBuscarFormula" type="text" placeholder="Código, nombre, marca o base" oninput="renderGestorCatalogo()"></label></div>
+      <div id="gestorCatalogoResultados" class="manage-results"></div>
+    </div>
+
+    <div class="panel">
+      <h3>📂 Importar desde PDF (Opcional)</h3>
+      
+      <div class="db-upload-box">
+        <label for="pdfFile" class="db-upload-label">
+          <span>📄</span>
+          Haz clic aquí para buscar un PDF
+        </label>
+        <input type="file" id="pdfFile" accept=".pdf" class="db-upload-input">
+        <div style="margin-top: 15px;">
+          <button class="btn" onclick="procesarPDF()" style="padding: 12px 30px; font-size: 1rem;">Extraer Fórmulas del PDF</button>
+        </div>
+        <div id="statusPDF" style="color: var(--exito); font-size: 0.9rem; margin-top: 10px;"></div>
+      </div>
+      
+      <div style="margin-top: 30px;">
+        <h4 style="margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;">
+          📊 Resumen de Fórmulas en Memoria
+        </h4>
+        <div id="resumenDB"></div>
+      </div>
+
+      <div class="fila" style="margin-top: 30px; border-top: 1px solid var(--borde); padding-top: 20px;">
+        <label class="btn" style="cursor: pointer; background: var(--primario); color: white; padding: 10px 16px; border-radius: 8px; font-weight: bold; display: inline-flex; align-items: center; justify-content: center;">
+            ⬆️ Importar Fórmulas (JSON)
+            <input type="file" id="inputJSON" accept=".json" style="display: none;" onchange="importarJSONLocal(event)">
+        </label>
+        <button class="btn exito" onclick="exportarDBaExcel()">⬇️ Exportar a Excel</button>
+        <button class="btn secundario" onclick="descargarDB_JSON()">⬇️ Descargar Catálogo (JSON)</button>
+        <button class="btn peligro" onclick="borrarDB()">🗑 Borrar Base de Datos</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PESTAÑA CONFIGURACIÓN -->
+  <div id="tab-config" class="tab-content">
+    <div class="panel">
+      <h3>⚙️ Configuración</h3>
+      
+      <details class="config-group" open>
+        <summary>🎨 Diseño de Etiqueta y Logo</summary>
+        <div class="config-content">
+          <div class="fila">
+            <label style="flex: 2;">Logo de la Empresa (Imagen PNG/JPG):
+              <input type="file" id="inputLogo" accept="image/*" onchange="guardarLogo(event)">
+            </label>
+            <label style="justify-content: flex-end;">
+              <button class="btn secundario" onclick="borrarLogo()">🗑 Quitar Logo</button>
+            </label>
+          </div>
+
+          <div class="fila">
+            <label>Tamaño Fuente Contador:
+              <input type="number" id="sizeContador" value="14" min="8" max="30" onchange="guardarTamanos()">
+            </label>
+            <label>Tamaño Fuente Producto:
+              <input type="number" id="sizeProducto" value="18" min="8" max="30" onchange="guardarTamanos()">
+            </label>
+            <label>Tamaño Fuente Color:
+              <input type="number" id="sizeColor" value="14" min="8" max="30" onchange="guardarTamanos()">
+            </label>
+          </div>
+        </div>
+      </details>
+
+      <details class="config-group">
+        <summary>📄 Plantilla de Etiqueta Avanzada (.dymo / .xml)</summary>
+        <div class="config-content">
+          <p style="font-size: 0.85rem; color: var(--txt-suave); margin-top: 0;">
+            Sube un archivo generado por el software de DYMO. <br>
+            <b>Nota importante:</b> Asegúrate de que tu plantilla tenga cuadros de texto nombrados exactamente como: <i>PRODUCTO, COLOR, FECHA, FORMULA, CONTADOR, COMENTARIOS</i>.
+          </p>
+          <div class="fila">
+            <label style="flex: 2;">Subir Plantilla:
+              <input type="file" id="inputTemplate" accept=".dymo,.xml" onchange="guardarTemplate(event)">
+            </label>
+            <label style="justify-content: flex-end;">
+              <button class="btn peligro" onclick="borrarTemplate()">🗑 Restaurar Plantilla Original</button>
+            </label>
+          </div>
+        </div>
+      </details>
+
+      <details class="config-group" open>
+        <summary>💾 Gestión de Base de Datos</summary>
+        <div class="config-content">
+          <p style="font-size: 0.85rem; color: var(--txt-suave); margin-top: 0;">
+            Importa los datos extraídos de SanTint o descarga un respaldo completo.
+          </p>
+          <div class="fila">
+            <label class="btn" style="cursor: pointer; background: var(--primario); color: white; padding: 10px 16px; border-radius: 8px; font-weight: bold; display: inline-flex; align-items: center; justify-content: center;">
+                ⬆️ Importar Fórmulas (JSON)
+                <input type="file" id="inputJSONConfig" accept=".json" style="display: none;" onchange="importarJSONLocal(event)">
+            </label>
+            <button class="btn exito" onclick="exportarDBaExcel()">⬇️ Exportar Fórmulas (Excel)</button>
+            <button class="btn secundario" onclick="descargarDB_JSON()">⬇️ Descargar Catálogo (JSON)</button>
+            <button class="btn secundario" onclick="descargarRespaldo()">⬇️ Respaldar Todo (JSON)</button>
+            <button class="btn peligro" onclick="borrarDB()">🗑 Borrar Base de Datos</button>
+          </div>
+        </div>
+      </details>
+
+      <details class="config-group">
+        <summary>💾 Respaldo de Datos</summary>
+        <div class="config-content">
+          <p style="font-size: 0.85rem; color: var(--txt-suave); margin-top: 0;">
+            Descarga un archivo con todas tus fórmulas e historial, o restaura tu aplicación subiendo un archivo previo.
+          </p>
+          <div class="fila">
+            <button class="btn exito" onclick="descargarRespaldo()">⬇️ Descargar Respaldo Total</button>
+            <label class="btn" style="cursor: pointer; background: var(--primario); color: white; padding: 10px 16px; border-radius: 8px; font-weight: bold; display: inline-flex; align-items: center;">
+              ⬆️ Restaurar Respaldo
+              <input type="file" id="inputRespaldo" accept=".json" style="display: none;" onchange="restaurarRespaldo(event)">
+            </label>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- MODAL PARA AJUSTE DE TINTE -->
+<div id="modalAjuste" class="modal-ajuste">
+  <div class="modal-ajuste-content">
+    <h3 style="margin-top: 0; color: var(--primario);">➕ Ajuste de Tinte</h3>
+    <p style="font-size: 0.85rem; color: var(--txt-suave); margin-bottom: 15px;">
+      Escribe los tintes y cantidades que se agregarán al ticket original (uno por línea).
+    </p>
+    
+    <div class="fila">
+      <label>Tintes a agregar:
+        <textarea id="ajusteTintes" placeholder="Ejemplo:&#10;Rojo Oxido (R2) = 1/64&#10;Amarillo (Y1) = 1/128" style="min-height: 80px; font-family: monospace;"></textarea>
+      </label>
+    </div>
+    
+    <div class="fila">
+      <label>Motivo / Comentario (Opcional):
+        <input type="text" id="ajusteComentario" placeholder="Ej. Cliente pidió más rojo">
+      </label>
+    </div>
+    
+    <div class="fila" style="margin-top: 20px; justify-content: flex-end;">
+      <button class="btn secundario" onclick="cerrarModalAjuste()">Cancelar</button>
+      <button class="btn exito" onclick="confirmarAjuste()">Generar Etiqueta de Ajuste</button>
+    </div>
+  </div>
+</div>
+
+  <!-- MODAL DE ETIQUETA DYMO -->
+  <div id="modalEtiqueta" class="modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:1000; align-items:center; justify-content:center; flex-direction:column; padding:20px;">
+    <h2 style="color:white; margin-bottom:10px;">Vista Previa de Etiqueta</h2>
+    
+    <div id="preview-etiqueta" style="display:flex;">
+      <div class="et-header">
+        <div class="et-logo">
+          <svg viewBox="0 0 200 60" width="80" height="35">
+            <path d="M10,50 L10,30 L25,15 L40,30 L40,50 Z" fill="none" stroke="#0033a0" stroke-width="4"/>
+            <text x="45" y="45" font-family="Arial" font-weight="bold" font-size="24" fill="#0033a0">R</text>
+            <rect x="65" y="25" width="20" height="20" fill="#cc0000" transform="rotate(15 75 35)"/>
+            <text x="68" y="43" font-family="Arial" font-weight="bold" font-size="20" fill="#fff">L</text>
+            <text x="88" y="45" font-family="Arial" font-weight="bold" font-size="24" fill="#0033a0">MA</text>
+          </svg>
+        </div>
+        <div class="et-producto" id="lblProducto">PRODUCTO</div>
+  <div style="font-family: 'Arial Black', Arial, sans-serif; font-weight: 900; font-style: italic; font-size: 10px; text-align: right; letter-spacing: -0.7px; line-height: 1;">
+      SHERWIN-WILLIAMS<br>SAHAGUN
+  </div>
+      </div>
+      <div class="et-fecha" id="lblFecha">Fecha y hora</div>
+      <div class="et-color" id="lblCodigoColor">SW-0000 COLOR</div>
+      <div class="et-formula" id="lblFormula">FORMULA...</div>
+      <div class="et-footer">
+        <div>
+          <div style="font-weight: bold; font-size:8px;">SERVICIO A DOMICILIO</div>
+          <div class="et-contador" id="lblContador">No. 0000</div>
+        </div>
+        <div class="et-contacto">
+          <div>📞 7915961197 &nbsp; 7713923110</div>
+          <div>CORREO: pinturas.relma@gmail.com</div>
+          <div id="lblComentarios" style="font-size:8px; font-style:italic;"></div>
+        </div>
+      </div>
+    </div>
+    <p id="avisoSoloConsulta" class="mobile-view-note" hidden>📱 Modo consulta: aquí puedes revisar la etiqueta y la fórmula. La impresión DYMO está disponible únicamente desde una computadora compatible.</p>
+
+    <div class="label-actions solo-pc-print" style="margin-top:20px; display:flex; gap:15px; align-items:center; justify-content:center;">
+      <label style="color:white; font-weight:bold; display:flex; align-items:center; gap:10px;">
+        Cantidad de etiquetas:
+        <input type="number" id="cantEtiquetas" value="1" min="1" max="10" style="width:60px; padding:8px; border-radius:5px; border:none; text-align:center; font-size:1.1rem;">
+      </label>
+      <button class="btn secundario" onclick="cerrarModalEtiqueta()">Cancelar</button>
+      <button class="btn exito" onclick="dispararDYMO()" id="btnImprimirDYMO">🖨️ Imprimir en DYMO (PC)</button>
+    </div>
+  </div>
+
+  <script>
+  const pdfjsLib = window['pdfjs-dist/build/pdf'] || window.pdfjsLib || null;
+  if (pdfjsLib && pdfjsLib.GlobalWorkerOptions) pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+  function leerJSONSeguro(clave, respaldo) {
+    try { const valor = localStorage.getItem(clave); return valor ? JSON.parse(valor) : respaldo; }
+    catch (error) { console.warn("Dato local dañado:", clave, error); return respaldo; }
+  }
+  let DATABASE_SW = leerJSONSeguro("fc_conv_db", []);
+  if (!Array.isArray(DATABASE_SW)) DATABASE_SW = [];
+  let HISTORIAL_PREP = leerJSONSeguro("fc_hist_prep", []);
+  if (!Array.isArray(HISTORIAL_PREP)) HISTORIAL_PREP = [];
+  let CONTADOR_SUCURSAL = parseInt(localStorage.getItem("fc_contador") || "0");
+  let busquedaActual = [];
+  let prepTemporal = null;
+  let etiquetaTemporal = null;
+  let formulaDesdeConversor = null;    
+
+  const LISTA_PRODUCTOS = [
+    "SUPER KEM-TONE MATE", "SUPER KEM-TONE SATIN", "KEM-TONE MATE", "KEM-TONE SATIN",
+    "EVOLUCION MATE", "EVOLUCION SATIN", "PROCRAFT", "CENTINELA", "VINIL-ACRILICA", "A-12",
+    "METALEX", "P.A.B", "METALEX BASE METALICA", "EVOLUCION ESMALTE", "EZ-COLOR", "PROMAX EPOXICO", "PROMAX POLIURETANO",
+    "RA-28", "RA-26", "ACROLON 218", "MACROPOXY", "AMERLOCK400", "PRIMARIO ESTRUCTURAL", 
+    "P-34", "ACROLON 7300", "RP-6", "P-19", "RECORTABLE", "A-29"
+  ];
+
+  const TINTAS_VALIDAS = [
+    "Negro", "Blanco", "Amarillo", "Ocre", "Magenta", "Rojo Óxido", "Rojo Nuevo", 
+    "Azul", "Café", "Verde Nuevo", "Verde", "Naranja", "Violeta", "Rojo", "Óxido"
+  ];
+
+  if (localStorage.getItem("fc_tema") === "light") document.body.classList.add("light-mode");
+  function toggleTema() {
+    document.body.classList.toggle("light-mode");
+    localStorage.setItem("fc_tema", document.body.classList.contains("light-mode") ? "light" : "dark");
+  }
+
+  (function initConvProductos() {
+    const sel = document.getElementById("convProducto");
+    if (!sel) return;
+    LISTA_PRODUCTOS.forEach(p => {
+      const opt = document.createElement("option");
+      opt.value = p;
+      opt.textContent = p;
+      sel.appendChild(opt);
+    });
+    const customOpt = document.createElement("option");
+    customOpt.value = "__CUSTOM__";
+    customOpt.textContent = "[ + Escribir otro producto... ]";
+    sel.appendChild(customOpt);
+
+    sel.addEventListener("change", function () {
+      const lbl = document.getElementById("convProdCustomLabel");
+      if (this.value === "__CUSTOM__") lbl.classList.remove("oculto");
+      else lbl.classList.add("oculto");
+    });
+  })();
+
+  // ==================== PESTAÑAS ARRASTRABLES ====================
+  let draggedTab = null;
+  document.querySelectorAll('.tab-btn').forEach(tab => {
+    tab.addEventListener('dragstart', (e) => {
+      draggedTab = tab;
+      e.dataTransfer.effectAllowed = 'move';
+      setTimeout(() => tab.style.opacity = '0.5', 0);
+    });
+    tab.addEventListener('dragend', () => {
+      tab.style.opacity = '1';
+      guardarOrdenPestañas();
+    });
+    tab.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+    });
+    tab.addEventListener('drop', (e) => {
+      e.preventDefault();
+      if (draggedTab !== tab) {
+        const parent = tab.parentNode;
+        const tabs = Array.from(parent.children);
+        const draggedIndex = tabs.indexOf(draggedTab);
+        const targetIndex = tabs.indexOf(tab);
+        if (draggedIndex < targetIndex) parent.insertBefore(draggedTab, tab.nextSibling);
+        else parent.insertBefore(draggedTab, tab);
+      }
+    });
+  });
+
+  function guardarOrdenPestañas() {
+    const orden = Array.from(document.querySelectorAll('.tab-btn')).map(t => t.dataset.target);
+    localStorage.setItem('fc_tab_order', JSON.stringify(orden));
+  }
+
+  function cargarOrdenPestañas() {
+    const ordenGuardado = localStorage.getItem('fc_tab_order');
+    if (ordenGuardado) {
+      try {
+        const orden = JSON.parse(ordenGuardado);
+        const contenedor = document.getElementById('tabsContainer');
+        const botones = {};
+        document.querySelectorAll('.tab-btn').forEach(b => botones[b.dataset.target] = b);
+        orden.forEach(target => { if (botones[target]) contenedor.appendChild(botones[target]); });
+      } catch(e) {}
+    }
+  }
+  cargarOrdenPestañas();
+
+  function cambiarTab(id, btn) {
+    document.querySelectorAll(".tab-content").forEach(t => t.classList.remove("activo"));
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("activo"));
+    document.getElementById(id).classList.add("activo");
+    btn.classList.add("activo");
+  }
+
+  // ==================== LECTOR DE PDF ====================
+  async function procesarPDF() {
+    if (!pdfjsLib) { const status = document.getElementById("statusPDF"); if (status) { status.textContent = "No se pudo cargar PDF.js. Comprueba la conexión a Internet y vuelve a intentarlo."; status.style.color = "var(--alerta)"; } return; }
+    const fileInput = document.getElementById("pdfFile");
+    const status = document.getElementById("statusPDF");
+    if (!fileInput.files.length) { status.textContent = "Selecciona un PDF."; status.style.color = "var(--alerta)"; return; }
+
+    const nombreArchivo = fileInput.files[0].name.toUpperCase();
+    let tipoPintura = nombreArchivo.includes("SOLVENTE") ? "BASE SOLVENTE" : "BASE AGUA";
+    status.textContent = "⏳ Leyendo PDF..."; status.style.color = "var(--primario)";
+
+    const tintasAceptadas = [...TINTAS_VALIDAS, "Cafe"];
+
+    try {
+      const file = fileInput.files[0];
+      const arrayBuffer = await file.arrayBuffer();
+      const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
+      let nuevasFormulas = 0;
+
+      for (let i = 1; i <= pdf.numPages; i++) {
+        const page = await pdf.getPage(i);
+        const textContent = await page.getTextContent();
+        
+        let rows = [];
+        textContent.items.forEach(item => {
+          if (!item.str.trim()) return;
+          const y = item.transform[5];
+          let row = rows.find(r => Math.abs(r.y - y) < 0.5); 
+          if (!row) { row = { y: y, items: [] }; rows.push(row); }
+          row.items.push({ str: item.str, x: item.transform[4] });
+        });
+        rows.sort((a, b) => b.y - a.y);
+
+        let cols = null;
+
+        for (let r = 0; r < rows.length; r++) {
+          const items = rows[r].items.sort((a, b) => a.x - b.x);
+          let rowText = items.map(i => i.str).join(" ");
+
+          if (!cols) {
+            const headers = items.filter(i => /^(oz|32|64|128)\.?$/i.test(i.str.trim()));
+            if (headers.length >= 10) {
+               cols = headers.map(h => h.x).sort((a,b)=>a-b);
+            }
+          }
+
+          const matchSW = rowText.match(/(SW\d{4})/i);
+          if (matchSW) {
+            let textoContexto = rowText;
+            if (rows[r+1]) textoContexto += " " + rows[r+1].items.map(i=>i.str).join(" ");
+            if (rows[r+2]) textoContexto += " " + rows[r+2].items.map(i=>i.str).join(" ");
+            
+            let base = "EXTRA WHITE"; 
+            if (textoContexto.match(/ULTRA\s*DEEP/i)) base = "ULTRA DEEP";
+            else if (textoContexto.match(/REAL\s*RED/i)) base = "REAL RED";
+            else if (textoContexto.match(/DEEP/i)) base = "DEEP";
+            else if (textoContexto.match(/VIVID\s*YELLOW/i)) base = "VIVID YELLOW";
+            else if (textoContexto.match(/LIGHT\s*YELLOW/i)) base = "LIGHT YELLOW";
+
+            let pagina = "N/A";
+            let textoParaPagina = rowText;
+            if (rows[r-1]) textoParaPagina += " " + rows[r-1].items.map(i=>i.str).join(" ");
+            if (rows[r+1]) textoParaPagina += " " + rows[r+1].items.map(i=>i.str).join(" ");
+            
+            const matchPagina = textoParaPagina.match(/\b(\d{3}(?:-[A-Z0-9]+)?)\b/i);
+            if (matchPagina && matchPagina[1] !== "128") {
+                pagina = matchPagina[1].toUpperCase();
+            }
+
+            let nombre = "Desconocido";
+            let textoSinCodigo = rowText.replace(/SW\d{4}/i, '').trim();
+            let stopIndex = textoSinCodigo.length;
+
+            let patterns = [
+                /\b\d{3}(?:-[A-Z0-9]+)?\b/i,
+                /\b(EXTRA WHITE|ULTRADEEP|ULTRA DEEP|DEEP|REAL RED|VIVID YELLOW|LIGHT YELLOW)\b/i,
+                /\bN\/A\b/i,
+                new RegExp(`\\b(${tintasAceptadas.join('|')})\\b`, 'i')
+            ];
+
+            patterns.forEach(regex => {
+                let match = textoSinCodigo.match(regex);
+                if (match && match.index < stopIndex) {
+                    stopIndex = match.index;
+                }
+            });
+
+            nombre = textoSinCodigo.substring(0, stopIndex).trim();
+            nombre = nombre.replace(/[0-9]/g, '').trim(); 
+            if (!nombre || nombre.length < 3) nombre = "Desconocido";
+
+            let currentFormula = { codigo: matchSW[1].toUpperCase(), nombre: nombre, base_color: base, pagina: pagina, tipo_pintura: tipoPintura, marca: "SHERWIN WILLIAMS", colorantes: [] };
+            
+            let tintasProcesadas = new Set(); 
+            
+            for(let k = 0; k < 8; k++) {
+                if (r + k >= rows.length) break;
+                let filaTinta = rows[r+k];
+                if (k > 0 && filaTinta.items.map(i=>i.str).join(" ").match(/(SW\d{4})/i)) break;
+
+                let itemsTinta = filaTinta.items.sort((a, b) => a.x - b.x);
+                let rowTextTinta = itemsTinta.map(i => i.str).join(" ");
+                
+                const regexGlobalTinta = /([A-Za-zÀ-ÿ\s]+)\s*\(([A-Z]\d)\)/gi;
+                let matchTinta;
+                
+                while ((matchTinta = regexGlobalTinta.exec(rowTextTinta)) !== null) {
+                    let tintaLimpia = matchTinta[1].trim();
+                    let codigoTinta = matchTinta[2].toUpperCase();
+                    
+                    let tintaValida = null;
+                    for (let t of tintasAceptadas) {
+                        if (tintaLimpia.toLowerCase().includes(t.toLowerCase())) {
+                            tintaValida = t;
+                            break;
+                        }
+                    }
+
+                    if (tintaValida) {
+                        const tintaFinal = tintaValida + " (" + codigoTinta + ")";
+                        
+                        if (!tintasProcesadas.has(tintaFinal)) {
+                            tintasProcesadas.add(tintaFinal);
+                            const v = new Array(12).fill(0);
+                            let tieneLitros = false;
+
+                            itemsTinta.forEach(item => {
+                              if (/^\d+$/.test(item.str.trim())) {
+                                const num = parseInt(item.str.trim(), 10);
+                                let minDist = Infinity, colIdx = -1;
+                                for (let j=0; j<cols.length; j++) {
+                                  const dist = Math.abs(cols[j] - item.x);
+                                  if (dist < minDist) { minDist = dist; colIdx = j; }
+                                }
+                                if (minDist < 50 && v[colIdx] === 0) {
+                                    v[colIdx] = num; 
+                                    if(colIdx <= 3) tieneLitros = true;
+                                }
+                              }
+                            });
+
+                            currentFormula.colorantes.push({
+                              tinta: tintaFinal, 
+                              oz_litro: tieneLitros ? ozDe(v[0], v[1], v[2], v[3]) : 0, 
+                              oz_galon: ozDe(v[4], v[5], v[6], v[7]), 
+                              oz_cubeta: ozDe(v[8], v[9], v[10], v[11])
+                            });
+                        }
+                    }
+                }
+            }
+
+            if (currentFormula.colorantes.length > 0) {
+              actualizarBaseDatos(currentFormula, tipoPintura);
+              nuevasFormulas++;
+            }
+          }
+        }
+      }
+
+      localStorage.setItem("fc_conv_db", JSON.stringify(DATABASE_SW));
+      actualizarResumenDB();
+      status.textContent = `✅ ¡Listo! Se procesaron ${nuevasFormulas} fórmulas.`;
+      status.style.color = "var(--exito)";
+    } catch (error) {
+      console.error(error);
+      status.textContent = "❌ Error: " + error.message;
+      status.style.color = "var(--alerta)";
+    }
+  }
+
+  function actualizarBaseDatos(formula, tipoPintura) {
+      const index = DATABASE_SW.findIndex(f => f.codigo === formula.codigo && f.tipo_pintura === tipoPintura && f.base_color === formula.base_color);
+      if (index !== -1) {
+          DATABASE_SW[index] = formula; 
+      } else {
+          DATABASE_SW.push(formula);
+      }
+  }
+
+  function ozDe(oz, a, b, c) { return (oz||0) + (a||0)/32 + (b||0)/64 + (c||0)/128; }
+
+  function actualizarResumenDB() { 
+      const cont = document.getElementById("resumenDB");
+      if (!cont) return;
+
+      if (DATABASE_SW.length === 0) {
+          cont.innerHTML = `
+              <div style="text-align:center; padding: 30px; background: rgba(128,128,128,0.05); border-radius: 10px; border: 1px dashed var(--borde);">
+                  <h3 style="color: var(--txt-suave); margin-bottom: 5px;">No hay fórmulas cargadas</h3>
+                  <p style="font-size: 0.9rem; color: var(--txt-suave);">Importa un archivo JSON o extrae un PDF para comenzar.</p>
+              </div>`;
+          return;
+      }
+
+      let conteo = {};
+      DATABASE_SW.forEach(f => {
+          let marca = f.marca || "SHERWIN WILLIAMS"; 
+          let linea = f.tipo_pintura || "SIN LINEA";
+          let key = `${marca} - ${linea.replace('BASE ', '')}`;
+          conteo[key] = (conteo[key] || 0) + 1;
+      });
+
+      let html = `
+          <div class="db-total-banner">
+              <div>Total Global de Colores</div>
+              <span>${DATABASE_SW.length.toLocaleString()}</span>
+          </div>
+          <div class="db-grid-cards">
+      `;
+      
+      for (let key in conteo) {
+          let colorBorde = "var(--primario)";
+          if(key.includes("COMEX")) colorBorde = "#ef4444"; 
+          if(key.includes("BEREL")) colorBorde = "#f59e0b"; 
+          if(key.includes("SOLVENTE")) colorBorde = "#8b5cf6"; 
+
+          html += `
+              <div class="db-card" style="border-left-color: ${colorBorde};">
+                  <div class="db-card-title" style="color: ${colorBorde};">${key}</div>
+                  <div class="db-card-count">${conteo[key].toLocaleString()} <small>colores</small></div>
+              </div>
+          `;
+      }
+      
+      html += `</div>`;
+      cont.innerHTML = html;
+  }
+
+  function borrarDB() { if(confirm("¿Borrar BD?")) { DATABASE_SW = []; localStorage.removeItem("fc_conv_db"); actualizarResumenDB(); } }
+
+  function exportarDBaExcel() {
+      if (DATABASE_SW.length === 0) return alert("No hay datos para exportar.");
+      
+      let csv = "Codigo,Nombre,Marca,Linea,Base,RGB,Tintes\n";
+      DATABASE_SW.forEach(f => {
+          let tintesStr = f.colorantes.map(c => `${c.tinta}: ${c.oz_litro}L / ${c.oz_galon}G / ${c.oz_cubeta}C`).join(" | ");
+          csv += `"${f.codigo}","${f.nombre}","${f.marca || ''}","${f.tipo_pintura}","${f.base_color}","${f.rgb || ''}","${tintesStr}"\n`;
+      });
+      const blob = new Blob(["\ufeff" + csv], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `BaseDatos_FC_${new Date().toISOString().split('T')[0]}.csv`;
+      link.click();
+  }
+
+  // ==================== PREPARAR ====================
+  function buscarParaPreparar() {
+    const q = document.getElementById("prepBuscar").value.trim().toUpperCase();
+    const base = document.getElementById("prepFiltroBase").value;
+    const marca = document.getElementById("prepFiltroMarca").value; 
+    const cont = document.getElementById("prepResultados");
+    if (!q) return;
+
+    let res = DATABASE_SW.filter(f => f.codigo.toUpperCase().includes(q) || f.nombre.toUpperCase().includes(q));
+    if (base !== "TODAS") res = res.filter(f => f.tipo_pintura === base);
+    if (marca !== "TODAS") res = res.filter(f => f.marca === marca); 
+    if (res.length === 0) { cont.innerHTML = "<p>No se encontraron resultados.</p>"; return; }
+
+    busquedaActual = res;
+    let html = "";
+    
+    res.forEach((f, i) => {
+      const isNA = f.base_color === "N/A";
+      html += `
+        <div class="prep-item">
+          <div class="prep-titulo">${f.codigo} — ${f.nombre} ${isNA ? '<span class="badge-na">N/A - Sin Fórmula</span>' : ''}</div>
+          <div class="prep-sub">
+              <span class="badge-base">BASE: ${f.base_color}</span> 
+              <span>| Pág: <b>${f.pagina || 'N/A'}</b></span>
+              <span>| Línea: ${f.tipo_pintura}</span>
+              <span>| Marca: <b>${f.marca || 'N/A'}</b></span>
+          </div>
+          
+          ${!isNA ? `
+          <div class="prep-opciones">
+              <label>
+                  <input type="checkbox" id="chk-exacto-${i}" onchange="recalcularActual(${i})"> Mostrar fracciones exactas (1/256, 1/512)
+              </label>
+              <div class="prep-botones">
+                <button class="btn secundario" onclick="verFormulaPreparar(${i}, 'LITRO', 1)">🧪 Litro</button>
+                <button class="btn secundario" onclick="verFormulaPreparar(${i}, 'GALON', 4)">🥫 Galón</button>
+                <button class="btn secundario" onclick="verFormulaPreparar(${i}, 'CUBETA', 19)">🪣 Cubeta</button>
+                <button class="btn secundario" onclick="verFormulaCustom(${i})">➕ Otro...</button>
+              </div>
+          </div>` : ''}
+
+          <div class="prep-detalle" id="detalle-${i}">
+            <h4 style="margin-top:0; margin-bottom:10px; color:var(--primario);">Fórmula a preparar:</h4>
+            <div class="prep-formula-txt" id="formula-txt-${i}"></div>
+            
+            <div class="fila">
+              <label>Producto:
+                <select id="prod-${i}">
+                  <option value="">— Selecciona —</option>
+                  ${LISTA_PRODUCTOS.map(p => `<option value="${p}">${p}</option>`).join("")}
+                  <option value="__CUSTOM__">[ + Escribir otro producto... ]</option>
+                </select>
+              </label>
+              <label class="oculto" id="prod-custom-label-${i}">Nuevo Producto:
+                <input type="text" id="prod-custom-${i}" placeholder="Ej. PINTURA ESPECIAL">
+              </label>
+              <label>Comentarios:
+                <input type="text" id="com-${i}" placeholder="Opcional">
+              </label>
+              
+              <label style="flex: 0.8;">👤 Operador:
+                <select id="operador-${i}" style="font-weight: bold;">
+                  <option value="">— ¿Quién prepara? —</option>
+                  <option value="JONATHAN">JONATHAN</option>
+                  <option value="DAVID">DAVID</option>
+                  <option value="YESI">YESI</option>
+                  <option value="JOVANY">JOVAN</option>
+                  <option value="JULIO">JULIO</option>
+                  <option value="RODOLFO">RODOLFO</option>
+                  <option value="KEVIN">KEVIN</option>
+                  <option value="MIROS">MIROS</option>
+                </select>
+              </label>
+            </div>
+            
+            <label style="flex-direction: row; align-items: center; gap: 10px; cursor: pointer; margin-bottom: 10px;">
+              <input type="checkbox" id="chk-formula-${i}"> Incluir fórmula en la etiqueta
+            </label>
+            <button class="btn exito" onclick="prepararEImprimir(${i})">🖨️ Generar Etiqueta</button>
+          </div>
+        </div>
+      `;
+    });
+    cont.innerHTML = html;
+
+    res.forEach((_, i) => {
+      document.getElementById(`prod-${i}`).addEventListener("change", function() {
+        const customLabel = document.getElementById(`prod-custom-label-${i}`);
+        if (this.value === "__CUSTOM__") customLabel.classList.remove("oculto");
+        else customLabel.classList.add("oculto");
+      });
+    });
+  }
+
+  function recalcularActual(index) {
+      if (prepTemporal && prepTemporal.index === index) {
+          verFormulaPreparar(index, prepTemporal.unidad, prepTemporal.cap);
+      }
+  }
+
+  function verFormulaPreparar(index, unidad, cap) {
+    const f = busquedaActual[index];
+    
+    if (unidad === 'LITRO' && f.colorantes.every(c => c.oz_litro === 0)) {
+        alert("⚠️ Esta fórmula no tiene cantidades para 1 LT.\n\nPor favor, usa la pestaña 'Convertidor' seleccionando Galón como origen y Litro como destino.");
+        return;
+    }
+
+    prepTemporal = { index: index, unidad: unidad, cap: cap };
+    const maquina = 64; 
+    const exacto = document.getElementById(`chk-exacto-${index}`).checked;
+    
+    let textoTamano = "GALÓN";
+    if (unidad === 'LITRO') textoTamano = "1 LT";
+    else if (unidad === 'GALON') textoTamano = "GALÓN (4 LT)";
+    else if (unidad === 'CUBETA') textoTamano = "CUBETA (19 LT)";
+    else if (unidad === 'CUSTOM') textoTamano = cap + " LT";
+
+    let htmlTexto = `
+        <div class="formula-header">
+            <div class="header-item">
+                <div class="header-label">Línea</div>
+                <div class="header-value">${f.tipo_pintura.replace('BASE ', '')}</div>
+            </div>
+            <div class="header-item">
+                <div class="header-label">Tamaño</div>
+                <div class="header-value" style="color: var(--exito);">${textoTamano}</div>
+            </div>
+            <div class="header-item">
+                <div class="header-label">Base</div>
+                <div class="header-value">${f.base_color}</div>
+            </div>
+        </div>
+    `;
+    
+    f.colorantes.forEach(c => {
+      let oz = 0;
+      if (unidad === 'LITRO') oz = c.oz_litro; 
+      else if (unidad === 'CUBETA') oz = c.oz_cubeta;
+      else if (unidad === 'CUSTOM') oz = (c.oz_galon / 4) * cap;
+      else oz = c.oz_galon;
+
+      const total128 = oz * 128; 
+      
+      if (total128 > 0.1) {
+          let cantidadFormateada = exacto ? formatearOZExacto(total128) : formatearOZConMaquina(total128, maquina, false);
+          
+          let bgColor = "#000000";
+          let txtColor = "#4ade80";
+          let borderColor = "var(--primario)";
+          let t = c.tinta.toLowerCase();
+
+          if (t.includes('blanco')) { bgColor = "#ffffff"; txtColor = "#000000"; borderColor = "#cccccc"; }
+          else if (t.includes('negro')) { bgColor = "#0B1524"; txtColor = "#ffffff"; borderColor = "#000000"; }
+          else if (t.includes('magenta')) { bgColor = "#7F04B8"; txtColor = "#ffffff"; borderColor = "#5D00B8"; }
+          else if (t.includes('azul')) { bgColor = "#0C048F"; txtColor = "#ffffff"; borderColor = "#0d47a1"; }
+          else if (t.includes('rojo óxido')) { bgColor = "#642424"; txtColor = "#ffffff"; borderColor = "#7f0000"; }
+          else if (t.includes('rojo nuevo')) { bgColor = "#BF1E1B"; txtColor = "#ffffff"; borderColor = "#b71c1c"; }
+          else if (t.includes('rojo ')) { bgColor = "#642424"; txtColor = "#ffffff"; borderColor = "#590B0B"; }
+          else if (t.includes('ocre')) { bgColor = "#CF8A00"; txtColor = "#ffffff"; borderColor = "#8d5e00"; }
+          else if (t.includes('amarillo')) { bgColor = "#F7EC48"; txtColor = "#000000"; borderColor = "#f57f17"; }
+          else if (t.includes('verde')) { bgColor = "#388e3c"; txtColor = "#ffffff"; borderColor = "#1b5e20"; }
+          else if (t.includes('café') || t.includes('cafe')) { bgColor = "#85594D"; txtColor = "#ffffff"; borderColor = "#3e2723"; }
+
+          htmlTexto += `
+              <div class="formula-item" style="background: ${bgColor}; border-left-color: ${borderColor};">
+                  <span class="formula-tinta" style="color: ${txtColor};">${c.tinta}</span>
+                  <span class="formula-cantidad" style="color: ${txtColor};">${cantidadFormateada}</span>
+              </div>
+          `;
+      }
+    });
+
+    document.getElementById(`formula-txt-${index}`).innerHTML = htmlTexto;
+    document.getElementById(`detalle-${index}`).classList.add("activo");
+  }
+
+  function verFormulaCustom(index) {
+    const tam = prompt("Escribe la cantidad en Litros (Ej. 2.5):", "2.5");
+    if (!tam || isNaN(Number(tam)) || Number(tam) <= 0) return;
+    verFormulaPreparar(index, 'CUSTOM', Number(tam));
+  }
+
+  function prepararEImprimir(index) {
+    if (!prepTemporal || prepTemporal.index !== index) return alert("Selecciona un tamaño primero.");
+    
+    const f = busquedaActual[index];
+    const operador = document.getElementById(`operador-${index}`).value;
+    if (!operador) return alert("⚠️ Por favor, selecciona tu nombre en la lista de Operador.");
+
+    let producto = document.getElementById(`prod-${index}`).value;
+    if (producto === "__CUSTOM__") {
+      producto = document.getElementById(`prod-custom-${index}`).value.trim().toUpperCase();
+      if (!producto) return alert("Escribe el nombre del producto.");
+    } else if (!producto) return alert("Selecciona un producto.");
+
+    const comentarios = document.getElementById(`com-${index}`).value.trim();
+    const incluirFormula = document.getElementById(`chk-formula-${index}`).checked;
+    const exacto = document.getElementById(`chk-exacto-${index}`).checked;
+    const maquina = 64;
+
+    let textoFormula = "";
+    f.colorantes.forEach(c => {
+      let oz = 0;
+      if (prepTemporal.unidad === 'LITRO') oz = c.oz_litro; 
+      else if (prepTemporal.unidad === 'CUBETA') oz = c.oz_cubeta;
+      else if (prepTemporal.unidad === 'CUSTOM') oz = (c.oz_galon / 4) * prepTemporal.cap;
+      else oz = c.oz_galon;
+
+      const total128 = oz * 128;
+      if (total128 > 0.1) {
+          textoFormula += c.tinta + " = " + (exacto ? formatearOZExacto(total128) : formatearOZConMaquina(total128, maquina, false)) + " | ";
+      }
+    });
+
+    CONTADOR_SUCURSAL++;
+    localStorage.setItem("fc_contador", CONTADOR_SUCURSAL);
+    const contStr = "No. " + String(CONTADOR_SUCURSAL).padStart(4, '0');
+    const ahora = new Date();
+    
+    etiquetaTemporal = {
+      contador: contStr,
+      fecha: ahora.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) + " " + ahora.toLocaleTimeString('es-ES', {hour: '2-digit', minute:'2-digit'}),
+      codigo: f.codigo, nombre: f.nombre, producto: producto, base: f.base_color, tamano: prepTemporal.cap + " LT", comentarios: comentarios, 
+      formula: textoFormula, 
+      imprimirFormula: incluirFormula,
+      tipo: "preparacion",
+      marca: f.marca || "SHERWIN WILLIAMS",
+      timestamp: ahora.getTime(), usuario: operador
+    };
+
+    document.getElementById("lblProducto").textContent = producto;
+    document.getElementById("lblFecha").textContent = etiquetaTemporal.fecha;
+    document.getElementById("lblCodigoColor").textContent = f.codigo + " " + f.nombre.toUpperCase();
+    document.getElementById("lblContador").textContent = contStr;
+    document.getElementById("lblComentarios").textContent = comentarios ? "Obs: " + comentarios : "";
+    
+    const lblFormula = document.getElementById("lblFormula");
+    if (incluirFormula && textoFormula) { lblFormula.textContent = textoFormula; lblFormula.style.display = "block"; } 
+    else lblFormula.style.display = "none";
+
+    document.getElementById("modalEtiqueta").style.display = "flex";
+  }
+
+  function cerrarModalEtiqueta() { document.getElementById("modalEtiqueta").style.display = "none"; }
+
+  // ==================== DISPARAR DYMO ====================
+  async function dispararDYMOOriginal() {
+    if (!etiquetaTemporal) return;
+    
+    const cantidad = parseInt(document.getElementById("cantEtiquetas").value) || 1;
+    etiquetaTemporal.cantidad = cantidad; 
+    
+    const botonImprimir = document.querySelector('#modalEtiqueta .btn.exito');
+    if (botonImprimir) {
+        botonImprimir.disabled = true;
+        botonImprimir.textContent = "⏳ Conectando con DYMO...";
+    }
+
+    let intentos = 0;
+    while (typeof dymo === 'undefined' && intentos < 50) {
+      await new Promise(r => setTimeout(r, 100));
+      intentos++;
+    }
+
+    if (typeof dymo === 'undefined' || !dymo.label || !dymo.label.framework) {
+      alert("⚠️ No se detectó el software DYMO Connect.\n\nAsegúrate de que el programa esté abierto en tu PC.\n\nSe abrirá la ventana de impresión normal del navegador.");
+      usarImpresionNormal();
+      if (botonImprimir) { botonImprimir.disabled = false; botonImprimir.textContent = "🖨️ Imprimir en DYMO"; }
+      return;
+    }
+
+    try {
+      const szContador = localStorage.getItem("fc_size_contador") || "10";
+      const szProducto = localStorage.getItem("fc_size_producto") || "16";
+      const szColor = localStorage.getItem("fc_size_color") || "13";
+
+      const logoGuardado = (localStorage.getItem("fc_logo_base64") || "").replace(/^data:image\/[^;]+;base64,/i, "");
+      const logoBase64 = logoGuardado || "iVBORw0KGgoAAAANSUhEUgAAAo8AAAEfAQAAAAAIZREIAAAACXBIWXMAAC4jAAAuIwF4pT92AAAIIUlEQVR42u1cy47bNhQ9pISxF4NY6KazCGDlD7zMbvQp/oQsu+owf5BP8KeowCyy6/QHCrWYhRctoAlmoRiy2AX1IPUiKXK6aEVgknFiHd/Lcx/nUrYJh+fFKbwvQ8jvhBCSeIV8AytXyBXyvw75QgihAGUADBMSfH5l9XNSYMeNVrXSs0KukACAff2z7uUKuUKukCvkCrlCrpAr5Aq5Qv6fICP/kJl3yMC/47f+IT95hyTMO+SN/yC68w+ZeYcM/GfPrX/Iw1rcVkgXyNg/ZGIHSeZvIV0DgqC0QtTdQnq2y0UTx2O7XDRw/BpyQir4dPzZqpwbOX6yKuetnTOrBDgeuN2qZvfyJQIPS/jcyy8LQkh1vOr5WAHg99zWcdnKKlVf7RsApE5lo+w11qdllUim5+XHYrDP9neRFXqeyqHfjvUyrXz4rTAOJawrbSboGecqvRf5hf9c5vhF1VJf+8m+gPGXCLtc+p/GdAA8qBYxngOv3aPvi8mninOSLefl5MuE9x8Rhpp8sohxDgBM8fvdGPkWjlcKs2dZVJ4XQr7WFHWtkaSL5AaVCQeaunGV55Lr0hzP5F17BoCP8oMlkAkIa2vZSa6+p4VlowKCtCkcJQBsOGeo68eiIKqAMG4sK2W/vy2tlyWwvVPyJF1YN6kUiIewoxzYNDsjy8tXG8gMSGjtsjKHXmyTnUpuMiLHYDaSOjyxgOQMROD259B4qtLrICvgBog7Ut6Ppc7ZBrIEtkDU+ZuNpU5sA1kAEXDbGhLIXSewSnbaUXkEOspvuz3uHjxbQQpiSNsrIjl1Ptkle9sXCOecM5HlBfZcPExFFyVNGTDPcV7be+yrv0TqF9+sEvJSb1g0dtRysEt2KhPOsJV6Rb9+GKVOB5kDMa4pbkYqw8ayT9KWyxRlJlE+PMc620EyEKA4A2yoezPLPkklwp9KIBmM32rqfHk1hKyAUKjgw4ByJXWu7G8tSWFTrO9EXRtS3kud6NHMSkE4kEDpFfJRKG8K6TUxgsyABCWQgfaD5WaQOo9GkAkIQwHksjwQ6+MgdXRm0o7wHCiARFKEE6nzaAApCD8BF6VXTKWOxkzadQkGcECVB+Op86iHPAOHRgX3KD+Opc68mbQl/CJ2TpEHCJikug3NpG2XKASvijyYOjOYNZO2sqBRwalM+aeJyx41kEIWnGqiZMon7yLMmUklwgnDVe0V7yave5zvkDmw71RwCWyaDinPVWK1U+b9bId8Ao64NCpYpXyBmVQifBsB473CbjcbWZAB92Wt+fGT3vFJlVBR4ApQ4NSq4KPZ4dC0mZwXwI5zALW9OXBnYOXU4FLRWhZwIKj743a2v+bqaDxOTw7EuAAhcAQS+zPQIeQJSFF0Kpi4QzYZfmj6I3OFFF0iAxLUxTJxNJOLYKzFa0P5NOOZ7sy3okIW8FqoNJS7OZ4Dcd3Q6v4YukJmQILX2rYDkNrcIBzfyzbDOW8yibntpUy4J8oVwus5JHOzsgS24M1BoOgVd270nIFD3dA8UU4Vwuv+6HaPjsYAQ94OjR4KB40QAFkrfsT4nDphFjLhHeVOOS4T3ozPkZPjISKJcB+Fg1IcJcLrXuFGD1EInxifLSvRZ5lwjI/PlpBUlZSDWWpBcfuVV0qbBwgv3ILooBA+Oj7bHzaWStQkrl2XihklUg5HTs6QMuEeKG8lK7xRTpuDDflfSldIrt6UIwzujPeGsAQQnzcjRFORfhEfDuWEhADwB6EdZDRx7vnSVpCH9mNoAR/Z6kqMoryDVOZYGf9r79II+l5H5aOB4Sj6XXd9hm6mSSVIMn4u3m6s+WLN9WqTJWOnY9aMTy/d2V3eM9EA0iTqS/W8RgdZ+Xfconbyeutd36JUYFBlqElYmK3KFNJOHuVWjn8erSMlBhV7GjIQVcI81ss6leetfL+ELaoLsVzPSWbDuFYOJ9LTCjPG7ZrGDyj1kIlJyqTULtTnV9yLyQoGb0qz6ekffFgJMIBxpVp7eWdjqGytI6SaoAnzYmU6+M2D47y3tY6QW+lPgCVGVm41bmeDTPPgeNXbWqrXJ8a8E5FM1DUic5WlzAbyQR2AptUD1UVdZL6lVDzZsV4O5GmugzTQGsWgVs1DXizeS1QiFEFMdVLQRLMmSoucVt5Xk6MdgrILo61vTVQ0hZNqzTBU6F2QuuY4qwZ5SY0Cz6QOCNFW6S+5NeLIyopIFYPD+OGdsbEZpEGkp7K9XA9pIoKpleMbvYJh7YsnRpB3dlEJ5n7Sr6r5zyZWas9iola/sLm95FbHJWn/4exEkZpIQd5v9XSeTq29234DyOYho0UsUefZ+ff+M+m8V9p+Fvadyechw7dw3LxPlGaQ1MSkv9RqVXipRDaGEBM1WCh/aX3T7yTplMGGc16g1Dqeq2KwaK7l+UIGkn6Sh5MaPscWQIhqeR8vpIHPxsrY/Fg4a5OIagpsZRtAXGzO1en+G7Gix6BuJG1OxKY5x2wtZhTOpYhaOU71SR633iQ+Tw2UfUq1R0+ZdgIObUtiLklBQsL6SyYJ2aotjxsPz8zW8QSZ9jRLLw62vVaqdbw0AZSTKKdmIWK8Yq2VJnUj6jmjdVyX5GEfqaDzA5j1Xe1IvMiMIZtZI+85EHDxGa76iTvO149Rr5D/EuRotwicIO9tapSh4yPF42G6LJitphK374jYO3896abX1naZO+N7haIg9xFEMkWk9BOXEszP81XbfBXNHu69fXtsQ9Eu85eQe6ajBtB++8Lg6bvfPmh6pm2jKHXU2FtpsN6inf0DnEsw7klBJBcAAAAASUVORK5CYII=";
+      const logoLimpio = logoBase64.replace(/[\n\r\s]+/g, "");
+
+      const logoBlock = `<ObjectInfo>
+          <ImageObject>
+              <Name>LOGO</Name>
+              <ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+              <BackColor Alpha="0" Red="255" Green="255" Blue="255" />
+              <LinkedObjectName />
+              <Rotation>Rotation0</Rotation>
+              <IsMirrored>False</IsMirrored>
+              <IsVariable>False</IsVariable>
+              <GroupID>-1</GroupID>
+              <IsOutlined>False</IsOutlined>
+              <Image>${logoLimpio}</Image>
+              <ScaleMode>Uniform</ScaleMode>
+              <BorderWidth>0</BorderWidth>
+              <BorderColor Alpha="255" Red="0" Green="0" Blue="0" />
+              <HorizontalAlignment>Center</HorizontalAlignment>
+              <VerticalAlignment>Center</VerticalAlignment>
+          </ImageObject>
+          <Bounds X="300" Y="200" Width="1000" Height="500" />
+      </ObjectInfo>`;
+
+      let labelXml = `<?xml version="1.0" encoding="utf-8"?>
+      <DieCutLabel Version="8.0" Units="twips" MediaType="Default">
+          <PaperOrientation>Landscape</PaperOrientation>
+          <Id>LargeShipping</Id>
+          <IsOutlined>false</IsOutlined>
+          <PaperName>30256 Shipping</PaperName>
+          <DrawCommands><RoundRectangle X="0" Y="0" Width="5780" Height="3326" Rx="270" Ry="270" /></DrawCommands>
+          ${logoBlock}
+          <ObjectInfo>
+              <TextObject>
+                  <Name>SW</Name>
+                  <ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+                  <BackColor Alpha="0" Red="255" Green="255" Blue="255" />
+                  <LinkedObjectName />
+                  <Rotation>Rotation0</Rotation>
+                  <IsMirrored>False</IsMirrored>
+                  <IsVariable>True</IsVariable>
+                  <HorizontalAlignment>Right</HorizontalAlignment>
+                  <VerticalAlignment>Middle</VerticalAlignment>
+                  <TextFitMode>ShrinkToFit</TextFitMode>
+                  <UseFullFontHeight>False</UseFullFontHeight>
+                  <Verticalized>False</Verticalized>
+                  <StyledText><Element><String>SHERWIN-WILLIAMS
+SAHAGUN</String><Attributes><Font Family="Arial" Size="10" Bold="True" Italic="False" Underline="False" Strikeout="False" /><ForeColor Alpha="255" Red="0" Green="0" Blue="0" /></Attributes></Element></StyledText>
+              </TextObject>
+              <Bounds X="4000" Y="220" Width="1500" Height="350" />
+          </ObjectInfo>
+          <ObjectInfo>
+              <TextObject>
+                  <Name>PRODUCTO</Name>
+                  <ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+                  <BackColor Alpha="0" Red="255" Green="255" Blue="255" />
+                  <LinkedObjectName />
+                  <Rotation>Rotation0</Rotation>
+                  <IsMirrored>False</IsMirrored>
+                  <IsVariable>True</IsVariable>
+                  <HorizontalAlignment>Center</HorizontalAlignment>
+                  <VerticalAlignment>Middle</VerticalAlignment>
+                  <TextFitMode>ShrinkToFit</TextFitMode>
+                  <UseFullFontHeight>False</UseFullFontHeight>
+                  <Verticalized>False</Verticalized>
+                  <StyledText><Element><String> </String><Attributes><Font Family="Arial" Size="${szProducto}" Bold="True" Italic="False" Underline="False" Strikeout="False" /><ForeColor Alpha="255" Red="0" Green="0" Blue="0" /></Attributes></Element></StyledText>
+              </TextObject>
+              <Bounds X="500" Y="610" Width="4800" Height="300" />
+          </ObjectInfo>
+          <ObjectInfo>
+              <TextObject>
+                  <Name>LINEA_ENCABEZADO</Name>
+                  <ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+                  <BackColor Alpha="0" Red="255" Green="255" Blue="255" />
+                  <LinkedObjectName />
+                  <Rotation>Rotation0</Rotation>
+                  <IsMirrored>False</IsMirrored>
+                  <IsVariable>False</IsVariable>
+                  <HorizontalAlignment>Center</HorizontalAlignment>
+                  <VerticalAlignment>Middle</VerticalAlignment>
+                  <TextFitMode>ShrinkToFit</TextFitMode>
+                  <UseFullFontHeight>False</UseFullFontHeight>
+                  <Verticalized>False</Verticalized>
+                  <StyledText><Element><String>------------------------------------------------------------------------------------------------------------------------------------------------</String><Attributes><Font Family="Arial" Size="5" Bold="True" Italic="False" Underline="False" Strikeout="False" /><ForeColor Alpha="255" Red="0" Green="0" Blue="0" /></Attributes></Element></StyledText>
+              </TextObject>
+              <Bounds X="300" Y="950" Width="5100" Height="60" />
+          </ObjectInfo>
+          <ObjectInfo>
+              <TextObject>
+                  <Name>COLOR</Name>
+                  <ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+                  <BackColor Alpha="0" Red="255" Green="255" Blue="255" />
+                  <LinkedObjectName />
+                  <Rotation>Rotation0</Rotation>
+                  <IsMirrored>False</IsMirrored>
+                  <IsVariable>True</IsVariable>
+                  <HorizontalAlignment>Center</HorizontalAlignment>
+                  <VerticalAlignment>Middle</VerticalAlignment>
+                  <TextFitMode>ShrinkToFit</TextFitMode>
+                  <UseFullFontHeight>False</UseFullFontHeight>
+                  <Verticalized>False</Verticalized>
+                  <StyledText><Element><String> </String><Attributes><Font Family="Arial" Size="${szColor}" Bold="True" Italic="False" Underline="False" Strikeout="False" /><ForeColor Alpha="255" Red="0" Green="0" Blue="0" /></Attributes></Element></StyledText>
+              </TextObject>
+              <Bounds X="500" Y="1060" Width="4800" Height="250" />
+          </ObjectInfo>
+          <ObjectInfo>
+              <TextObject>
+                  <Name>TAMANO</Name>
+                  <ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+                  <BackColor Alpha="0" Red="255" Green="255" Blue="255" />
+                  <LinkedObjectName />
+                  <Rotation>Rotation0</Rotation>
+                  <IsMirrored>False</IsMirrored>
+                  <IsVariable>True</IsVariable>
+                  <HorizontalAlignment>Center</HorizontalAlignment>
+                  <VerticalAlignment>Middle</VerticalAlignment>
+                  <TextFitMode>ShrinkToFit</TextFitMode>
+                  <UseFullFontHeight>False</UseFullFontHeight>
+                  <Verticalized>False</Verticalized>
+                  <StyledText><Element><String> </String><Attributes><Font Family="Arial" Size="14" Bold="True" Italic="False" Underline="False" Strikeout="False" /><ForeColor Alpha="255" Red="0" Green="0" Blue="0" /></Attributes></Element></StyledText>
+              </TextObject>
+              <Bounds X="500" Y="1360" Width="4800" Height="150" />
+          </ObjectInfo>
+          <ObjectInfo>
+              <TextObject>
+                  <Name>BASE</Name>
+                  <ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+                  <BackColor Alpha="0" Red="255" Green="255" Blue="255" />
+                  <LinkedObjectName />
+                  <Rotation>Rotation0</Rotation>
+                  <IsMirrored>False</IsMirrored>
+                  <IsVariable>True</IsVariable>
+                  <HorizontalAlignment>Center</HorizontalAlignment>
+                  <VerticalAlignment>Middle</VerticalAlignment>
+                  <TextFitMode>ShrinkToFit</TextFitMode>
+                  <UseFullFontHeight>False</UseFullFontHeight>
+                  <Verticalized>False</Verticalized>
+                  <StyledText><Element><String> </String><Attributes><Font Family="Arial" Size="12" Bold="True" Italic="False" Underline="False" Strikeout="False" /><ForeColor Alpha="255" Red="0" Green="0" Blue="0" /></Attributes></Element></StyledText>
+              </TextObject>
+              <Bounds X="500" Y="1560" Width="4800" Height="150" />
+          </ObjectInfo>
+          <ObjectInfo>
+              <TextObject>
+                  <Name>FECHA</Name>
+                  <ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+                  <BackColor Alpha="0" Red="255" Green="255" Blue="255" />
+                  <LinkedObjectName />
+                  <Rotation>Rotation0</Rotation>
+                  <IsMirrored>False</IsMirrored>
+                  <IsVariable>True</IsVariable>
+                  <HorizontalAlignment>Center</HorizontalAlignment>
+                  <VerticalAlignment>Middle</VerticalAlignment>
+                  <TextFitMode>ShrinkToFit</TextFitMode>
+                  <UseFullFontHeight>False</UseFullFontHeight>
+                  <Verticalized>False</Verticalized>
+                  <StyledText><Element><String> </String><Attributes><Font Family="Arial" Size="9" Bold="False" Italic="False" Underline="False" Strikeout="False" /><ForeColor Alpha="255" Red="0" Green="0" Blue="0" /></Attributes></Element></StyledText>
+              </TextObject>
+              <Bounds X="500" Y="1760" Width="4800" Height="150" />
+          </ObjectInfo>
+          <ObjectInfo>
+              <TextObject>
+                  <Name>FORMULA</Name>
+                  <ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+                  <BackColor Alpha="0" Red="255" Green="255" Blue="255" />
+                  <LinkedObjectName />
+                  <Rotation>Rotation0</Rotation>
+                  <IsMirrored>False</IsMirrored>
+                  <IsVariable>True</IsVariable>
+                  <HorizontalAlignment>Center</HorizontalAlignment>
+                  <VerticalAlignment>Middle</VerticalAlignment>
+                  <TextFitMode>ShrinkToFit</TextFitMode>
+                  <UseFullFontHeight>False</UseFullFontHeight>
+                  <Verticalized>False</Verticalized>
+                  <StyledText><Element><String> </String><Attributes><Font Family="Arial" Size="12" Bold="False" Italic="False" Underline="False" Strikeout="False" /><ForeColor Alpha="255" Red="0" Green="0" Blue="0" /></Attributes></Element></StyledText>
+              </TextObject>
+              <Bounds X="500" Y="1960" Width="4800" Height="350" />
+          </ObjectInfo>
+          <ObjectInfo>
+              <TextObject>
+                  <Name>DOMICILIO</Name>
+                  <ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+                  <BackColor Alpha="0" Red="255" Green="255" Blue="255" />
+                  <LinkedObjectName />
+                  <Rotation>Rotation0</Rotation>
+                  <IsMirrored>False</IsMirrored>
+                  <IsVariable>True</IsVariable>
+                  <HorizontalAlignment>Left</HorizontalAlignment>
+                  <VerticalAlignment>Middle</VerticalAlignment>
+                  <TextFitMode>ShrinkToFit</TextFitMode>
+                  <UseFullFontHeight>False</UseFullFontHeight>
+                  <Verticalized>False</Verticalized>
+                  <StyledText><Element><String>SERVICIO A DOMICILIO</String><Attributes><Font Family="Arial" Size="8" Bold="True" Italic="False" Underline="False" Strikeout="False" /><ForeColor Alpha="255" Red="0" Green="0" Blue="0" /></Attributes></Element></StyledText>
+              </TextObject>
+              <Bounds X="300" Y="2360" Width="1500" Height="150" />
+          </ObjectInfo>
+          <ObjectInfo>
+              <TextObject>
+                  <Name>CONTADOR</Name>
+                  <ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+                  <BackColor Alpha="0" Red="255" Green="255" Blue="255" />
+                  <LinkedObjectName />
+                  <Rotation>Rotation0</Rotation>
+                  <IsMirrored>False</IsMirrored>
+                  <IsVariable>True</IsVariable>
+                  <HorizontalAlignment>Left</HorizontalAlignment>
+                  <VerticalAlignment>Middle</VerticalAlignment>
+                  <TextFitMode>ShrinkToFit</TextFitMode>
+                  <UseFullFontHeight>False</UseFullFontHeight>
+                  <Verticalized>False</Verticalized>
+                  <StyledText><Element><String> </String><Attributes><Font Family="Arial" Size="${szContador}" Bold="True" Italic="False" Underline="False" Strikeout="False" /><ForeColor Alpha="255" Red="0" Green="0" Blue="0" /></Attributes></Element></StyledText>
+              </TextObject>
+              <Bounds X="300" Y="2560" Width="1500" Height="300" />
+          </ObjectInfo>
+          <ObjectInfo>
+              <TextObject>
+                  <Name>CONTACTO</Name>
+                  <ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+                  <BackColor Alpha="0" Red="255" Green="255" Blue="255" />
+                  <LinkedObjectName />
+                  <Rotation>Rotation0</Rotation>
+                  <IsMirrored>False</IsMirrored>
+                  <IsVariable>True</IsVariable>
+                  <HorizontalAlignment>Right</HorizontalAlignment>
+                  <VerticalAlignment>Middle</VerticalAlignment>
+                  <TextFitMode>ShrinkToFit</TextFitMode>
+                  <UseFullFontHeight>False</UseFullFontHeight>
+                  <Verticalized>False</Verticalized>
+                  <StyledText><Element><String>📞 7915961197  7713923110
+CORREO: pinturas.relma@gmail.com</String><Attributes><Font Family="Arial" Size="9" Bold="False" Italic="False" Underline="False" Strikeout="False" /><ForeColor Alpha="255" Red="0" Green="0" Blue="0" /></Attributes></Element></StyledText>
+              </TextObject>
+              <Bounds X="2800" Y="2560" Width="2700" Height="300" />
+          </ObjectInfo>
+          <ObjectInfo>
+              <TextObject>
+                  <Name>COMENTARIOS</Name>
+                  <ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+                  <BackColor Alpha="0" Red="255" Green="255" Blue="255" />
+                  <LinkedObjectName />
+                  <Rotation>Rotation0</Rotation>
+                  <IsMirrored>False</IsMirrored>
+                  <IsVariable>True</IsVariable>
+                  <HorizontalAlignment>Right</HorizontalAlignment>
+                  <VerticalAlignment>Middle</VerticalAlignment>
+                  <TextFitMode>ShrinkToFit</TextFitMode>
+                  <UseFullFontHeight>False</UseFullFontHeight>
+                  <Verticalized>False</Verticalized>
+                  <StyledText><Element><String> </String><Attributes><Font Family="Arial" Size="10" Bold="False" Italic="True" Underline="False" Strikeout="False" /><ForeColor Alpha="255" Red="0" Green="0" Blue="0" /></Attributes></Element></StyledText>
+              </TextObject>
+              <Bounds X="2800" Y="2910" Width="2700" Height="200" />
+          </ObjectInfo>
+      </DieCutLabel>`;
+
+      let label = null;
+      const plantillaPersonalizada = localStorage.getItem("fc_custom_template");
+      if (plantillaPersonalizada) {
+        try { label = dymo.label.framework.openLabelXml(plantillaPersonalizada); }
+        catch (plantillaError) { console.warn("Plantilla personalizada no válida; se usa la original.", plantillaError); }
+      }
+      if (!label) label = dymo.label.framework.openLabelXml(labelXml);
+      const objectNames = label.getObjectNames();
+      const setTextIfExists = (name, text) => {
+          if (objectNames.includes(name)) label.setObjectText(name, text || "");
+      };
+
+      setTextIfExists("PRODUCTO", etiquetaTemporal.producto);
+      setTextIfExists("COLOR", etiquetaTemporal.codigo + " " + etiquetaTemporal.nombre);
+      setTextIfExists("TAMANO", "TAMAÑO: " + etiquetaTemporal.tamano); 
+      setTextIfExists("BASE", "BASE: " + etiquetaTemporal.base); 
+      setTextIfExists("FECHA", etiquetaTemporal.fecha);
+      setTextIfExists("FORMULA", etiquetaTemporal.imprimirFormula ? etiquetaTemporal.formula : "");
+      setTextIfExists("CONTADOR", etiquetaTemporal.contador);
+      setTextIfExists("COMENTARIOS", etiquetaTemporal.comentarios ? 'Obs: ' + etiquetaTemporal.comentarios : "");
+
+      const printers = dymo.label.framework.getPrinters();
+      if (printers.length === 0) throw new Error("No hay impresoras DYMO conectadas en el sistema.");
+      
+      let nombreImpresora = printers[0].name; 
+      for (let p of printers) {
+          if (p.name.includes("450") || p.name.includes("LabelWriter")) {
+              nombreImpresora = p.name;
+              break;
+          }
+      }
+
+      await new Promise(r => setTimeout(r, 300));
+      const params = dymo.label.framework.createLabelWriterPrintParamsXml({ copies: cantidad });    
+
+      label.print(nombreImpresora, params); 
+      
+      if (etiquetaTemporal.tipo === "ajuste") {
+          guardarAjusteEnHistorial(etiquetaTemporal);
+      } else {
+          HISTORIAL_PREP.unshift(etiquetaTemporal);
+          localStorage.setItem("fc_hist_prep", JSON.stringify(HISTORIAL_PREP));
+      }
+      
+      if(typeof aplicarFiltrosHistorial === 'function') aplicarFiltrosHistorial(); 
+
+      cerrarModalEtiqueta();
+      if(typeof mostrarToast === 'function') mostrarToast(`✅ ${cantidad} etiqueta(s) enviada(s) a DYMO`);
+      
+    } 
+    catch (e) {
+      console.error("Error DYMO:", e); 
+      alert("❌ ERROR AL IMPRIMIR CON DYMO:\n\n" + e.message + "\n\nSe usará la impresión normal.");
+      usarImpresionNormal();
+    } finally {
+      if (botonImprimir) {
+          botonImprimir.disabled = false;
+          botonImprimir.textContent = "🖨️ Imprimir en DYMO";
+      }
+    }
+  }
+
+  window.__fcOriginalDispararDYMO = dispararDYMOOriginal;
+  function usarImpresionNormal() {
+    if (etiquetaTemporal.tipo === "ajuste") {
+        guardarAjusteEnHistorial(etiquetaTemporal);
+    } else {
+        HISTORIAL_PREP.unshift(etiquetaTemporal);
+        localStorage.setItem("fc_hist_prep", JSON.stringify(HISTORIAL_PREP));
+    }
+    if(typeof aplicarFiltrosHistorial === 'function') aplicarFiltrosHistorial();
+    setTimeout(() => { window.print(); cerrarModalEtiqueta(); }, 250);
+  }
+
+  // ==================== CONVERTIDOR ====================
+  function ejecutarConversion() {
+    const capOrigen = document.getElementById("capOrigen").value === "custom" ? (parseFloat(document.getElementById("capOrigenCustom").value) || 1) : Number(document.getElementById("capOrigen").value);
+    const capDestino = document.getElementById("capDestino").value === "custom" ? (parseFloat(document.getElementById("capDestinoCustom").value) || 1) : Number(document.getElementById("capDestino").value);
+    const maquina = Number(document.getElementById("maquinaConv").value);
+    const esExacto = document.getElementById("convExacto").checked;
+    const mostrarML = document.getElementById("convMostrarML").checked;
+    const texto = (document.getElementById("entradaConv").value || "").trim();
+
+    if (document.getElementById("capOrigen").value === "custom" || document.getElementById("capDestino").value === "custom") {
+      document.getElementById("customCapFila").style.display = "flex";
+    } else {
+      document.getElementById("customCapFila").style.display = "none";
+    }
+
+    if (!texto) return document.getElementById("salidaConv").textContent = "(escribe algo primero)";
+
+    const out = [];
+    texto.split("\n").filter(l => l.trim()).forEach(linea => {
+      const partes = linea.split(/[|=]/);
+      if (partes.length < 2) return;
+      const tinta = partes[0].trim();
+      const cant = partes.slice(1).join("=").trim();
+      const total128 = parsearCantidad(cant);
+      if (total128 === null) { out.push(tinta + " = ERROR"); return; }
+      
+      const conv = (total128 / capOrigen) * capDestino;
+      let textoFinal = tinta + " = " + formatearOZConMaquina(conv, maquina, esExacto);
+      if (mostrarML) textoFinal += "   (" + formatearML(conv) + ")";
+      out.push(textoFinal);
+    });
+    document.getElementById("salidaConv").textContent = out.join("\n") || "(vacío)";
+   
+    if (out.length > 0 && !out.some(l => l.includes("ERROR"))) {
+      document.getElementById("panelDatosEtiquetaConv").style.display = "block";
+    }
+  }
+
+  function parsearCantidad(texto) {
+    if (!texto) return null;
+    const str = String(texto).trim().toLowerCase().replace(/,/g, ".");
+    const partes = str.split("+").map(p => p.trim()).filter(p => p);
+    let total128 = 0;
+    for (const parte of partes) {
+      let m;
+      m = parte.match(/^(\d+(?:\.\d+)?)\s*ml$/); if (m) { total128 += (parseFloat(m[1]) / (964/32)) * 128; continue; }
+      m = parte.match(/^(\d+(?:\.\d+)?)\s*(hoz|h|onzas?|oz)$/); if (m) { total128 += parseFloat(m[1]) * 128; continue; }
+      m = parte.match(/^(\d+(?:\.\d+)?)\s*\/\s*(\d+)$/); if (m) { total128 += (parseFloat(m[1]) / parseFloat(m[2])) * 128; continue; }
+      m = parte.match(/^(\d+(?:\.\d+)?)$/); if (m) { total128 += parseFloat(m[1]) * 128; continue; }
+      return null;
+    }
+    return total128;
+  }
+
+  function formatearOZExacto(total128) {
+    const total512 = Math.round(total128 * 4);
+    const onzasOut = Math.floor(total512 / 512);
+    let rem = total512 % 512;
+    const r64 = Math.floor(rem / 8); rem = rem % 8;
+    const r128 = Math.floor(rem / 4); rem = rem % 4;
+    const r256 = Math.floor(rem / 2); rem = rem % 2;
+    const r512 = rem;
+    
+    let t = "";
+    if (onzasOut > 0) t += onzasOut + " HOZ";
+    if (r64 > 0) { if (t) t += " + "; t += r64 + "/64"; }
+    if (r128 > 0) { if (t) t += " + "; t += r128 + "/128"; }
+    if (r256 > 0) { if (t) t += " + "; t += r256 + "/256"; }
+    if (r512 > 0) { if (t) t += " + "; t += r512 + "/512"; }
+    
+    return t || "0";
+  }
+
+  function formatearOZConMaquina(total128, maquina, exacto = false) {
+    if (exacto) return formatearOZExacto(total128);
+    
+    const val128 = Math.round(total128);
+    
+    if (val128 > 0) {
+      const onzasOut = Math.floor(val128 / 128);
+      const resto128 = val128 % 128;
+      const r64 = Math.floor(resto128 / 2);
+      const r128 = resto128 % 2;
+      
+      let t = "";
+      if (onzasOut > 0) t += onzasOut + " HOZ";
+      if (r64 > 0) { if (t) t += " + "; t += r64 + "/64"; }
+      if (r128 > 0) { if (t) t += " + "; t += r128 + "/128"; }
+      return t || "0";
+    } 
+    
+    if (total128 > 0) {
+      const total512 = Math.round(total128 * 4);
+      const r256 = Math.floor(total512 / 2);
+      const r512 = total512 % 2;
+      
+      let t = "";
+      if (r256 > 0) { if (t) t += " + "; t += r256 + "/256"; }
+      if (r512 > 0) { if (t) t += " + "; t += r512 + "/512"; }
+      return t;
+    }
+    
+    return "0";
+  }
+
+  function formatearML(total128) {
+    const ml = (total128 / 128) * (964/32);
+    return ml < 10 ? ml.toFixed(1) + " ML" : Math.round(ml) + " ML";
+  }
+
+  function buscarSW() {
+    const query = document.getElementById("inputBuscarSW").value.trim().toUpperCase();
+    const filtroLinea = document.getElementById("filtroLineaBusqueda").value;
+    const filtroMarca = document.getElementById("filtroMarcaBusqueda").value;
+    const msg = document.getElementById("msgBusqueda");
+    const cont = document.getElementById("resultadoBusqueda");
+    
+    if (!query) { msg.textContent = "Escribe un código."; return; }
+    
+    const codigoLimpio = query.replace(/\s+/g, '');
+    let resultados = DATABASE_SW.filter(f => f.codigo.toUpperCase().includes(codigoLimpio) || f.nombre.toUpperCase().includes(query));
+    
+    if (filtroLinea !== "TODAS") resultados = resultados.filter(f => f.tipo_pintura === filtroLinea);
+    if (filtroMarca !== "TODAS") resultados = resultados.filter(f => f.marca === filtroMarca);
+
+    if (resultados.length === 0) { msg.textContent = "No se encontró en la base de datos."; cont.style.display = "none"; return; }
+
+    msg.textContent = "";
+    busquedaActual = resultados;
+
+    let html = "";
+    resultados.forEach((res, i) => {
+      const alertaNA = res.base_color === "N/A" ? `<span class="badge-na">N/A - Sin Fórmula</span>` : "";
+      html += `
+        <div class="item-resultado">
+          <h4>${res.codigo} — ${res.nombre} ${alertaNA}</h4>
+          <p style="margin: 0 0 10px 0; font-size: 0.85rem; color: var(--txt-suave);">
+            Marca: <b>${res.marca || 'N/A'}</b> | Base: <b>${res.base_color}</b> | Línea: <b>${res.tipo_pintura}</b> | RGB: <b>#${res.rgb || 'N/A'}</b>
+          </p>
+          ${res.base_color !== "N/A" ? `
+          <div class="fila" style="margin-bottom: 0;">
+            <button class="btn secundario" onclick="cargarFormulaSW('LITRO', ${i})">🧪 Litro</button>
+            <button class="btn secundario" onclick="cargarFormulaSW('GALON', ${i})">🥫 Galón</button>
+            <button class="btn secundario" onclick="cargarFormulaSW('CUBETA', ${i})">🪣 Cubeta</button>
+          </div>` : ``}
+        </div>
+      `;
+    });
+
+    cont.innerHTML = html;
+    cont.style.display = "block";
+  }
+
+  function cargarFormulaSW(unidad, index) {
+    const formula = busquedaActual[index];
+    let colorantes = formula.colorantes;
+    const maquinaFormula = 64; 
+    document.getElementById("maquinaConv").value = maquinaFormula;
+
+    const lineas = [];
+    colorantes.forEach(c => {
+      let oz = 0;
+      if (unidad === 'LITRO') oz = c.oz_litro;
+      else if (unidad === 'CUBETA') oz = c.oz_cubeta;
+      else oz = c.oz_galon;
+
+      const total128 = oz * 128;
+      if (Math.round(total128 * 4) > 0) {
+        lineas.push(c.tinta + " = " + formatearOZConMaquina(total128, maquinaFormula, document.getElementById("convExacto").checked));
+      }
+    });
+
+    document.getElementById("entradaConv").value = lineas.join("\n");
+    
+    const capSelect = document.getElementById("capOrigen");
+    if (unidad === 'LITRO') capSelect.value = "1";
+    if (unidad === 'GALON') capSelect.value = "4";
+    if (unidad === 'CUBETA') capSelect.value = "19";
+
+    cambiarTab('tab-conv', document.querySelector('[data-target="tab-conv"]'));
+    const inCodigo = document.getElementById("convCodigo");
+    if (inCodigo) {
+      inCodigo.value = formula.codigo;
+      document.getElementById("convNombre").value = formula.nombre;
+      document.getElementById("convMarca").value = formula.marca || "SHERWIN WILLIAMS";
+      document.getElementById("convBase").value = formula.tipo_pintura === "BASE SOLVENTE" ? "BASE SOLVENTE" : "BASE AGUA";
+      document.getElementById("convTamano").value = unidad === 'LITRO' ? "1" : unidad === 'GALON' ? "4" : "19";
+    }
+    ejecutarConversion();
+  }
+
+  // ==================== COMPARAR ====================
+  let numComparaciones = 2;
+
+  function llenarDatalistComparar() {
+    const dl = document.getElementById("listaFormulas");
+    if(!dl) return;
+    dl.innerHTML = "";
+    
+    let opcionesAgregadas = new Set();
+
+    DATABASE_SW.forEach(f => {
+      let tipoLimpio = f.tipo_pintura.replace('BASE ', '');
+      let keyUnica = `${f.codigo}-${f.base_color}-${f.tipo_pintura}`;
+      
+      if (!opcionesAgregadas.has(keyUnica)) {
+        opcionesAgregadas.add(keyUnica);
+        let opt = document.createElement("option");
+        opt.value = `${f.codigo} - ${f.base_color} - ${tipoLimpio}`; 
+        opt.label = f.nombre;
+        dl.appendChild(opt);
+      }
+    });
+  }
+
+  function buscarFormulaPorTexto(query, filtroBase, filtroMarca) {
+    let qUpper = query.toUpperCase().trim();
+    let partes = qUpper.split('-').map(p => p.trim());
+    let qCode = partes[0]; 
+    let qBase = partes[1] || null; 
+    
+    return DATABASE_SW.find(f => {
+      let matchCode = f.codigo.toUpperCase() === qCode || f.nombre.toUpperCase() === qCode || f.codigo.toUpperCase().includes(qCode);
+      let matchBase = qBase ? f.base_color.toUpperCase().includes(qBase) : true;
+      let matchFiltroBase = filtroBase === "TODAS" || f.tipo_pintura === filtroBase;
+      let matchFiltroMarca = filtroMarca === "TODAS" || f.marca === filtroMarca;
+      
+      return matchCode && matchBase && matchFiltroBase && matchFiltroMarca;
+    });
+  }
+
+  function agregarCampoComparacion() {
+    if (numComparaciones >= 6) return alert("Máximo 6 fórmulas para comparar.");
+    numComparaciones++;
+    
+    const cont = document.getElementById("inputsComparacion");
+    const div = document.createElement("div");
+    div.className = "fila input-comp";
+    div.id = "comp-row-" + numComparaciones;
+    
+    div.innerHTML = `
+      <label style="flex: 1;">Fórmula ${numComparaciones} 
+        <div style="display: flex; gap: 10px;">
+          <input type="text" class="comp-codigo" list="listaFormulas" placeholder="Código o Nombre" style="flex: 1;">
+          <button class="btn peligro" style="padding: 10px;" onclick="quitarCampoComparacion(${numComparaciones})" title="Quitar">✕</button>
+        </div>
+      </label>
+    `;
+    cont.appendChild(div);
+  }
+
+  function quitarCampoComparacion(num) {
+    const row = document.getElementById("comp-row-" + num);
+    if (row) row.remove();
+  }
+
+  function hacerComparacion() {
+    llenarDatalistComparar();
+    
+    const inputs = document.querySelectorAll(".comp-codigo");
+    const filtroBase = document.getElementById("compFiltroBase").value;
+    const filtroMarca = document.getElementById("compFiltroMarca").value;
+    const tamano = parseFloat(document.getElementById("compTamano").value);
+    const textoTamano = tamano === 1 ? "1 LT" : tamano === 4 ? "Galón" : "Cubeta";
+    
+    const codigos = Array.from(inputs).map(i => i.value.trim().toUpperCase()).filter(v => v);
+    
+    if (codigos.length < 2) return alert("Escribe al menos 2 fórmulas para comparar.");
+    
+    let formulas = [];
+    codigos.forEach(q => {
+      let f = buscarFormulaPorTexto(q, filtroBase, filtroMarca);
+      if (f) {
+          formulas.push(f);
+      }
+    });
+
+    const cont = document.getElementById("comparativaResultado");
+    const contDif = document.getElementById("diferenciasResultado");
+    cont.innerHTML = ""; contDif.innerHTML = "";
+
+    if (formulas.length < 2) {
+      cont.innerHTML = `<p style="color:var(--alerta); grid-column: 1/-1;">No se encontraron suficientes fórmulas. Verifica los códigos o nombres.</p>`;
+      return;
+    }
+
+    let alertasGlobales = "";
+    const tipoRef = formulas[0].tipo_pintura;
+    const baseRef = formulas[0].base_color;
+
+    formulas.forEach(f => {
+      if (f.tipo_pintura !== tipoRef) {
+        alertasGlobales += `<div style="color:var(--alerta); font-weight:bold; margin-bottom:5px;">⚠️ ¡CUIDADO! Estás comparando ${tipoRef} con ${f.tipo_pintura} (${f.codigo}). No se pueden mezclar.</div>`;
+      }
+      if (f.base_color !== baseRef) {
+        alertasGlobales += `<div style="color:#f59e0b; font-weight:bold; margin-bottom:5px;">⚠️ La base es diferente: ${baseRef} vs ${f.base_color} (${f.codigo}).</div>`;
+      }
+    });
+
+    formulas.forEach(f => {
+      let tintasHTML = "";
+      const maquina = 64;
+      
+      f.colorantes.forEach(c => {
+        let oz = 0;
+        if (tamano === 1) oz = c.oz_litro;
+        else if (tamano === 19) oz = c.oz_cubeta;
+        else oz = c.oz_galon;
+
+        const total128 = oz * 128;
+        if (Math.round(total128 * 4) > 0) {
+          tintasHTML += `<div class="tinta-row">
+            <span style="color: var(--primario); font-weight: bold;">${c.tinta}</span>
+            <span style="font-family: monospace;">${formatearOZConMaquina(total128, maquina, false)}</span>
+          </div>`;
+        }
+      });
+
+      cont.innerHTML += `
+        <div class="comparativa-col">
+          <h4>${f.codigo} - ${f.nombre}</h4>
+          <p style="font-size: 0.8rem; color: var(--txt-suave); margin-bottom: 10px;">Marca: <b>${f.marca || 'N/A'}</b> | Base: <b>${f.base_color}</b> | ${f.tipo_pintura}</p>
+          ${tintasHTML || "<p>Sin tintas (N/A)</p>"}
+        </div>
+      `;
+    });
+
+    const fRef = formulas[0];
+    const maquinaRef = 64;
+    
+    let difHTML = alertasGlobales;
+    difHTML += `<h4 style="color:var(--primario); margin-top: 15px;">Análisis en <b>${textoTamano}</b> (Tomando <b>${fRef.codigo} - ${fRef.base_color}</b> como referencia)</h4>`;
+    difHTML += `<div style="overflow-x: auto;"><table class="historial-tabla"><thead><tr><th>Tinta</th><th>${fRef.codigo} (Ref)</th>`;
+    
+    formulas.slice(1).forEach(f => difHTML += `<th>${f.codigo}</th>`);
+    difHTML += `<th>Diferencias vs Ref</th></tr></thead><tbody>`;
+
+    let todasTintas = new Set();
+    formulas.forEach(f => f.colorantes.forEach(c => todasTintas.add(c.tinta)));
+
+    todasTintas.forEach(tinta => {
+      difHTML += `<tr><td><b>${tinta}</b></td>`;
+      
+      const cRef = fRef.colorantes.find(x => x.tinta === tinta);
+      let valRef = 0;
+      if(cRef) {
+        let ozRef = tamano === 1 ? cRef.oz_litro : tamano === 19 ? cRef.oz_cubeta : cRef.oz_galon;
+        valRef = ozRef * 128;
+      }
+      difHTML += `<td style="${valRef < 0.1 ? 'color:var(--alerta)' : ''}">${valRef < 0.1 ? 'N/A' : formatearOZConMaquina(valRef, maquinaRef, false)}</td>`;
+
+      let diferenciasTexto = [];
+
+      formulas.slice(1).forEach(f => {
+        const maquinaF = 64;
+        const c = f.colorantes.find(x => x.tinta === tinta);
+        let val = 0;
+        if(c) {
+          let ozF = tamano === 1 ? c.oz_litro : tamano === 19 ? c.oz_cubeta : c.oz_galon;
+          val = ozF * 128;
+        }
+
+        let celdaEstilo = "color:var(--txt);";
+        let badge = "";
+        if (valRef > 0.1 && val < 0.1) {
+          celdaEstilo = "color:var(--alerta); font-weight:bold;";
+          badge = " <br><span class='badge-na' style='font-size:0.65rem;'>FALTA</span>";
+        } else if (valRef < 0.1 && val > 0.1) {
+          celdaEstilo = "color:var(--exito); font-weight:bold;";
+          badge = " <br><span class='badge-base' style='font-size:0.65rem;'>SOBRA</span>";
+        } else if (val < 0.1) {
+          celdaEstilo = "color:var(--txt-suave); opacity: 0.5;";
+        }
+
+        difHTML += `<td style="${celdaEstilo}">${val < 0.1 ? 'N/A' : formatearOZConMaquina(val, maquinaF, false)}${badge}</td>`;
+        
+        if (Math.abs(val - valRef) > 0.01) {
+          const dif = val - valRef;
+          const signo = dif > 0 ? "+" : "-";
+          const absDif = Math.abs(dif);
+          if(absDif > 0.1) {
+            const strDif = formatearOZConMaquina(absDif, maquinaF, false);
+            diferenciasTexto.push(`<span style="color:${dif > 0 ? 'var(--exito)' : 'var(--alerta)'}; font-weight:bold;">${f.codigo}: ${signo}${strDif}</span>`);
+          }
+        }
+      });
+
+      difHTML += `<td>${diferenciasTexto.length === 0 ? '<span style="color:var(--exito);">Igual</span>' : diferenciasTexto.join("<br>")}</td>`;
+      difHTML += `</tr>`;
+    });
+    
+    difHTML += `</tbody></table></div>`;
+    contDif.innerHTML = difHTML;
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+      llenarDatalistComparar();
+  });
+
+  // ==================== HISTORIAL ====================
+  let histPaginaActual = 1;
+  let histDatosFiltrados = [];
+
+  function inicializarFiltrosHistorial() {
+    const selProd = document.getElementById("histFiltroProducto");
+    if (!selProd) return;
+    let productosUnicos = new Set();
+    HISTORIAL_PREP.forEach(h => { if(h.producto) productosUnicos.add(h.producto); });
+    
+    selProd.innerHTML = `<option value="TODOS">Todos</option>`;
+    Array.from(productosUnicos).sort().forEach(p => {
+      selProd.innerHTML += `<option value="${p}">${p}</option>`;
+    });
+  }
+
+  function aplicarFiltrosHistorial() {
+    const q = document.getElementById("histBuscar").value.toUpperCase().trim();
+    const tipo = document.getElementById("histFiltroTipo").value;
+    const fechaIni = document.getElementById("histFechaInicio").value;
+    const fechaFin = document.getElementById("histFechaFin").value;
+    const prod = document.getElementById("histFiltroProducto").value;
+    const marca = document.getElementById("histFiltroMarca").value; 
+    const base = document.getElementById("histFiltroBase").value;
+    const tam = document.getElementById("histFiltroTamano").value;
+
+    histDatosFiltrados = HISTORIAL_PREP.filter(h => {
+      let matchTexto = true;
+      if (q) {
+        matchTexto = (h.contador||"").toUpperCase().includes(q) || 
+                     (h.codigo||"").toUpperCase().includes(q) || 
+                     (h.nombre||"").toUpperCase().includes(q) || 
+                     (h.producto||"").toUpperCase().includes(q) || (h.usuario||"").toUpperCase().includes(q);
+      }
+
+      let matchTipo = (tipo === "TODOS") || 
+                  (h.tipo && h.tipo.toUpperCase() === tipo.toUpperCase()) || 
+                  (tipo === "PREPARACION" && !h.tipo);
+
+      let matchFecha = true;
+      if (h.timestamp) {
+        const d = new Date(h.timestamp);
+        d.setHours(0,0,0,0);
+        if (fechaIni) {
+          const fIni = new Date(fechaIni + 'T00:00:00');
+          if (d < fIni) matchFecha = false;
+        }
+        if (fechaFin) {
+          const fFin = new Date(fechaFin + 'T23:59:59');
+          if (d > fFin) matchFecha = false;
+        }
+      }
+
+      let matchProd = (prod === "TODOS") || (h.producto === prod);
+
+      let matchMarca = (marca === "TODAS") || (h.marca === marca) || (!h.marca && marca === "SHERWIN WILLIAMS");
+
+      let matchBase = true;
+      if (base !== "TODAS") {
+          let b = base.toUpperCase();
+          let hBase = (h.base || "").toUpperCase(); 
+          let hLinea = (h.linea || h.tipo_pintura || "").toUpperCase(); 
+          matchBase = hLinea.includes(b) || hBase.includes(b);
+      }
+      
+      let matchTam = (tam === "TODOS") || (h.tamano && h.tamano.includes(tam));
+
+      return matchTexto && matchTipo && matchFecha && matchProd && matchMarca && matchBase && matchTam;
+    });
+
+    histPaginaActual = 1; 
+    renderHistorialPaginado();
+  }
+
+  function limpiarFiltrosHistorial() {
+    document.getElementById("histBuscar").value = "";
+    document.getElementById("histFiltroTipo").value = "TODOS";
+    document.getElementById("histFechaInicio").value = "";
+    document.getElementById("histFechaFin").value = "";
+    document.getElementById("histFiltroProducto").value = "TODOS";
+    document.getElementById("histFiltroMarca").value = "TODAS";
+    document.getElementById("histFiltroBase").value = "TODAS";
+    document.getElementById("histFiltroTamano").value = "TODOS";
+    aplicarFiltrosHistorial();
+  }
+
+  function cambiarPaginaHistorial(dir) {
+    const porPagina = parseInt(document.getElementById("histRowsPorPagina").value);
+    const totalPaginas = Math.ceil(histDatosFiltrados.length / porPagina) || 1;
+    
+    let nuevaPag = histPaginaActual + dir;
+    if (nuevaPag >= 1 && nuevaPag <= totalPaginas) {
+      histPaginaActual = nuevaPag;
+      renderHistorialPaginado();
+    }
+  }
+
+  function renderHistorialPaginado() {
+    const tbody = document.getElementById("tbodyHistorial");
+    const porPagina = parseInt(document.getElementById("histRowsPorPagina").value);
+    const totalPaginas = Math.ceil(histDatosFiltrados.length / porPagina) || 1;
+
+    if (histPaginaActual > totalPaginas) histPaginaActual = totalPaginas;
+    
+    const inicio = (histPaginaActual - 1) * porPagina;
+    const fin = inicio + porPagina;
+    const datosPagina = histDatosFiltrados.slice(inicio, fin);
+
+    document.getElementById("lblPaginaHistorial").textContent = `Página ${histPaginaActual} de ${totalPaginas} (${histDatosFiltrados.length} total)`;
+    document.getElementById("btnPrevHist").disabled = (histPaginaActual === 1);
+    document.getElementById("btnNextHist").disabled = (histPaginaActual === totalPaginas);
+
+    if (datosPagina.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding: 20px;">No hay registros que coincidan con los filtros.</td></tr>`;
+      return;
+    }
+
+    let html = "";
+    datosPagina.forEach(h => {
+      const esConv = h.tipo === "conversion";
+      const esAjuste = h.tipo === "ajuste";
+      const badgeTipo = esConv ? '<span class="badge-tipo-conv">CONV</span>' : (esAjuste ? '<span class="badge-base">AJUSTE</span>' : '<span class="badge-tipo-prep">PREP</span>');
+      const cantMostrar = esConv || esAjuste ? "" : ` (x${h.cantidad || 1})`;
+      
+      const strContador = h.contador || "S/N";
+      const strCodigo = h.codigo || "S/C";
+      const strNombre = h.nombre || "";
+      const strMarca = h.marca || "SHERWIN WILLIAMS";
+      const strProducto = h.producto || "S/P";
+      const strTamano = h.tamano || "-";
+      const strFormula = h.formula || "";
+
+      const tieneAjuste = HISTORIAL_PREP.some(ajuste => ajuste.tipo === "ajuste" && ajuste.comentarios && ajuste.comentarios.includes(strContador));
+      const badgeModificado = tieneAjuste ? '<span class="badge-modificado">⚠️ MODIFICADO</span>' : '';
+
+      const idFila = `detalle-${Math.random().toString(36).substr(2, 9)}`;
+      const idxOriginal = HISTORIAL_PREP.indexOf(h);
+
+      html += `
+        <tr style="cursor: pointer;" onclick="toggleDetalleHistorial('${idFila}')">
+          <td style="text-align: center; color: var(--primario); font-weight: bold;" id="icono-${idFila}">➕</td>
+          <td><b>${strContador}</b>${badgeModificado}</td>
+          <td style="font-weight: bold; color: var(--exito);">${h.usuario || "N/A"}</td>
+          <td style="font-size:0.8rem; color:var(--txt-suave);">${strMarca}</td>
+          <td style="text-align:center;">${badgeTipo}</td>
+          <td>${h.fecha || "-"}</td>
+          <td>${strCodigo} - ${strNombre}</td>
+          <td>${strProducto}${cantMostrar}</td>
+          <td>${strTamano}</td>
+        </tr>
+      `;
+
+      html += `
+        <tr id="${idFila}" style="display: none; background: rgba(0,0,0,0.15);">
+         <td colspan="9" style="padding: 15px; border-left: 4px solid var(--primario);">
+        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+              <div style="flex: 1; min-width: 250px;">
+                <!-- NUEVO: Si es un ajuste y tiene fórmula original, la mostramos -->
+                ${esAjuste && h.formula_original ? `
+                  <p style="margin: 0 0 5px 0; font-size: 0.85rem; color: var(--txt-suave);">Fórmula Original del Galón:</p>
+                  <div style="font-family: monospace; font-size: 0.9rem; background: #111; padding: 10px; border-radius: 5px; color: #94a3b8; margin-bottom: 10px; border: 1px solid #333;">
+                    ${h.formula_original.split(" | ").join("<br>")}
+                  </div>
+                ` : ''}
+
+                <p style="margin: 0 0 5px 0; font-size: 0.85rem; color: ${esAjuste ? 'var(--exito)' : 'var(--txt-suave)'};">${esAjuste ? 'Ajuste a aplicar:' : 'Fórmula:'}</p>
+                <div style="font-family: monospace; font-size: 0.9rem; background: #000; padding: 10px; border-radius: 5px; color: ${esAjuste ? '#4ade80' : '#4ade80'}; font-weight: ${esAjuste ? 'bold' : 'normal'};">
+                  ${strFormula ? strFormula.split(" | ").join("<br>") : "No se incluyó fórmula."}
+                </div>
+              </div>
+                         <div style="flex: 1; min-width: 200px;">
+              <p style="font-size: 0.9rem; margin: 0 0 5px 0;"><b>Base Color:</b> ${h.base || "-"}</p>
+              <p style="font-size: 0.9rem; margin: 0;"><b>Comentarios:</b> ${h.comentarios || "Ninguno"}</p>
+              
+                            <!-- AVISO DE MODIFICACIÓN (CON AJUSTE Y RASTREO) -->
+              ${HISTORIAL_PREP.filter(ajuste => ajuste.tipo === "ajuste" && ajuste.comentarios && ajuste.comentarios.includes(strContador)).map(ajuste => `
+                <div style="margin-top: 10px; padding: 8px; background: rgba(245, 158, 11, 0.2); border-left: 4px solid #f59e0b; border-radius: 4px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <span style="font-size: 0.8rem; color: #f59e0b; font-weight: bold;">⚠️ TICKET MODIFICADO:</span>
+                    <span style="font-size: 0.75rem; background: #f59e0b; color: #000; padding: 2px 6px; border-radius: 4px; font-weight: bold;">${ajuste.contador}</span>
+                  </div>
+                  <span style="font-size: 0.9rem; color: var(--txt); font-weight: bold; display: block; margin: 3px 0;">${ajuste.formula}</span>
+                  <span style="font-size: 0.8rem; color: var(--txt-suave); font-style: italic;">${ajuste.comentarios.replace('Origen: ' + strContador + ' | ', '')}</span>
+                </div>
+              `).join('')}
+
+              <!-- BOTONES (RESTAURADOS) -->
+              <div style="margin-top: 10px; display: flex; gap: 5px; flex-wrap: wrap;">
+                <button class="btn secundario" style="padding: 5px 10px; font-size: 0.8rem;" onclick="event.stopPropagation(); reimprimirDesdeHistorial(${idxOriginal})">🖨️ Reimprimir</button>
+                <button class="btn peligro" style="padding: 5px 10px; font-size: 0.8rem;" onclick="event.stopPropagation(); eliminarRegistroHistorial(${idxOriginal})">🗑️ Eliminar</button>
+                ${!esAjuste ? `<button class="btn exito" style="padding: 5px 10px; font-size: 0.8rem;" onclick="event.stopPropagation(); abrirModalAjuste(${idxOriginal})">➕ Ajuste de Tinte</button>` : ''}
+              </div>
+            </div>
+          </td>
+        </tr>
+      `;
+    });
+
+    tbody.innerHTML = html;
+  }
+
+  function toggleDetalleHistorial(idFila) {
+    const fila = document.getElementById(idFila);
+    const icono = document.getElementById("icono-" + idFila);
+    if (fila.style.display === "none") {
+      fila.style.display = "table-row";
+      if (icono) icono.textContent = "➖";
+    } else {
+      fila.style.display = "none";
+      if (icono) icono.textContent = "➕";
+    }
+  }
+
+  function reimprimirDesdeHistorial(index) {
+    const h = HISTORIAL_PREP[index];
+    if (!h) return;
+
+    etiquetaTemporal = {
+      contador: h.contador,
+      fecha: h.fecha,
+      codigo: h.codigo,
+      nombre: h.nombre,
+      producto: h.producto,
+      base: h.base,
+      tamano: h.tamano,
+      comentarios: h.comentarios || "",
+      formula: h.formula || "",
+      tipo: h.tipo || "preparacion",
+      marca: h.marca || "SHERWIN WILLIAMS",
+      cantidad: 1,
+      usuario: h.usuario || ""
+    };
+
+    document.getElementById("lblProducto").textContent = etiquetaTemporal.producto;
+    document.getElementById("lblFecha").textContent = etiquetaTemporal.fecha;
+    document.getElementById("lblCodigoColor").textContent = etiquetaTemporal.codigo + " " + etiquetaTemporal.nombre.toUpperCase();
+    document.getElementById("lblContador").textContent = etiquetaTemporal.contador;
+    document.getElementById("lblComentarios").textContent = etiquetaTemporal.comentarios ? "Obs: " + etiquetaTemporal.comentarios : "";
+    
+    const lblFormula = document.getElementById("lblFormula");
+    if (etiquetaTemporal.formula) { 
+      lblFormula.textContent = etiquetaTemporal.formula; 
+      lblFormula.style.display = "block"; 
+    } else {
+      lblFormula.style.display = "none";
+    }
+
+    document.getElementById("cantEtiquetas").value = 1;
+    document.getElementById("modalEtiqueta").style.display = "flex";
+  }
+
+  function borrarHistorialPrep() { 
+    if(confirm("⚠️ ¿Estás seguro de que quieres borrar TODO el historial? Esta acción no se puede deshacer.")) { 
+      HISTORIAL_PREP = []; 
+      localStorage.removeItem("fc_hist_prep"); 
+      inicializarFiltrosHistorial();
+      aplicarFiltrosHistorial(); 
+    } 
+  }
+
+  function exportarExcel() {
+    if (HISTORIAL_PREP.length === 0) return alert("No hay datos para exportar.");
+
+    let csv = "Ticket,Tipo,Fecha,Codigo,Color,Marca,Producto,Base,Tamano,Cantidad,Comentarios,Formula,Usuario\n";
+    
+    HISTORIAL_PREP.forEach(h => {
+      const tipo = h.tipo === "conversion" ? "CONVERSION" : "PREPARACION";
+      const cant = h.tipo === "conversion" ? "" : (h.cantidad || 1);
+      const formulaLimpia = (h.formula || "").replace(/"/g, "'");
+      const comentariosLimpios = (h.comentarios || "").replace(/"/g, "'");
+      const usuario = (h.usuario || "").replace(/"/g, "'");
+      const marca = h.marca || "SHERWIN WILLIAMS";
+
+      csv += `"${h.contador}","${tipo}","${h.fecha}","${h.codigo}","${h.nombre}","${marca}","${h.producto}","${h.base}","${h.tamano}","${cant}","${comentariosLimpios}","${formulaLimpia}","${usuario}"\n`;
+    });
+
+    const blob = new Blob(["\ufeff" + csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `Historial_FC_${new Date().toISOString().split('T')[0]}.csv`;
+    link.click();
+  }
+
+  // ==================== CONFIGURACIÓN Y RESPALDO ====================
+  if(localStorage.getItem("fc_size_contador")) document.getElementById("sizeContador").value = localStorage.getItem("fc_size_contador");
+  if(localStorage.getItem("fc_size_producto")) document.getElementById("sizeProducto").value = localStorage.getItem("fc_size_producto");
+  if(localStorage.getItem("fc_size_color")) document.getElementById("sizeColor").value = localStorage.getItem("fc_size_color");
+
+  function guardarLogo(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+          localStorage.setItem("fc_logo_base64", e.target.result);
+          alert("✅ Logo guardado correctamente.");
+      };
+      reader.readAsDataURL(file);
+  }
+
+  function borrarLogo() {
+      if(confirm("¿Quitar el logo personalizado?")) {
+          localStorage.removeItem("fc_logo_base64");
+          document.getElementById("inputLogo").value = "";
+          alert("Logo eliminado.");
+      }
+  }
+
+  function guardarTamanos() {
+      localStorage.setItem("fc_size_contador", document.getElementById("sizeContador").value);
+      localStorage.setItem("fc_size_producto", document.getElementById("sizeProducto").value);
+      localStorage.setItem("fc_size_color", document.getElementById("sizeColor").value);
+  }
+
+  function descargarRespaldo() {
+      const respaldo = {};
+      const claves = ["fc_conv_db", "fc_hist_prep", "fc_contador", "fc_tema", "fc_tab_order", "fc_logo_base64", "fc_size_contador", "fc_size_producto", "fc_size_color"];
+      
+      claves.forEach(clave => {
+          const valor = localStorage.getItem(clave);
+          if (valor !== null) respaldo[clave] = valor;
+      });
+
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(respaldo, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `Respaldo_RELMA_${new Date().toISOString().split('T')[0]}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+  }
+
+  function restaurarRespaldo(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+          try {
+              const data = JSON.parse(e.target.result);
+              if (confirm("⚠️ Esto reemplazará todos tus datos actuales (fórmulas, historial, configuración). ¿Estás seguro?")) {
+                  Object.keys(data).forEach(clave => {
+                      localStorage.setItem(clave, data[clave]);
+                  });
+                  alert("✅ Respaldo restaurado con éxito. La página se recargará.");
+                  location.reload();
+              }
+          } catch (error) {
+              alert("❌ Error: El archivo seleccionado no es un respaldo válido.");
+          }
+      };
+      reader.readAsText(file);
+  }
+
+  function guardarTemplate(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+          localStorage.setItem("fc_custom_template", e.target.result);
+          alert("✅ Plantilla guardada correctamente. Se usará en la próxima impresión.");
+      };
+      reader.readAsText(file);
+  }
+
+  function borrarTemplate() {
+      if(confirm("¿Restaurar la plantilla original del sistema? Se perderá la plantilla personalizada.")) {
+          localStorage.removeItem("fc_custom_template");
+          document.getElementById("inputTemplate").value = "";
+          alert("Plantilla original restaurada.");
+      }
+  }
+
+  function generarEtiquetaDirectoDesdeConversor() {
+    const codigo = document.getElementById("convCodigo").value.trim().toUpperCase() || "SIN-CODIGO";
+    const nombre = document.getElementById("convNombre").value.trim().toUpperCase() || "SIN-NOMBRE";
+    const marca = document.getElementById("convMarca").value; 
+    const base = document.getElementById("convBase").value;
+    const productoSel = document.getElementById("convProducto").value;
+    const productoCustom = document.getElementById("convProdCustom").value.trim().toUpperCase();
+    const tamano = parseFloat(document.getElementById("convTamano").value);
+    const comentarios = document.getElementById("convComentarios").value.trim();
+    const textoFormula = document.getElementById("salidaConv").textContent.trim();
+
+    if (!textoFormula || textoFormula === "(Escribe las tintas arriba)" || textoFormula === "(vacío)" || textoFormula.includes("ERROR")) {
+      return alert("⚠️ Primero ejecuta una conversión válida con el botón 🔄 Convertir.");
+    }
+
+    let producto = productoSel;
+    if (productoSel === "__CUSTOM__") {
+      if (!productoCustom) return alert("Escribe el nombre del producto nuevo.");
+      producto = productoCustom;
+    } else if (!productoSel) {
+      return alert("Selecciona un producto.");
+    }
+
+    const operador = document.getElementById("convOperador").value || "SIN ASIGNAR";
+    if (!operador) return alert("⚠️ Por favor, selecciona tu nombre en la lista de Operador.");
+
+    const tamanoTexto = tamano === 1 ? "1 LT" : tamano === 4 ? "GALÓN (4 LT)" : tamano === 19 ? "CUBETA (19 LT)" : tamano + " LT";
+
+    CONTADOR_SUCURSAL++;
+    localStorage.setItem("fc_contador", CONTADOR_SUCURSAL);
+    const contStr = "No. " + String(CONTADOR_SUCURSAL).padStart(4, '0');
+    const ahora = new Date();
+    const formulaLinea = textoFormula.split("\n").filter(l => l.trim()).join(" | ");
+
+    etiquetaTemporal = {
+      contador: contStr,
+      fecha: ahora.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) + " " + ahora.toLocaleTimeString('es-ES', {hour: '2-digit', minute:'2-digit'}),
+      codigo: codigo,
+      nombre: nombre,
+      marca: marca, 
+      producto: producto,
+      base: base,
+      tamano: tamanoTexto,
+      comentarios: comentarios,
+      formula: formulaLinea,
+      tipo: "conversion",
+      timestamp: ahora.getTime(),
+      usuario: operador 
+    };
+
+    document.getElementById("lblProducto").textContent = etiquetaTemporal.producto;
+    document.getElementById("lblFecha").textContent = etiquetaTemporal.fecha;
+    document.getElementById("lblCodigoColor").textContent = etiquetaTemporal.codigo + " " + etiquetaTemporal.nombre.toUpperCase();
+    document.getElementById("lblContador").textContent = contStr;
+    document.getElementById("lblComentarios").textContent = etiquetaTemporal.comentarios ? "Obs: " + etiquetaTemporal.comentarios : "";
+
+    const lblFormula = document.getElementById("lblFormula");
+    if (etiquetaTemporal.formula) {
+      lblFormula.textContent = etiquetaTemporal.formula;
+      lblFormula.style.display = "block";
+    } else {
+      lblFormula.style.display = "none";
+    }
+
+    document.getElementById("modalEtiqueta").style.display = "flex";
+  }
+
+  function guardarEnHistorialConv() {
+    const codigo      = document.getElementById("convCodigo").value.trim().toUpperCase() || "SIN-CODIGO";
+    const nombre      = document.getElementById("convNombre").value.trim().toUpperCase() || "SIN-NOMBRE";
+    const marca       = document.getElementById("convMarca").value; 
+    const base        = document.getElementById("convBase").value;
+    const productoSel = document.getElementById("convProducto").value;
+    const productoCustom = document.getElementById("convProdCustom").value.trim().toUpperCase();
+    const tamano      = parseFloat(document.getElementById("convTamano").value);
+    const comentarios = document.getElementById("convComentarios").value.trim();
+    const textoFormula = document.getElementById("salidaConv").textContent.trim();
+
+    if (!textoFormula || textoFormula === "(Escribe las tintas arriba)" || textoFormula === "(vacío)") {
+      return alert("⚠️ Primero ejecuta una conversión válida (botón 🔄 Convertir).");
+    }
+    if (textoFormula.includes("ERROR")) {
+      return alert("⚠️ La fórmula tiene errores. Corrige las tintas antes de guardar.");
+    }
+
+    let producto = productoSel;
+    if (productoSel === "__CUSTOM__") {
+      producto = productoCustom || "SIN PRODUCTO";
+    } else if (!productoSel) {
+      producto = "SIN PRODUCTO";
+    }
+
+    const tamanoTexto = tamano === 1 ? "1 LT"
+                      : tamano === 4 ? "GALÓN (4 LT)"
+                      : tamano === 19 ? "CUBETA (19 LT)"
+                      : tamano + " LT";
+
+    const ahora = new Date();
+    const fechaTexto = ahora.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+                     + " " + ahora.toLocaleTimeString('es-ES', {hour: '2-digit', minute:'2-digit'});
+
+    const registro = {
+      contador: "CONV-" + String(ahora.getTime()).slice(-6),
+      fecha: fechaTexto,
+      codigo: codigo,
+      nombre: nombre,
+      marca: marca, 
+      producto: producto,
+      base: base,
+      tamano: tamanoTexto,
+      comentarios: comentarios,
+      formula: textoFormula.split("\n").filter(l => l.trim()).join(" | "),
+      cantidad: 0,               
+      tipo: "conversion",
+      timestamp: ahora.getTime()
+    };
+
+    HISTORIAL_PREP.unshift(registro);
+    localStorage.setItem("fc_hist_prep", JSON.stringify(HISTORIAL_PREP));
+    
+    inicializarFiltrosHistorial();
+    aplicarFiltrosHistorial();
+    
+    mostrarToast("✅ Conversión guardada en historial");
+  }
+
+  function mostrarToast(mensaje) {
+      const toast = document.getElementById('toastExito');
+      if (toast) {
+          toast.textContent = mensaje;
+          toast.style.display = 'block';
+          setTimeout(() => { 
+              toast.style.display = 'none'; 
+          }, 3500);
+      }
+  }
+
+  function importarJSONLocal(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+          try {
+              const nuevasFormulas = JSON.parse(e.target.result);
+              if (!Array.isArray(nuevasFormulas)) throw new Error("El archivo no tiene el formato correcto.");
+              
+              let agregadas = 0;
+              let actualizadas = 0;
+              
+              nuevasFormulas.forEach(nf => {
+                  const index = DATABASE_SW.findIndex(f => f.codigo === nf.codigo && f.base_color === nf.base_color && f.tipo_pintura === nf.tipo_pintura);
+                  
+                  if (index !== -1) {
+                      DATABASE_SW[index] = nf; 
+                      actualizadas++;
+                  } else {
+                      DATABASE_SW.push(nf); 
+                      agregadas++;
+                  }
+              });
+              
+              localStorage.setItem("fc_conv_db", JSON.stringify(DATABASE_SW));
+              actualizarResumenDB();
+              llenarDatalistComparar();
+              
+              alert(`✅ ¡Éxito!\nSe agregaron: ${agregadas} fórmulas nuevas.\nSe actualizaron: ${actualizadas} fórmulas.`);
+              
+          } catch (err) {
+              alert("❌ Error al leer el archivo JSON:\n" + err.message);
+          }
+      };
+      reader.readAsText(file);
+  }
+
+  // ==================== BUSCADOR RGB ====================
+  function hexToRgb(hex) {
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16)
+      } : null;
+  }
+
+  function buscarPorRGB() {
+      const hexInput = document.getElementById("inputRGBColor").value;
+      const marcaFiltro = document.getElementById("rgbFiltroMarca").value;
+      const cont = document.getElementById("resultadosRGB");
+      
+      let rgbObj = hexToRgb(hexInput);
+      if (!rgbObj) return alert("Color no válido.");
+
+      let similares = [];
+      let coloresSinRGB = 0;
+
+      DATABASE_SW.forEach(f => {
+          if (marcaFiltro !== "TODAS" && f.marca !== marcaFiltro) return;
+
+          if (!f.rgb || f.rgb.length !== 6) {
+              coloresSinRGB++;
+              return; 
+          }
+
+          let fRgb = hexToRgb(f.rgb);
+          if (!fRgb) return;
+
+          const distance = Math.sqrt(
+              Math.pow(rgbObj.r - fRgb.r, 2) + 
+              Math.pow(rgbObj.g - fRgb.g, 2) + 
+              Math.pow(rgbObj.b - fRgb.b, 2)
+          );
+
+          similares.push({ formula: f, distancia: distance });
+      });
+
+      if (similares.length === 0) {
+          cont.innerHTML = `<p style="color:var(--alerta);">No se encontraron colores con RGB válido en la base de datos.<br><br>
+          <b>Asegúrate de haber importado el JSON más reciente en la pestaña PDF.</b></p>`;
+          return;
+      }
+
+      similares.sort((a, b) => a.distancia - b.distancia);
+      const top12 = similares.slice(0, 12);
+
+      let html = `<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">`;
+      
+      top12.forEach(item => {
+          const f = item.formula;
+          const similitud = Math.max(0, 100 - Math.round((item.distancia / 441) * 100));
+          
+          html += `
+              <div style="background: #${f.rgb}; padding: 15px; border-radius: 8px; text-align: center; border: 2px solid var(--borde); box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+                  <h4 style="color: ${getContrastColor(f.rgb)}; margin: 0 0 5px 0; font-size: 1rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">${f.nombre}</h4>
+                  <div style="color: ${getContrastColor(f.rgb)}; font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">${f.codigo}</div>
+                  <div style="color: ${getContrastColor(f.rgb)}; font-size: 0.7rem; margin-bottom: 5px;">${f.marca}</div>
+                  <div style="background: rgba(0,0,0,0.6); color: white; padding: 3px; border-radius: 4px; font-size: 0.75rem;">
+                      Similitud: ${similitud}%
+                  </div>
+              </div>
+          `;
+      });
+      html += `</div>`;
+      cont.innerHTML = html;
+  }
+
+  function getContrastColor(hex) {
+      const rgb = hexToRgb(hex);
+      if (!rgb) return "#000";
+      const yiq = ((rgb.r * 299) + (rgb.g * 587) + (rgb.b * 114)) / 1000;
+      return (yiq >= 128) ? '#000000' : '#ffffff';
+  }
+
+  function descargarDB_JSON() {
+      if (DATABASE_SW.length === 0) return alert("No hay fórmulas para descargar.");
+      
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(DATABASE_SW, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `Catalogo_Formulas_${new Date().toISOString().split('T')[0]}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+  }
+
+  let ajusteIndiceActual = null;
+
+function abrirModalAjuste(index) {
+    ajusteIndiceActual = index;
+    
+    // Limpiamos los campos con los nombres NUEVOS
+    const txtTintes = document.getElementById("ajusteTintes");
+    const txtComentario = document.getElementById("ajusteComentario");
+    
+    if (txtTintes) txtTintes.value = "";
+    if (txtComentario) txtComentario.value = "";
+    
+    document.getElementById("modalAjuste").style.display = "flex";
+    if (txtTintes) txtTintes.focus();
+}
+
+  function cerrarModalAjuste() {
+      document.getElementById("modalAjuste").style.display = "none";
+      ajusteIndiceActual = null;
+  }
+
+function confirmarAjuste() {
+    if (ajusteIndiceActual === null) return;
+    
+    const tintesTexto = document.getElementById("ajusteTintes").value.trim().toUpperCase();
+    const motivo = document.getElementById("ajusteComentario").value.trim();
+    
+    if (!tintesTexto) {
+        return alert("⚠️ Por favor, escribe al menos un tinte y su cantidad.");
+    }
+
+    const h = HISTORIAL_PREP[ajusteIndiceActual];
+    const ahora = new Date();
+
+    // Juntamos las líneas que escribió el usuario
+    const formulaLimpia = tintesTexto.split("\n").filter(l => l.trim()).join(" | ");
+    const obsFinal = motivo ? `Origen: ${h.contador} | Motivo: ${motivo}` : `Origen: ${h.contador}`;
+
+    etiquetaTemporal = {
+        contador: "AJUSTE-" + String(ahora.getTime()).slice(-6),
+        fecha: ahora.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
+        codigo: h.codigo,
+        nombre: h.nombre,
+        producto: "AJUSTE DE TINTE",
+        base: h.base,
+        tamano: h.tamano,
+        comentarios: obsFinal, 
+        formula: formulaLimpia,
+        formula_original: h.formula, // <-- GUARDAMOS LA FÓRMULA ORIGINAL AQUÍ
+        imprimirFormula: true,
+        tipo: "ajuste",
+        usuario: h.usuario || "N/A",
+        timestamp: ahora.getTime()
+    };
+
+    document.getElementById("lblProducto").textContent = etiquetaTemporal.producto;
+    document.getElementById("lblFecha").textContent = etiquetaTemporal.fecha;
+    document.getElementById("lblCodigoColor").textContent = etiquetaTemporal.codigo + " " + etiquetaTemporal.nombre.toUpperCase();
+    document.getElementById("lblContador").textContent = etiquetaTemporal.contador;
+    document.getElementById("lblComentarios").textContent = etiquetaTemporal.comentarios;
+
+    const lblFormula = document.getElementById("lblFormula");
+    lblFormula.textContent = etiquetaTemporal.formula;
+    lblFormula.style.display = "block";
+
+    cerrarModalAjuste();
+    document.getElementById("modalEtiqueta").style.display = "flex";
+}
+
+  function guardarAjusteEnHistorial(registroAjuste) {
+      HISTORIAL_PREP.unshift(registroAjuste);
+      localStorage.setItem("fc_hist_prep", JSON.stringify(HISTORIAL_PREP));
+      if (typeof aplicarFiltrosHistorial === 'function') {
+          aplicarFiltrosHistorial();
+      }
+  }
+
+  actualizarResumenDB();
+  inicializarFiltrosHistorial();
+  aplicarFiltrosHistorial();
+  </script>
+  <div id="toastExito" class="toast-exito">✅ Etiqueta enviada</div>
+<script src="app.js"></script>
+</body>
+</html>

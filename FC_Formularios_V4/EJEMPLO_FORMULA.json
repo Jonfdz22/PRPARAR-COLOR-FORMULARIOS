@@ -1,0 +1,19 @@
+[
+  {
+    "codigo": "EJEMPLO-0001",
+    "nombre": "COLOR DE PRUEBA",
+    "marca": "SHERWIN WILLIAMS",
+    "tipo_pintura": "BASE AGUA",
+    "base_color": "EXTRA WHITE",
+    "pagina": "DEMO",
+    "rgb": "AABBCC",
+    "colorantes": [
+      {
+        "tinta": "Negro (B1)",
+        "oz_litro": 0.0,
+        "oz_galon": 0.125,
+        "oz_cubeta": 0.59375
+      }
+    ]
+  }
+]
