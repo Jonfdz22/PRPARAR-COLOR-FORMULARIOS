@@ -171,6 +171,89 @@
   .modal-ajuste-content { background: var(--fondo-suave); border: 1px solid var(--borde); border-radius: 12px; padding: 25px; width: 100%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 </style>
 <link rel="stylesheet" href="app.css">
+
+
+<style>
+/* PRESENTACIÓN ORIGINAL DEL BUSCADOR RGB */
+#resultadosRGB .rgb-results {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(165px, 1fr)) !important;
+    gap: 14px !important;
+    margin-top: 15px !important;
+    align-items: stretch;
+}
+
+#resultadosRGB .rgb-card {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    min-width: 0;
+    min-height: 158px !important;
+    padding: 15px 12px !important;
+    border: 2px solid rgba(255,255,255,.35) !important;
+    border-radius: 11px !important;
+    box-shadow: 0 4px 9px rgba(0,0,0,.25) !important;
+    gap: 8px !important;
+    overflow-wrap: anywhere;
+    box-sizing: border-box;
+    transition: transform .2s ease;
+    text-shadow: 0 1px 2px rgba(0,0,0,.3);
+}
+
+#resultadosRGB .rgb-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0,0,0,.3) !important;
+}
+
+#resultadosRGB .rgb-card b {
+    display: block !important;
+    font-size: .98rem !important;
+    line-height: 1.2;
+    font-weight: 850;
+}
+
+#resultadosRGB .rgb-card strong {
+    display: block !important;
+    font-size: .9rem !important;
+}
+
+#resultadosRGB .rgb-card small {
+    display: block !important;
+    font-size: .75rem !important;
+    font-weight: 650;
+}
+
+#resultadosRGB .rgb-card span {
+    display: inline-block !important;
+    padding: 6px 10px !important;
+    border-radius: 6px;
+    background: rgba(0,0,0,.68) !important;
+    color: white !important;
+    font-size: .73rem !important;
+    font-weight: 800;
+    text-shadow: none;
+}
+
+@media(max-width:520px) {
+    #resultadosRGB .rgb-results {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 9px !important;
+    }
+
+    #resultadosRGB .rgb-card {
+        min-height: 145px !important;
+        padding: 12px 8px !important;
+    }
+
+    #resultadosRGB .rgb-card b {
+        font-size: .85rem !important;
+    }
+}
+</style>
+
+  
 </head>
 <body>
 
