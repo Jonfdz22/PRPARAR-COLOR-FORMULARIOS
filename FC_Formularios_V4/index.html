@@ -169,91 +169,12 @@
   @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
   .modal-ajuste { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px; }
   .modal-ajuste-content { background: var(--fondo-suave); border: 1px solid var(--borde); border-radius: 12px; padding: 25px; width: 100%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+
+  .fila-tinta-add { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
+  .fila-tinta-add input { margin-top: 0; }
+  .fila-tinta-add button { padding: 10px; }
 </style>
 <link rel="stylesheet" href="app.css">
-
-
-<style>
-/* PRESENTACIÓN ORIGINAL DEL BUSCADOR RGB */
-#resultadosRGB .rgb-results {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(165px, 1fr)) !important;
-    gap: 14px !important;
-    margin-top: 15px !important;
-    align-items: stretch;
-}
-
-#resultadosRGB .rgb-card {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    align-items: center !important;
-    text-align: center !important;
-    min-width: 0;
-    min-height: 158px !important;
-    padding: 15px 12px !important;
-    border: 2px solid rgba(255,255,255,.35) !important;
-    border-radius: 11px !important;
-    box-shadow: 0 4px 9px rgba(0,0,0,.25) !important;
-    gap: 8px !important;
-    overflow-wrap: anywhere;
-    box-sizing: border-box;
-    transition: transform .2s ease;
-    text-shadow: 0 1px 2px rgba(0,0,0,.3);
-}
-
-#resultadosRGB .rgb-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 16px rgba(0,0,0,.3) !important;
-}
-
-#resultadosRGB .rgb-card b {
-    display: block !important;
-    font-size: .98rem !important;
-    line-height: 1.2;
-    font-weight: 850;
-}
-
-#resultadosRGB .rgb-card strong {
-    display: block !important;
-    font-size: .9rem !important;
-}
-
-#resultadosRGB .rgb-card small {
-    display: block !important;
-    font-size: .75rem !important;
-    font-weight: 650;
-}
-
-#resultadosRGB .rgb-card span {
-    display: inline-block !important;
-    padding: 6px 10px !important;
-    border-radius: 6px;
-    background: rgba(0,0,0,.68) !important;
-    color: white !important;
-    font-size: .73rem !important;
-    font-weight: 800;
-    text-shadow: none;
-}
-
-@media(max-width:520px) {
-    #resultadosRGB .rgb-results {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        gap: 9px !important;
-    }
-
-    #resultadosRGB .rgb-card {
-        min-height: 145px !important;
-        padding: 12px 8px !important;
-    }
-
-    #resultadosRGB .rgb-card b {
-        font-size: .85rem !important;
-    }
-}
-</style>
-
-  
 </head>
 <body>
 
@@ -262,13 +183,14 @@
     <div class="header-brand"><h2>🧪 FC Formularios</h2><span class="version-chip">RELMA · V4</span></div>
     <div class="header-actions">
       <span id="estadoConexion" class="status-chip">● Listo</span>
-      <button class="btn secundario" id="btnInstalarApp" onclick="instalarAplicacion()">📲 Instalar / Ayuda</button>
+      <!-- Botón de Ayuda removido de aquí y movido a Configuración según pedido -->
       <button class="btn secundario" onclick="toggleTema()">🌓 Tema</button>
     </div>
   </div>
 
   <div class="tabs" id="tabsContainer">
     <button class="tab-btn activo" draggable="false" data-target="tab-inicio" onclick="cambiarTab('tab-inicio', this)">🏠 Inicio</button>
+      <button class="tab-btn" draggable="true" data-target="tab-emerald" onclick="cambiarTab('tab-emerald', this)">🌿 Emerald</button>
     <button class="tab-btn" draggable="true" data-target="tab-prep" onclick="cambiarTab('tab-prep', this)">🎨 Preparar</button>
     <button class="tab-btn" draggable="true" data-target="tab-conv" onclick="cambiarTab('tab-conv', this)">🧪 Convertidor</button>
     <button class="tab-btn" draggable="true" data-target="tab-comp" onclick="cambiarTab('tab-comp', this)">⚖️ Comparar</button>
@@ -277,7 +199,6 @@
     <button class="tab-btn" draggable="true" data-target="tab-db" onclick="cambiarTab('tab-db', this)">💾 Base de Datos</button>
     <button class="tab-btn" draggable="true" data-target="tab-config" onclick="cambiarTab('tab-config', this)">⚙️ Configuración</button>  
   </div>
-
 
   <!-- PANEL PRINCIPAL -->
   <div id="tab-inicio" class="tab-content activo">
@@ -517,6 +438,25 @@
     </div>
   </div>
 
+    <!-- PESTAÑA EXCLUSIVA EMERALD -->
+  <div id="tab-emerald" class="tab-content">
+    <div class="panel">
+      <h3>🌿 Buscador de Equivalencias Emerald</h3>
+      <p style="font-size: 0.85rem; color: var(--txt-suave); margin-bottom: 15px;">
+        Escribe el código Emerald (ej. SW9697) para encontrar su fórmula equivalente en ColorSnap.
+      </p>
+      <div class="fila">
+        <label style="flex: 2;">Buscar Código Emerald:
+          <input type="text" id="emeraldBuscar" placeholder="Ej. SW9697 o 9697" style="text-transform: uppercase;">
+        </label>
+        <label style="justify-content: flex-end;">
+          <button class="btn" onclick="buscarEmerald()" style="width: 100%;">Buscar Equivalencia</button>
+        </label>
+      </div>
+      <div id="emeraldResultados" style="margin-top: 15px;"></div>
+    </div>
+  </div>
+
   <!-- PESTAÑA BUSCAR RGB -->
   <div id="tab-rgb" class="tab-content">
     <div class="panel">
@@ -658,8 +598,16 @@
       <div id="estadoCatalogoCarpeta" class="import-status">No hay carpeta seleccionada. También puedes elegir un JSON desde el explorador.</div>
       <div id="resultadoImportacionCatalogo" class="import-result" hidden></div>
     </div>
+    
     <div class="panel db-manage-panel">
-      <div class="section-heading"><div><h3>🛠️ Administrar fórmulas</h3><p class="small-note">Busca, agrega, corrige o elimina fórmulas individuales.</p></div><button class="btn exito" onclick="editarFormulaCatalogo(null)">＋ Nueva fórmula</button></div>
+      <div class="section-heading">
+        <div>
+          <h3>🛠️ Administrar fórmulas</h3>
+          <p class="small-note">Busca, agrega, corrige o elimina fórmulas individuales.</p>
+        </div>
+        <!-- Aquí se modificó para abrir el nuevo modal simplificado -->
+        <button class="btn exito" onclick="abrirNuevaFormulaPropia()">＋ Nueva fórmula</button>
+      </div>
       <div class="fila"><label>Filtrar catálogo:<input id="gestorBuscarFormula" type="text" placeholder="Código, nombre, marca o base" oninput="renderGestorCatalogo()"></label></div>
       <div id="gestorCatalogoResultados" class="manage-results"></div>
     </div>
@@ -691,6 +639,12 @@
             ⬆️ Importar Fórmulas (JSON)
             <input type="file" id="inputJSON" accept=".json" style="display: none;" onchange="importarJSONLocal(event)">
         </label>
+
+                    <label class="btn" style="cursor: pointer; background: #8b5cf6; color: white; padding: 10px 16px; border-radius: 8px; font-weight: bold; display: inline-flex; align-items: center; justify-content: center;">
+                🔄 Importar Equivalencias (JSON)
+                <input type="file" id="inputEquivalencias" accept=".json" style="display: none;" onchange="importarEquivalenciasJSON(event)">
+            </label>
+
         <button class="btn exito" onclick="exportarDBaExcel()">⬇️ Exportar a Excel</button>
         <button class="btn secundario" onclick="descargarDB_JSON()">⬇️ Descargar Catálogo (JSON)</button>
         <button class="btn peligro" onclick="borrarDB()">🗑 Borrar Base de Datos</button>
@@ -701,7 +655,10 @@
   <!-- PESTAÑA CONFIGURACIÓN -->
   <div id="tab-config" class="tab-content">
     <div class="panel">
-      <h3>⚙️ Configuración</h3>
+      <!-- Botón de Ayuda AQUI, tal como lo pediste -->
+      <h3>⚙️ Configuración
+         <button class="btn secundario" id="btnInstalarApp" onclick="instalarAplicacion()" style="margin-left: 15px; font-size: 0.9rem;">📲 Instalar / Ayuda</button>
+      </h3>
       
       <details class="config-group" open>
         <summary>🎨 Diseño de Etiqueta y Logo</summary>
@@ -758,6 +715,11 @@
                 ⬆️ Importar Fórmulas (JSON)
                 <input type="file" id="inputJSONConfig" accept=".json" style="display: none;" onchange="importarJSONLocal(event)">
             </label>
+            <label class="btn" style="cursor: pointer; background: #8b5cf6; color: white; padding: 10px 16px; border-radius: 8px; font-weight: bold; display: inline-flex; align-items: center; justify-content: center;">
+                🔄 Importar Equivalencias (JSON)
+                <input type="file" id="inputEquivalenciasConfig" accept=".json" style="display: none;" onchange="importarEquivalenciasJSON(event)">
+            </label>
+
             <button class="btn exito" onclick="exportarDBaExcel()">⬇️ Exportar Fórmulas (Excel)</button>
             <button class="btn secundario" onclick="descargarDB_JSON()">⬇️ Descargar Catálogo (JSON)</button>
             <button class="btn secundario" onclick="descargarRespaldo()">⬇️ Respaldar Todo (JSON)</button>
@@ -781,6 +743,59 @@
           </div>
         </div>
       </details>
+    </div>
+  </div>
+
+  <!-- MODAL PARA NUEVA FÓRMULA PROPIA (CUSTOM) -->
+  <div id="modalNuevaFormula" class="modal-ajuste">
+    <div class="modal-ajuste-content" style="max-width: 600px;">
+      <h3 style="margin-top: 0; color: var(--primario);">➕ Agregar Fórmula Propia</h3>
+      <p style="font-size: 0.85rem; color: var(--txt-suave); margin-bottom: 15px;">
+        Escribe los datos básicos y luego agrega las tintas una por una.
+      </p>
+      
+      <div class="fila">
+        <label>Código:
+          <input type="text" id="fpCodigo" style="text-transform: uppercase;" placeholder="Ej. SW1234">
+        </label>
+        <label>Nombre:
+          <input type="text" id="fpNombre" style="text-transform: uppercase;" placeholder="Ej. AZUL CIELO">
+        </label>
+      </div>
+      <div class="fila">
+        <label>Marca:
+          <input type="text" id="fpMarca" value="SHERWIN WILLIAMS" style="text-transform: uppercase;">
+        </label>
+        <label>Línea:
+          <select id="fpLinea">
+            <option value="BASE AGUA">BASE AGUA</option>
+            <option value="BASE SOLVENTE">BASE SOLVENTE</option>
+          </select>
+        </label>
+      </div>
+      <div class="fila">
+        <label>Base de color:
+          <input type="text" id="fpBase" style="text-transform: uppercase;" placeholder="Ej. EXTRA WHITE">
+        </label>
+        <label>Tamaño que estás capturando:
+          <select id="fpTamano" style="font-weight: bold; color: var(--exito);">
+            <option value="1">1 Litro (1 LT)</option>
+            <option value="4" selected>Galón (4 LT)</option>
+            <option value="19">Cubeta (19 LT)</option>
+          </select>
+        </label>
+      </div>
+
+      <h4 style="color: var(--txt-suave); margin-top: 15px; margin-bottom: 10px; border-bottom: 1px solid var(--borde); padding-bottom: 5px;">Tintes de la Fórmula</h4>
+      
+      <div id="fpTintesList"></div>
+      
+      <button class="btn secundario" onclick="agregarFilaTintePropia()" style="margin-bottom: 20px;">➕ Agregar otra Tinta</button>
+
+      <div class="fila" style="justify-content: flex-end; border-top: 1px solid var(--borde); padding-top: 15px; margin-top: 15px;">
+        <button class="btn secundario" onclick="cerrarModalPropia()">Cancelar</button>
+        <button class="btn exito" onclick="guardarFormulaPropia()">💾 Guardar Fórmula</button>
+      </div>
     </div>
   </div>
 
@@ -866,15 +881,30 @@
     try { const valor = localStorage.getItem(clave); return valor ? JSON.parse(valor) : respaldo; }
     catch (error) { console.warn("Dato local dañado:", clave, error); return respaldo; }
   }
+  
+  // Cargar Base de Datos
   let DATABASE_SW = leerJSONSeguro("fc_conv_db", []);
   if (!Array.isArray(DATABASE_SW)) DATABASE_SW = [];
+  
+  // Cargar Fórmulas Propias
+  let FORMULAS_PROPIAS = leerJSONSeguro("fc_formulas_propias", []);
+  if (!Array.isArray(FORMULAS_PROPIAS)) FORMULAS_PROPIAS = [];
+  
+  // Unir fórmulas propias a la base de datos al iniciar
+  FORMULAS_PROPIAS.forEach(fp => {
+      if (!DATABASE_SW.find(f => f.codigo === fp.codigo && f.base_color === fp.base_color)) {
+          DATABASE_SW.push(fp);
+      }
+  });
+
   let HISTORIAL_PREP = leerJSONSeguro("fc_hist_prep", []);
   if (!Array.isArray(HISTORIAL_PREP)) HISTORIAL_PREP = [];
   let CONTADOR_SUCURSAL = parseInt(localStorage.getItem("fc_contador") || "0");
   let busquedaActual = [];
+  let busquedaEmerald = [];
+  let emeraldContexto = null;
   let prepTemporal = null;
   let etiquetaTemporal = null;
-  let formulaDesdeConversor = null;    
 
   const LISTA_PRODUCTOS = [
     "SUPER KEM-TONE MATE", "SUPER KEM-TONE SATIN", "KEM-TONE MATE", "KEM-TONE SATIN",
@@ -1218,116 +1248,137 @@
   }
 
   // ==================== PREPARAR ====================
-  function buscarParaPreparar() {
-    const q = document.getElementById("prepBuscar").value.trim().toUpperCase();
-    const base = document.getElementById("prepFiltroBase").value;
-    const marca = document.getElementById("prepFiltroMarca").value; 
-    const cont = document.getElementById("prepResultados");
-    if (!q) return;
+function buscarParaPreparar() {
+  emeraldContexto = null;
+  let q = document.getElementById("prepBuscar").value.trim().toUpperCase();
+  const base = document.getElementById("prepFiltroBase").value;
+  const marca = document.getElementById("prepFiltroMarca").value; 
+  const cont = document.getElementById("prepResultados");
+  
+  if (!q) return;
 
-    let res = DATABASE_SW.filter(f => f.codigo.toUpperCase().includes(q) || f.nombre.toUpperCase().includes(q));
-    if (base !== "TODAS") res = res.filter(f => f.tipo_pintura === base);
-    if (marca !== "TODAS") res = res.filter(f => f.marca === marca); 
-    if (res.length === 0) { cont.innerHTML = "<p>No se encontraron resultados.</p>"; return; }
+  let res = DATABASE_SW.filter(f => 
+      (f.codigo && f.codigo.toUpperCase().includes(q)) || 
+      (f.nombre && f.nombre.toUpperCase().includes(q))
+  );
 
-    busquedaActual = res;
-    let html = "";
-    
-    res.forEach((f, i) => {
-      const isNA = f.base_color === "N/A";
-      html += `
-        <div class="prep-item">
-          <div class="prep-titulo">${f.codigo} — ${f.nombre} ${isNA ? '<span class="badge-na">N/A - Sin Fórmula</span>' : ''}</div>
-          <div class="prep-sub">
-              <span class="badge-base">BASE: ${f.base_color}</span> 
-              <span>| Pág: <b>${f.pagina || 'N/A'}</b></span>
-              <span>| Línea: ${f.tipo_pintura}</span>
-              <span>| Marca: <b>${f.marca || 'N/A'}</b></span>
-          </div>
-          
-          ${!isNA ? `
-          <div class="prep-opciones">
-              <label>
-                  <input type="checkbox" id="chk-exacto-${i}" onchange="recalcularActual(${i})"> Mostrar fracciones exactas (1/256, 1/512)
-              </label>
-              <div class="prep-botones">
-                <button class="btn secundario" onclick="verFormulaPreparar(${i}, 'LITRO', 1)">🧪 Litro</button>
-                <button class="btn secundario" onclick="verFormulaPreparar(${i}, 'GALON', 4)">🥫 Galón</button>
-                <button class="btn secundario" onclick="verFormulaPreparar(${i}, 'CUBETA', 19)">🪣 Cubeta</button>
-                <button class="btn secundario" onclick="verFormulaCustom(${i})">➕ Otro...</button>
-              </div>
-          </div>` : ''}
+  if (base !== "TODAS") res = res.filter(f => f.tipo_pintura === base);
+  if (marca !== "TODAS") res = res.filter(f => f.marca === marca); 
 
-          <div class="prep-detalle" id="detalle-${i}">
-            <h4 style="margin-top:0; margin-bottom:10px; color:var(--primario);">Fórmula a preparar:</h4>
-            <div class="prep-formula-txt" id="formula-txt-${i}"></div>
-            
-            <div class="fila">
-              <label>Producto:
-                <select id="prod-${i}">
-                  <option value="">— Selecciona —</option>
-                  ${LISTA_PRODUCTOS.map(p => `<option value="${p}">${p}</option>`).join("")}
-                  <option value="__CUSTOM__">[ + Escribir otro producto... ]</option>
-                </select>
-              </label>
-              <label class="oculto" id="prod-custom-label-${i}">Nuevo Producto:
-                <input type="text" id="prod-custom-${i}" placeholder="Ej. PINTURA ESPECIAL">
-              </label>
-              <label>Comentarios:
-                <input type="text" id="com-${i}" placeholder="Opcional">
-              </label>
-              
-              <label style="flex: 0.8;">👤 Operador:
-                <select id="operador-${i}" style="font-weight: bold;">
-                  <option value="">— ¿Quién prepara? —</option>
-                  <option value="JONATHAN">JONATHAN</option>
-                  <option value="DAVID">DAVID</option>
-                  <option value="YESI">YESI</option>
-                  <option value="JOVANY">JOVAN</option>
-                  <option value="JULIO">JULIO</option>
-                  <option value="RODOLFO">RODOLFO</option>
-                  <option value="KEVIN">KEVIN</option>
-                  <option value="MIROS">MIROS</option>
-                </select>
-              </label>
-            </div>
-            
-            <label style="flex-direction: row; align-items: center; gap: 10px; cursor: pointer; margin-bottom: 10px;">
-              <input type="checkbox" id="chk-formula-${i}"> Incluir fórmula en la etiqueta
-            </label>
-            <button class="btn exito" onclick="prepararEImprimir(${i})">🖨️ Generar Etiqueta</button>
-          </div>
-        </div>
-      `;
-    });
-    cont.innerHTML = html;
-
-    res.forEach((_, i) => {
-      document.getElementById(`prod-${i}`).addEventListener("change", function() {
-        const customLabel = document.getElementById(`prod-custom-label-${i}`);
-        if (this.value === "__CUSTOM__") customLabel.classList.remove("oculto");
-        else customLabel.classList.add("oculto");
-      });
-    });
+  if (res.length === 0) { 
+      cont.innerHTML = "<p>No se encontraron resultados.</p>"; 
+      return; 
   }
 
-  function recalcularActual(index) {
-      if (prepTemporal && prepTemporal.index === index) {
-          verFormulaPreparar(index, prepTemporal.unidad, prepTemporal.cap);
+  busquedaActual = res;
+  let html = "";
+  res.forEach((f, i) => { html += generarHTMLPreparar(f, i); });
+  cont.innerHTML = html;
+  bindEventosPreparar(res);
+}
+
+function generarHTMLPreparar(f, i) {
+    const isNA = f.base_color === "N/A";
+    const badgePropia = f.esPropia ? '<span style="background:#a855f7; color:white; padding:2px 6px; border-radius:4px; font-size:0.65rem; font-weight:bold; margin-left:6px; text-transform:uppercase;">PROPIA</span>' : '';
+    return `
+      <div class="prep-item">
+        <div class="prep-titulo">${f.codigo} — ${f.nombre} ${badgePropia} ${isNA ? '<span class="badge-na">N/A - Sin Fórmula</span>' : ''}</div>
+        <div class="prep-sub">
+            <span class="badge-base">BASE: ${f.base_color}</span> 
+            <span>| Línea: ${f.tipo_pintura}</span>
+            <span>| Marca: <b>${f.marca || 'N/A'}</b></span>
+        </div>
+        
+        ${!isNA ? `
+        <div class="prep-opciones">
+            <label>
+                <input type="checkbox" id="chk-exacto-${i}" onchange="recalcularActual(${i}, '')"> Mostrar fracciones exactas (1/256, 1/512)
+            </label>
+            <div class="prep-botones">
+              <button class="btn secundario" onclick="verFormulaPreparar(${i}, 'LITRO', 1, '')">🧪 Litro</button>
+              <button class="btn secundario" onclick="verFormulaPreparar(${i}, 'GALON', 4, '')">🥫 Galón</button>
+              <button class="btn secundario" onclick="verFormulaPreparar(${i}, 'CUBETA', 19, '')">🪣 Cubeta</button>
+              <button class="btn secundario" onclick="verFormulaCustom(${i}, '')">➕ Otro...</button>
+            </div>
+        </div>` : ''}
+
+        <div class="prep-detalle" id="detalle-${i}">
+          <h4 style="margin-top:0; margin-bottom:10px; color:var(--primario);">Fórmula a preparar:</h4>
+          <div class="prep-formula-txt" id="formula-txt-${i}"></div>
+          
+          <div class="fila">
+            <label>Producto:
+              <select id="prod-${i}">
+                <option value="">— Selecciona —</option>
+                ${LISTA_PRODUCTOS.map(p => `<option value="${p}">${p}</option>`).join("")}
+                <option value="__CUSTOM__">[ + Escribir otro producto... ]</option>
+              </select>
+            </label>
+            <label class="oculto" id="prod-custom-label-${i}">Nuevo Producto:
+              <input type="text" id="prod-custom-${i}" placeholder="Ej. PINTURA ESPECIAL">
+            </label>
+            <label>Comentarios:
+              <input type="text" id="com-${i}" placeholder="Opcional">
+            </label>
+            
+            <label style="flex: 0.8;">👤 Operador:
+              <select id="operador-${i}" style="font-weight: bold;">
+                <option value="">— ¿Quién prepara? —</option>
+                <option value="JONATHAN">JONATHAN</option>
+                <option value="DAVID">DAVID</option>
+                <option value="YESI">YESI</option>
+                <option value="JOVANY">JOVAN</option>
+                <option value="JULIO">JULIO</option>
+                <option value="RODOLFO">RODOLFO</option>
+                <option value="KEVIN">KEVIN</option>
+                <option value="MIROS">MIROS</option>
+              </select>
+            </label>
+          </div>
+          
+          <label style="flex-direction: row; align-items: center; gap: 10px; cursor: pointer; margin-bottom: 10px;">
+            <input type="checkbox" id="chk-formula-${i}"> Incluir fórmula en la etiqueta
+          </label>
+          <button class="btn exito" onclick="prepararEImprimir(${i}, '')">🖨️ Generar Etiqueta</button>
+        </div>
+      </div>
+    `;
+}
+
+function bindEventosPreparar(res) {
+    res.forEach((_, i) => {
+        const select = document.getElementById(`prod-${i}`);
+        if(select) {
+            select.addEventListener("change", function() {
+              const customLabel = document.getElementById(`prod-custom-label-${i}`);
+              if (this.value === "__CUSTOM__") customLabel.classList.remove("oculto");
+              else customLabel.classList.add("oculto");
+            });
+        }
+    });
+}
+
+  function recalcularActual(index, prefix) {
+      prefix = prefix || "";
+      if (prepTemporal && prepTemporal.index === index && (prepTemporal.prefix || "") === prefix) {
+          verFormulaPreparar(index, prepTemporal.unidad, prepTemporal.cap, prefix);
       }
   }
 
-  function verFormulaPreparar(index, unidad, cap) {
-    const f = busquedaActual[index];
-    
+  function verFormulaPreparar(index, unidad, cap, prefix) {
+    prefix = prefix || "";
+    const fuenteDatos = prefix === "em-" ? busquedaEmerald : busquedaActual;
+    const f = fuenteDatos[index];
+    if (!f) return;
+
     if (unidad === 'LITRO' && f.colorantes.every(c => c.oz_litro === 0)) {
         alert("⚠️ Esta fórmula no tiene cantidades para 1 LT.\n\nPor favor, usa la pestaña 'Convertidor' seleccionando Galón como origen y Litro como destino.");
         return;
     }
 
-    prepTemporal = { index: index, unidad: unidad, cap: cap };
+    prepTemporal = { index: index, unidad: unidad, cap: cap, prefix: prefix };
     const maquina = 64; 
-    const exacto = document.getElementById(`chk-exacto-${index}`).checked;
+    const exacto = document.getElementById(`chk-exacto-${prefix}${index}`).checked;
     
     let textoTamano = "GALÓN";
     if (unidad === 'LITRO') textoTamano = "1 LT";
@@ -1390,32 +1441,37 @@
       }
     });
 
-    document.getElementById(`formula-txt-${index}`).innerHTML = htmlTexto;
-    document.getElementById(`detalle-${index}`).classList.add("activo");
+    document.getElementById(`formula-txt-${prefix}${index}`).innerHTML = htmlTexto;
+    document.getElementById(`detalle-${prefix}${index}`).classList.add("activo");
   }
 
-  function verFormulaCustom(index) {
+  function verFormulaCustom(index, prefix) {
+    prefix = prefix || "";
     const tam = prompt("Escribe la cantidad en Litros (Ej. 2.5):", "2.5");
     if (!tam || isNaN(Number(tam)) || Number(tam) <= 0) return;
-    verFormulaPreparar(index, 'CUSTOM', Number(tam));
+    verFormulaPreparar(index, 'CUSTOM', Number(tam), prefix);
   }
 
-  function prepararEImprimir(index) {
-    if (!prepTemporal || prepTemporal.index !== index) return alert("Selecciona un tamaño primero.");
+  function prepararEImprimir(index, prefix) {
+    prefix = prefix || "";
+    if (!prepTemporal || prepTemporal.index !== index || (prepTemporal.prefix || "") !== prefix) return alert("Selecciona un tamaño primero.");
     
-    const f = busquedaActual[index];
-    const operador = document.getElementById(`operador-${index}`).value;
+    const fuenteDatos = prefix === "em-" ? busquedaEmerald : busquedaActual;
+    const f = fuenteDatos[index];
+    if (!f) return;
+    
+    const operador = document.getElementById(`operador-${prefix}${index}`).value;
     if (!operador) return alert("⚠️ Por favor, selecciona tu nombre en la lista de Operador.");
 
-    let producto = document.getElementById(`prod-${index}`).value;
+    let producto = document.getElementById(`prod-${prefix}${index}`).value;
     if (producto === "__CUSTOM__") {
-      producto = document.getElementById(`prod-custom-${index}`).value.trim().toUpperCase();
+      producto = document.getElementById(`prod-custom-${prefix}${index}`).value.trim().toUpperCase();
       if (!producto) return alert("Escribe el nombre del producto.");
     } else if (!producto) return alert("Selecciona un producto.");
 
-    const comentarios = document.getElementById(`com-${index}`).value.trim();
-    const incluirFormula = document.getElementById(`chk-formula-${index}`).checked;
-    const exacto = document.getElementById(`chk-exacto-${index}`).checked;
+    const comentarios = document.getElementById(`com-${prefix}${index}`).value.trim();
+    const incluirFormula = document.getElementById(`chk-formula-${prefix}${index}`).checked;
+    const exacto = document.getElementById(`chk-exacto-${prefix}${index}`).checked;
     const maquina = 64;
 
     let textoFormula = "";
@@ -1437,22 +1493,34 @@
     const contStr = "No. " + String(CONTADOR_SUCURSAL).padStart(4, '0');
     const ahora = new Date();
     
+    const esEmerald = prefix === "em-" && emeraldContexto !== null;
+
     etiquetaTemporal = {
       contador: contStr,
       fecha: ahora.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) + " " + ahora.toLocaleTimeString('es-ES', {hour: '2-digit', minute:'2-digit'}),
-      codigo: f.codigo, nombre: f.nombre, producto: producto, base: f.base_color, tamano: prepTemporal.cap + " LT", comentarios: comentarios, 
+      codigo: esEmerald ? emeraldContexto.codigoEmerald : f.codigo,
+      nombre: esEmerald ? emeraldContexto.nombreEmerald : f.nombre,
+      producto: producto, base: f.base_color, tamano: prepTemporal.cap + " LT", comentarios: comentarios, 
       formula: textoFormula, 
       imprimirFormula: incluirFormula,
       tipo: "preparacion",
       marca: f.marca || "SHERWIN WILLIAMS",
+      esEmerald: esEmerald,
+      codigoSnap: esEmerald ? f.codigo : null,
+      nombreSnap: esEmerald ? f.nombre : null,
       timestamp: ahora.getTime(), usuario: operador
     };
 
     document.getElementById("lblProducto").textContent = producto;
     document.getElementById("lblFecha").textContent = etiquetaTemporal.fecha;
-    document.getElementById("lblCodigoColor").textContent = f.codigo + " " + f.nombre.toUpperCase();
-    document.getElementById("lblContador").textContent = contStr;
-    document.getElementById("lblComentarios").textContent = comentarios ? "Obs: " + comentarios : "";
+    
+    if (esEmerald) {
+      document.getElementById("lblCodigoColor").textContent = emeraldContexto.codigoEmerald + " (EMERALD) → " + f.codigo + " " + f.nombre.toUpperCase();
+      document.getElementById("lblComentarios").textContent = "EMERALD: " + emeraldContexto.nombreEmerald + (comentarios ? " | " + comentarios : "");
+    } else {
+      document.getElementById("lblCodigoColor").textContent = f.codigo + " " + f.nombre.toUpperCase();
+      document.getElementById("lblComentarios").textContent = comentarios ? "Obs: " + comentarios : "";
+    }
     
     const lblFormula = document.getElementById("lblFormula");
     if (incluirFormula && textoFormula) { lblFormula.textContent = textoFormula; lblFormula.style.display = "block"; } 
@@ -1760,13 +1828,20 @@ CORREO: pinturas.relma@gmail.com</String><Attributes><Font Family="Arial" Size="
       };
 
       setTextIfExists("PRODUCTO", etiquetaTemporal.producto);
-      setTextIfExists("COLOR", etiquetaTemporal.codigo + " " + etiquetaTemporal.nombre);
       setTextIfExists("TAMANO", "TAMAÑO: " + etiquetaTemporal.tamano); 
       setTextIfExists("BASE", "BASE: " + etiquetaTemporal.base); 
       setTextIfExists("FECHA", etiquetaTemporal.fecha);
       setTextIfExists("FORMULA", etiquetaTemporal.imprimirFormula ? etiquetaTemporal.formula : "");
       setTextIfExists("CONTADOR", etiquetaTemporal.contador);
-      setTextIfExists("COMENTARIOS", etiquetaTemporal.comentarios ? 'Obs: ' + etiquetaTemporal.comentarios : "");
+
+      if (etiquetaTemporal.esEmerald) {
+          setTextIfExists("COLOR", etiquetaTemporal.codigo + " (EMERALD) → " + etiquetaTemporal.codigoSnap + " " + etiquetaTemporal.nombreSnap);
+          const obsBase = etiquetaTemporal.comentarios ? etiquetaTemporal.comentarios : "";
+          setTextIfExists("COMENTARIOS", "PEDIDO: " + etiquetaTemporal.nombre + (obsBase ? " | " + obsBase : ""));
+      } else {
+          setTextIfExists("COLOR", etiquetaTemporal.codigo + " " + etiquetaTemporal.nombre);
+          setTextIfExists("COMENTARIOS", etiquetaTemporal.comentarios ? 'Obs: ' + etiquetaTemporal.comentarios : "");
+      }
 
       const printers = dymo.label.framework.getPrinters();
       if (printers.length === 0) throw new Error("No hay impresoras DYMO conectadas en el sistema.");
@@ -1791,10 +1866,10 @@ CORREO: pinturas.relma@gmail.com</String><Attributes><Font Family="Arial" Size="
           localStorage.setItem("fc_hist_prep", JSON.stringify(HISTORIAL_PREP));
       }
       
-      if(typeof aplicarFiltrosHistorial === 'function') aplicarFiltrosHistorial(); 
+      aplicarFiltrosHistorial(); 
 
       cerrarModalEtiqueta();
-      if(typeof mostrarToast === 'function') mostrarToast(`✅ ${cantidad} etiqueta(s) enviada(s) a DYMO`);
+      mostrarToast(`✅ ${cantidad} etiqueta(s) enviada(s) a DYMO`);
       
     } 
     catch (e) {
@@ -1817,7 +1892,7 @@ CORREO: pinturas.relma@gmail.com</String><Attributes><Font Family="Arial" Size="
         HISTORIAL_PREP.unshift(etiquetaTemporal);
         localStorage.setItem("fc_hist_prep", JSON.stringify(HISTORIAL_PREP));
     }
-    if(typeof aplicarFiltrosHistorial === 'function') aplicarFiltrosHistorial();
+    aplicarFiltrosHistorial();
     setTimeout(() => { window.print(); cerrarModalEtiqueta(); }, 250);
   }
 
@@ -1954,9 +2029,11 @@ CORREO: pinturas.relma@gmail.com</String><Attributes><Font Family="Arial" Size="
     let html = "";
     resultados.forEach((res, i) => {
       const alertaNA = res.base_color === "N/A" ? `<span class="badge-na">N/A - Sin Fórmula</span>` : "";
+      const badgePropia = res.esPropia ? '<span style="background:#a855f7; color:white; padding:2px 6px; border-radius:4px; font-size:0.65rem; font-weight:bold; margin-left:6px; text-transform:uppercase;">PROPIA</span>' : '';
+      
       html += `
         <div class="item-resultado">
-          <h4>${res.codigo} — ${res.nombre} ${alertaNA}</h4>
+          <h4>${res.codigo} — ${res.nombre} ${badgePropia} ${alertaNA}</h4>
           <p style="margin: 0 0 10px 0; font-size: 0.85rem; color: var(--txt-suave);">
             Marca: <b>${res.marca || 'N/A'}</b> | Base: <b>${res.base_color}</b> | Línea: <b>${res.tipo_pintura}</b> | RGB: <b>#${res.rgb || 'N/A'}</b>
           </p>
@@ -2013,8 +2090,6 @@ CORREO: pinturas.relma@gmail.com</String><Attributes><Font Family="Arial" Size="
   }
 
   // ==================== COMPARAR ====================
-  let numComparaciones = 2;
-
   function llenarDatalistComparar() {
     const dl = document.getElementById("listaFormulas");
     if(!dl) return;
@@ -2053,27 +2128,26 @@ CORREO: pinturas.relma@gmail.com</String><Attributes><Font Family="Arial" Size="
   }
 
   function agregarCampoComparacion() {
-    if (numComparaciones >= 6) return alert("Máximo 6 fórmulas para comparar.");
-    numComparaciones++;
+    const actuales = document.querySelectorAll("#inputsComparacion .input-comp").length;
+    if (actuales >= 6) return alert("Máximo 6 fórmulas para comparar.");
     
     const cont = document.getElementById("inputsComparacion");
     const div = document.createElement("div");
     div.className = "fila input-comp";
-    div.id = "comp-row-" + numComparaciones;
-    
+    div.id = "comp-row-new-" + Date.now();
     div.innerHTML = `
-      <label style="flex: 1;">Fórmula ${numComparaciones} 
+      <label style="flex: 1;">Fórmula adicional
         <div style="display: flex; gap: 10px;">
           <input type="text" class="comp-codigo" list="listaFormulas" placeholder="Código o Nombre" style="flex: 1;">
-          <button class="btn peligro" style="padding: 10px;" onclick="quitarCampoComparacion(${numComparaciones})" title="Quitar">✕</button>
+          <button class="btn peligro" style="padding: 10px;" onclick="quitarCampoComparacion('${div.id}')" title="Quitar">✕</button>
         </div>
       </label>
     `;
     cont.appendChild(div);
   }
 
-  function quitarCampoComparacion(num) {
-    const row = document.getElementById("comp-row-" + num);
+  function quitarCampoComparacion(id) {
+    const row = document.getElementById(id);
     if (row) row.remove();
   }
 
@@ -2252,6 +2326,8 @@ CORREO: pinturas.relma@gmail.com</String><Attributes><Font Family="Arial" Size="
         matchTexto = (h.contador||"").toUpperCase().includes(q) || 
                      (h.codigo||"").toUpperCase().includes(q) || 
                      (h.nombre||"").toUpperCase().includes(q) || 
+                     (h.codigoSnap||"").toUpperCase().includes(q) ||
+                     (h.nombreSnap||"").toUpperCase().includes(q) ||
                      (h.producto||"").toUpperCase().includes(q) || (h.usuario||"").toUpperCase().includes(q);
       }
 
@@ -2351,6 +2427,8 @@ CORREO: pinturas.relma@gmail.com</String><Attributes><Font Family="Arial" Size="
       const strProducto = h.producto || "S/P";
       const strTamano = h.tamano || "-";
       const strFormula = h.formula || "";
+      const esEmerald = h.esEmerald === true;
+      const badgeEmerald = esEmerald ? '<span style="background:#8b5cf6; color:white; padding:2px 6px; border-radius:4px; font-size:0.65rem; font-weight:bold; margin-left:6px;">🌿 EMERALD</span>' : '';
 
       const tieneAjuste = HISTORIAL_PREP.some(ajuste => ajuste.tipo === "ajuste" && ajuste.comentarios && ajuste.comentarios.includes(strContador));
       const badgeModificado = tieneAjuste ? '<span class="badge-modificado">⚠️ MODIFICADO</span>' : '';
@@ -2366,7 +2444,7 @@ CORREO: pinturas.relma@gmail.com</String><Attributes><Font Family="Arial" Size="
           <td style="font-size:0.8rem; color:var(--txt-suave);">${strMarca}</td>
           <td style="text-align:center;">${badgeTipo}</td>
           <td>${h.fecha || "-"}</td>
-          <td>${strCodigo} - ${strNombre}</td>
+          <td>${strCodigo} - ${strNombre}${badgeEmerald}${esEmerald ? `<br><small style="color:var(--txt-suave);">→ ${h.codigoSnap || ""} ${h.nombreSnap || ""}</small>` : ''}</td>
           <td>${strProducto}${cantMostrar}</td>
           <td>${strTamano}</td>
         </tr>
@@ -2377,7 +2455,6 @@ CORREO: pinturas.relma@gmail.com</String><Attributes><Font Family="Arial" Size="
          <td colspan="9" style="padding: 15px; border-left: 4px solid var(--primario);">
         <div style="display: flex; gap: 20px; flex-wrap: wrap;">
               <div style="flex: 1; min-width: 250px;">
-                <!-- NUEVO: Si es un ajuste y tiene fórmula original, la mostramos -->
                 ${esAjuste && h.formula_original ? `
                   <p style="margin: 0 0 5px 0; font-size: 0.85rem; color: var(--txt-suave);">Fórmula Original del Galón:</p>
                   <div style="font-family: monospace; font-size: 0.9rem; background: #111; padding: 10px; border-radius: 5px; color: #94a3b8; margin-bottom: 10px; border: 1px solid #333;">
@@ -2392,9 +2469,9 @@ CORREO: pinturas.relma@gmail.com</String><Attributes><Font Family="Arial" Size="
               </div>
                          <div style="flex: 1; min-width: 200px;">
               <p style="font-size: 0.9rem; margin: 0 0 5px 0;"><b>Base Color:</b> ${h.base || "-"}</p>
+              ${h.esEmerald ? `<p style="font-size: 0.9rem; margin: 0 0 5px 0; color:#8b5cf6;"><b>🌿 Emerald:</b> ${h.codigo} (${h.nombre}) → ${h.codigoSnap || ""} ${h.nombreSnap || ""}</p>` : ''}
               <p style="font-size: 0.9rem; margin: 0;"><b>Comentarios:</b> ${h.comentarios || "Ninguno"}</p>
               
-                            <!-- AVISO DE MODIFICACIÓN (CON AJUSTE Y RASTREO) -->
               ${HISTORIAL_PREP.filter(ajuste => ajuste.tipo === "ajuste" && ajuste.comentarios && ajuste.comentarios.includes(strContador)).map(ajuste => `
                 <div style="margin-top: 10px; padding: 8px; background: rgba(245, 158, 11, 0.2); border-left: 4px solid #f59e0b; border-radius: 4px;">
                   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
@@ -2406,7 +2483,6 @@ CORREO: pinturas.relma@gmail.com</String><Attributes><Font Family="Arial" Size="
                 </div>
               `).join('')}
 
-              <!-- BOTONES (RESTAURADOS) -->
               <div style="margin-top: 10px; display: flex; gap: 5px; flex-wrap: wrap;">
                 <button class="btn secundario" style="padding: 5px 10px; font-size: 0.8rem;" onclick="event.stopPropagation(); reimprimirDesdeHistorial(${idxOriginal})">🖨️ Reimprimir</button>
                 <button class="btn peligro" style="padding: 5px 10px; font-size: 0.8rem;" onclick="event.stopPropagation(); eliminarRegistroHistorial(${idxOriginal})">🗑️ Eliminar</button>
@@ -2450,15 +2526,25 @@ CORREO: pinturas.relma@gmail.com</String><Attributes><Font Family="Arial" Size="
       tipo: h.tipo || "preparacion",
       marca: h.marca || "SHERWIN WILLIAMS",
       cantidad: 1,
-      usuario: h.usuario || ""
+      usuario: h.usuario || "",
+      esEmerald: h.esEmerald || false,
+      codigoSnap: h.codigoSnap || null,
+      nombreSnap: h.nombreSnap || null
     };
 
     document.getElementById("lblProducto").textContent = etiquetaTemporal.producto;
     document.getElementById("lblFecha").textContent = etiquetaTemporal.fecha;
-    document.getElementById("lblCodigoColor").textContent = etiquetaTemporal.codigo + " " + etiquetaTemporal.nombre.toUpperCase();
-    document.getElementById("lblContador").textContent = etiquetaTemporal.contador;
-    document.getElementById("lblComentarios").textContent = etiquetaTemporal.comentarios ? "Obs: " + etiquetaTemporal.comentarios : "";
     
+    if (etiquetaTemporal.esEmerald) {
+      document.getElementById("lblCodigoColor").textContent = etiquetaTemporal.codigo + " (EMERALD) → " + etiquetaTemporal.codigoSnap + " " + (etiquetaTemporal.nombreSnap || "").toUpperCase();
+      document.getElementById("lblComentarios").textContent = "EMERALD: " + etiquetaTemporal.nombre + (etiquetaTemporal.comentarios ? " | " + etiquetaTemporal.comentarios : "");
+    } else {
+      document.getElementById("lblCodigoColor").textContent = etiquetaTemporal.codigo + " " + etiquetaTemporal.nombre.toUpperCase();
+      document.getElementById("lblComentarios").textContent = etiquetaTemporal.comentarios ? "Obs: " + etiquetaTemporal.comentarios : "";
+    }
+    
+    document.getElementById("lblContador").textContent = etiquetaTemporal.contador;
+
     const lblFormula = document.getElementById("lblFormula");
     if (etiquetaTemporal.formula) { 
       lblFormula.textContent = etiquetaTemporal.formula; 
@@ -2483,17 +2569,23 @@ CORREO: pinturas.relma@gmail.com</String><Attributes><Font Family="Arial" Size="
   function exportarExcel() {
     if (HISTORIAL_PREP.length === 0) return alert("No hay datos para exportar.");
 
-    let csv = "Ticket,Tipo,Fecha,Codigo,Color,Marca,Producto,Base,Tamano,Cantidad,Comentarios,Formula,Usuario\n";
+    let csv = "Ticket,Tipo,Fecha,Codigo,Color,Marca,Producto,Base,Tamano,Cantidad,Comentarios,Formula,Usuario,EsEmerald,CodigoSnap,NombreSnap\n";
     
     HISTORIAL_PREP.forEach(h => {
-      const tipo = h.tipo === "conversion" ? "CONVERSION" : "PREPARACION";
+      const tipo = h.tipo === "conversion" ? "CONVERSION"
+                 : h.tipo === "ajuste"     ? "AJUSTE"
+                 : "PREPARACION";
       const cant = h.tipo === "conversion" ? "" : (h.cantidad || 1);
       const formulaLimpia = (h.formula || "").replace(/"/g, "'");
       const comentariosLimpios = (h.comentarios || "").replace(/"/g, "'");
       const usuario = (h.usuario || "").replace(/"/g, "'");
       const marca = h.marca || "SHERWIN WILLIAMS";
+      
+      const esEm = h.esEmerald ? "SI" : "NO";
+      const codSnap = (h.codigoSnap || "").replace(/"/g, "'");
+      const nomSnap = (h.nombreSnap || "").replace(/"/g, "'");
 
-      csv += `"${h.contador}","${tipo}","${h.fecha}","${h.codigo}","${h.nombre}","${marca}","${h.producto}","${h.base}","${h.tamano}","${cant}","${comentariosLimpios}","${formulaLimpia}","${usuario}"\n`;
+      csv += `"${h.contador}","${tipo}","${h.fecha}","${h.codigo}","${h.nombre}","${marca}","${h.producto}","${h.base}","${h.tamano}","${cant}","${comentariosLimpios}","${formulaLimpia}","${usuario}","${esEm}","${codSnap}","${nomSnap}"\n`;
     });
 
     const blob = new Blob(["\ufeff" + csv], { type: 'text/csv;charset=utf-8;' });
@@ -2535,7 +2627,7 @@ CORREO: pinturas.relma@gmail.com</String><Attributes><Font Family="Arial" Size="
 
   function descargarRespaldo() {
       const respaldo = {};
-      const claves = ["fc_conv_db", "fc_hist_prep", "fc_contador", "fc_tema", "fc_tab_order", "fc_logo_base64", "fc_size_contador", "fc_size_producto", "fc_size_color"];
+      const claves = ["fc_conv_db", "fc_hist_prep", "fc_contador", "fc_tema", "fc_tab_order", "fc_logo_base64", "fc_size_contador", "fc_size_producto", "fc_size_color", "fc_formulas_propias"];
       
       claves.forEach(clave => {
           const valor = localStorage.getItem(clave);
@@ -2637,6 +2729,7 @@ CORREO: pinturas.relma@gmail.com</String><Attributes><Font Family="Arial" Size="
       tamano: tamanoTexto,
       comentarios: comentarios,
       formula: formulaLinea,
+      imprimirFormula: true,
       tipo: "conversion",
       timestamp: ahora.getTime(),
       usuario: operador 
@@ -2857,81 +2950,338 @@ CORREO: pinturas.relma@gmail.com</String><Attributes><Font Family="Arial" Size="
       downloadAnchor.remove();
   }
 
+  // ==================== NUEVA FÓRMULA PROPIA ====================
+  function abrirNuevaFormulaPropia() {
+      document.getElementById("fpCodigo").value = "";
+      document.getElementById("fpNombre").value = "";
+      document.getElementById("fpMarca").value = "SHERWIN WILLIAMS";
+      document.getElementById("fpBase").value = "";
+      document.getElementById("fpTamano").value = "4";
+      document.getElementById("fpTintesList").innerHTML = "";
+      agregarFilaTintePropia(); // Agrega la primera fila automáticamente
+      document.getElementById("modalNuevaFormula").style.display = "flex";
+  }
+
+  function cerrarModalPropia() {
+      document.getElementById("modalNuevaFormula").style.display = "none";
+  }
+
+  function agregarFilaTintePropia() {
+      const cont = document.getElementById("fpTintesList");
+      const div = document.createElement("div");
+      div.className = "fila-tinta-add";
+      div.innerHTML = `
+          <input type="text" class="fp-tinta-nombre" placeholder="Tinta (ej. Negro)" style="flex:1; text-transform:uppercase;">
+          <input type="text" class="fp-tinta-cant" placeholder="Cant (ej. 1/64 o 2 oz)" style="flex:1;">
+          <button class="btn peligro" onclick="this.parentNode.remove()" title="Quitar">✕</button>
+      `;
+      cont.appendChild(div);
+  }
+
+  function guardarFormulaPropia() {
+      const codigo = document.getElementById("fpCodigo").value.trim().toUpperCase();
+      const nombre = document.getElementById("fpNombre").value.trim().toUpperCase();
+      const marca = document.getElementById("fpMarca").value.trim().toUpperCase();
+      const linea = document.getElementById("fpLinea").value;
+      const base = document.getElementById("fpBase").value.trim().toUpperCase();
+      const tamanoBase = Number(document.getElementById("fpTamano").value);
+
+      if (!codigo || !nombre) return alert("El código y el nombre son obligatorios.");
+      
+      const filasTintes = document.querySelectorAll(".fila-tinta-add");
+      if (filasTintes.length === 0) return alert("Debes agregar al menos un tinte.");
+
+      const colorantes = [];
+      let errorEnTinta = false;
+
+      filasTintes.forEach(fila => {
+          const nombreTinta = fila.querySelector(".fp-tinta-nombre").value.trim().toUpperCase();
+          const cantTinta = fila.querySelector(".fp-tinta-cant").value.trim();
+          
+          if (!nombreTinta || !cantTinta) return; // Ignorar filas vacías
+
+          const total128 = parsearCantidad(cantTinta);
+          if (total128 === null) {
+              errorEnTinta = true;
+              return;
+          }
+
+          let oz = total128 / 128;
+          let oz_litro = 0, oz_galon = 0, oz_cubeta = 0;
+
+          // Calcular según el tamaño base que eligió el usuario
+          if (tamanoBase === 1) { // Capturó 1 Litro
+              oz_litro = oz;
+              oz_galon = oz * 4;
+              oz_cubeta = oz_galon * 5;
+          } else if (tamanoBase === 4) { // Capturó Galón
+              oz_galon = oz;
+              oz_litro = oz / 4;
+              oz_cubeta = oz * 5;
+          } else if (tamanoBase === 19) { // Capturó Cubeta
+              oz_cubeta = oz;
+              oz_galon = oz / 5;
+              oz_litro = oz_galon / 4;
+          }
+
+          colorantes.push({
+              tinta: nombreTinta,
+              oz_litro: oz_litro,
+              oz_galon: oz_galon,
+              oz_cubeta: oz_cubeta
+          });
+      });
+
+      if (errorEnTinta) return alert("Hubo un error en las cantidades. Revisa que estén bien escritas (ej. 1/64 o 2 oz).");
+      if (colorantes.length === 0) return alert("Debes llenar al menos un tinte completo.");
+
+      const nuevaFormula = {
+          codigo: codigo,
+          nombre: nombre,
+          marca: marca,
+          tipo_pintura: linea,
+          base_color: base || "EXTRA WHITE",
+          rgb: "",
+          pagina: "",
+          colorantes: colorantes,
+          esPropia: true // <-- Bandera para identificarla
+      };
+
+      // Guardar en el cajón de fórmulas propias
+      FORMULAS_PROPIAS.push(nuevaFormula);
+      localStorage.setItem("fc_formulas_propias", JSON.stringify(FORMULAS_PROPIAS));
+
+      // Agregar a la base en memoria para que aparezca de inmediato
+      DATABASE_SW.push(nuevaFormula);
+
+      cerrarModalPropia();
+      mostrarToast("✅ Fórmula guardada con éxito");
+      actualizarResumenDB();
+      llenarDatalistComparar();
+  }
+
+  // ==================== AJUSTES DE TINTE ====================
   let ajusteIndiceActual = null;
 
-function abrirModalAjuste(index) {
-    ajusteIndiceActual = index;
-    
-    // Limpiamos los campos con los nombres NUEVOS
-    const txtTintes = document.getElementById("ajusteTintes");
-    const txtComentario = document.getElementById("ajusteComentario");
-    
-    if (txtTintes) txtTintes.value = "";
-    if (txtComentario) txtComentario.value = "";
-    
-    document.getElementById("modalAjuste").style.display = "flex";
-    if (txtTintes) txtTintes.focus();
-}
+  function abrirModalAjuste(index) {
+      ajusteIndiceActual = index;
+      
+      const txtTintes = document.getElementById("ajusteTintes");
+      const txtComentario = document.getElementById("ajusteComentario");
+      
+      if (txtTintes) txtTintes.value = "";
+      if (txtComentario) txtComentario.value = "";
+      
+      document.getElementById("modalAjuste").style.display = "flex";
+      if (txtTintes) txtTintes.focus();
+  }
 
   function cerrarModalAjuste() {
       document.getElementById("modalAjuste").style.display = "none";
       ajusteIndiceActual = null;
   }
 
-function confirmarAjuste() {
-    if (ajusteIndiceActual === null) return;
-    
-    const tintesTexto = document.getElementById("ajusteTintes").value.trim().toUpperCase();
-    const motivo = document.getElementById("ajusteComentario").value.trim();
-    
-    if (!tintesTexto) {
-        return alert("⚠️ Por favor, escribe al menos un tinte y su cantidad.");
-    }
+  function confirmarAjuste() {
+      if (ajusteIndiceActual === null) return;
+      
+      const tintesTexto = document.getElementById("ajusteTintes").value.trim().toUpperCase();
+      const motivo = document.getElementById("ajusteComentario").value.trim();
+      
+      if (!tintesTexto) {
+          return alert("⚠️ Por favor, escribe al menos un tinte y su cantidad.");
+      }
 
-    const h = HISTORIAL_PREP[ajusteIndiceActual];
-    const ahora = new Date();
+      const h = HISTORIAL_PREP[ajusteIndiceActual];
+      const ahora = new Date();
 
-    // Juntamos las líneas que escribió el usuario
-    const formulaLimpia = tintesTexto.split("\n").filter(l => l.trim()).join(" | ");
-    const obsFinal = motivo ? `Origen: ${h.contador} | Motivo: ${motivo}` : `Origen: ${h.contador}`;
+      const formulaLimpia = tintesTexto.split("\n").filter(l => l.trim()).join(" | ");
+      const obsFinal = motivo ? `Origen: ${h.contador} | Motivo: ${motivo}` : `Origen: ${h.contador}`;
 
-    etiquetaTemporal = {
-        contador: "AJUSTE-" + String(ahora.getTime()).slice(-6),
-        fecha: ahora.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
-        codigo: h.codigo,
-        nombre: h.nombre,
-        producto: "AJUSTE DE TINTE",
-        base: h.base,
-        tamano: h.tamano,
-        comentarios: obsFinal, 
-        formula: formulaLimpia,
-        formula_original: h.formula, // <-- GUARDAMOS LA FÓRMULA ORIGINAL AQUÍ
-        imprimirFormula: true,
-        tipo: "ajuste",
-        usuario: h.usuario || "N/A",
-        timestamp: ahora.getTime()
-    };
+      etiquetaTemporal = {
+          contador: "AJUSTE-" + String(ahora.getTime()).slice(-6),
+          fecha: ahora.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
+          codigo: h.codigo,
+          nombre: h.nombre,
+          producto: "AJUSTE DE TINTE",
+          base: h.base,
+          tamano: h.tamano,
+          comentarios: obsFinal, 
+          formula: formulaLimpia,
+          formula_original: h.formula,
+          imprimirFormula: true,
+          tipo: "ajuste",
+          usuario: h.usuario || "N/A",
+          timestamp: ahora.getTime()
+      };
 
-    document.getElementById("lblProducto").textContent = etiquetaTemporal.producto;
-    document.getElementById("lblFecha").textContent = etiquetaTemporal.fecha;
-    document.getElementById("lblCodigoColor").textContent = etiquetaTemporal.codigo + " " + etiquetaTemporal.nombre.toUpperCase();
-    document.getElementById("lblContador").textContent = etiquetaTemporal.contador;
-    document.getElementById("lblComentarios").textContent = etiquetaTemporal.comentarios;
+      document.getElementById("lblProducto").textContent = etiquetaTemporal.producto;
+      document.getElementById("lblFecha").textContent = etiquetaTemporal.fecha;
+      document.getElementById("lblCodigoColor").textContent = etiquetaTemporal.codigo + " " + etiquetaTemporal.nombre.toUpperCase();
+      document.getElementById("lblContador").textContent = etiquetaTemporal.contador;
+      document.getElementById("lblComentarios").textContent = etiquetaTemporal.comentarios;
 
-    const lblFormula = document.getElementById("lblFormula");
-    lblFormula.textContent = etiquetaTemporal.formula;
-    lblFormula.style.display = "block";
+      const lblFormula = document.getElementById("lblFormula");
+      lblFormula.textContent = etiquetaTemporal.formula;
+      lblFormula.style.display = "block";
 
-    cerrarModalAjuste();
-    document.getElementById("modalEtiqueta").style.display = "flex";
-}
+      cerrarModalAjuste();
+      document.getElementById("modalEtiqueta").style.display = "flex";
+  }
 
   function guardarAjusteEnHistorial(registroAjuste) {
       HISTORIAL_PREP.unshift(registroAjuste);
       localStorage.setItem("fc_hist_prep", JSON.stringify(HISTORIAL_PREP));
-      if (typeof aplicarFiltrosHistorial === 'function') {
-          aplicarFiltrosHistorial();
+      aplicarFiltrosHistorial();
+  }
+
+  // ==================== EQUIVALENCIAS EMERALD/COLORSNAP ====================
+  let DB_EQUIVALENCIAS = JSON.parse(localStorage.getItem("fc_equivalencias") || "{}");
+
+  function importarEquivalenciasJSON(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+          try {
+              const nuevasEq = JSON.parse(e.target.result);
+              DB_EQUIVALENCIAS = { ...DB_EQUIVALENCIAS, ...nuevasEq };
+              
+              localStorage.setItem("fc_equivalencias", JSON.stringify(DB_EQUIVALENCIAS));
+              
+              const total = Object.keys(DB_EQUIVALENCIAS).length;
+              alert(`✅ ¡Éxito!\nSe cargaron ${Object.keys(nuevasEq).length} equivalencias nuevas.\nEn total tienes ${total} colores cruzados en memoria.`);
+          } catch (err) {
+              alert("❌ Error al leer el archivo de equivalencias:\n" + err.message);
+          }
+      };
+      reader.readAsText(file);
+  }
+
+  function buscarEmerald() {
+      let q = document.getElementById("emeraldBuscar").value.trim().toUpperCase();
+      const cont = document.getElementById("emeraldResultados");
+      
+      if (!q) return;
+      
+      if (/^\d{4}$/.test(q)) q = "SW" + q;
+      
+      const eqData = DB_EQUIVALENCIAS[q];
+      
+      if (!eqData) {
+          cont.innerHTML = `
+              <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid var(--alerta); padding: 15px; border-radius: 8px; color: var(--alerta);">
+                  ❌ El código <b>${q}</b> no se encontró en la base de datos Emerald. Verifica que esté bien escrito.
+              </div>`;
+          return;
       }
+
+      let snapCode = eqData.codigo_snap;
+      let cleanSnap = snapCode.toString().replace("SW", "").trim();
+      
+      let resEq = DATABASE_SW.filter(f => f.codigo && f.codigo.toString().replace("SW", "").trim() === cleanSnap);
+      
+      if (resEq.length === 0) {
+          cont.innerHTML = `
+              <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid var(--alerta); padding: 15px; border-radius: 8px; color: var(--alerta);">
+                  ⚠️ El código <b>${q}</b> (${eqData.nombre_emerald}) equivale a <b>${snapCode}</b>.<br><br>
+                  Sin embargo, el código <b>${snapCode}</b> no existe en tu base de datos de SanTint.
+              </div>`;
+          return;
+      }
+
+      busquedaEmerald = resEq;
+      emeraldContexto = {
+          codigoEmerald: q,
+          nombreEmerald: eqData.nombre_emerald,
+          codigoSnap: snapCode,
+          nombreSnap: eqData.nombre_snap
+      };
+      
+      let html = `
+          <div style="background: #8b5cf6; color: white; padding: 12px; border-radius: 8px; margin-bottom: 15px; font-weight: bold;">
+              🔄 EQUIVALENCIA ENCONTRADA<br>
+              <span style="font-size: 0.85rem; font-weight: normal;">
+                  El código Emerald <b>${eqData.nombre_emerald} (${q})</b> se prepara con la fórmula de <b>${eqData.nombre_snap} (${snapCode})</b>.
+              </span>
+          </div>`;
+
+      resEq.forEach((f, i) => {
+          const isNA = f.base_color === "N/A";
+          html += `
+            <div class="prep-item" style="border: 1px solid #8b5cf6; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+              <div class="prep-titulo">${f.codigo} — ${f.nombre} ${isNA ? '<span class="badge-na">N/A - Sin Fórmula</span>' : ''}</div>
+              <div class="prep-sub">
+                  <span class="badge-base">BASE: ${f.base_color}</span> 
+                  <span>| Línea: ${f.tipo_pintura}</span>
+                  <span>| Marca: <b>${f.marca || 'N/A'}</b></span>
+              </div>
+              
+              ${!isNA ? `
+              <div class="prep-opciones">
+                  <label>
+                      <input type="checkbox" id="chk-exacto-em-${i}" onchange="recalcularActual(${i}, 'em-')"> Mostrar fracciones exactas
+                  </label>
+                  <div class="prep-botones">
+                    <button class="btn secundario" onclick="verFormulaPreparar(${i}, 'LITRO', 1, 'em-')">🧪 Litro</button>
+                    <button class="btn secundario" onclick="verFormulaPreparar(${i}, 'GALON', 4, 'em-')">🥫 Galón</button>
+                    <button class="btn secundario" onclick="verFormulaPreparar(${i}, 'CUBETA', 19, 'em-')">🪣 Cubeta</button>
+                    <button class="btn secundario" onclick="verFormulaCustom(${i}, 'em-')">➕ Otro...</button>
+                  </div>
+              </div>` : ''}
+
+              <div class="prep-detalle" id="detalle-em-${i}">
+                <h4 style="margin-top:0; margin-bottom:10px; color:var(--primario);">Fórmula a preparar:</h4>
+                <div class="prep-formula-txt" id="formula-txt-em-${i}"></div>
+                
+                <div class="fila">
+                  <label>Producto:
+                    <select id="prod-em-${i}">
+                      <option value="">— Selecciona —</option>
+                      ${LISTA_PRODUCTOS.map(p => `<option value="${p}">${p}</option>`).join("")}
+                      <option value="__CUSTOM__">[ + Escribir otro producto... ]</option>
+                    </select>
+                  </label>
+                  <label class="oculto" id="prod-custom-label-em-${i}">Nuevo Producto:
+                    <input type="text" id="prod-custom-em-${i}" placeholder="Ej. PINTURA ESPECIAL">
+                  </label>
+                  <label>Comentarios:
+                    <input type="text" id="com-em-${i}" placeholder="Opcional">
+                  </label>
+                  
+                  <label style="flex: 0.8;">👤 Operador:
+                    <select id="operador-em-${i}" style="font-weight: bold;">
+                      <option value="">— ¿Quién prepara? —</option>
+                      <option value="JONATHAN">JONATHAN</option>
+                      <option value="DAVID">DAVID</option>
+                      <option value="YESI">YESI</option>
+                      <option value="JOVANY">JOVAN</option>
+                      <option value="JULIO">JULIO</option>
+                      <option value="RODOLFO">RODOLFO</option>
+                      <option value="KEVIN">KEVIN</option>
+                      <option value="MIROS">MIROS</option>
+                    </select>
+                  </label>
+                </div>
+                
+                <label style="flex-direction: row; align-items: center; gap: 10px; cursor: pointer; margin-bottom: 10px;">
+                  <input type="checkbox" id="chk-formula-em-${i}"> Incluir fórmula en la etiqueta
+                </label>
+                <button class="btn exito" onclick="prepararEImprimir(${i}, 'em-')">🖨️ Generar Etiqueta</button>
+              </div>
+            </div>
+          `;
+      });
+      
+      cont.innerHTML = html;
+      
+      resEq.forEach((_, i) => {
+          document.getElementById(`prod-em-${i}`).addEventListener("change", function() {
+              const customLabel = document.getElementById(`prod-custom-label-em-${i}`);
+              if (this.value === "__CUSTOM__") customLabel.classList.remove("oculto");
+              else customLabel.classList.add("oculto");
+          });
+      });
   }
 
   actualizarResumenDB();
@@ -2939,6 +3289,7 @@ function confirmarAjuste() {
   aplicarFiltrosHistorial();
   </script>
   <div id="toastExito" class="toast-exito">✅ Etiqueta enviada</div>
+  
 <script src="app.js"></script>
 </body>
 </html>
