@@ -1,0 +1,2557 @@
+{
+    "SW9501": {
+        "codigo_emerald": "SW9501",
+        "nombre_emerald": "Oat Milk",
+        "codigo_snap": "SW7516",
+        "nombre_snap": "Kestrel White",
+        "pagina": "266-C5"
+    },
+    "SW7516": {
+        "codigo_emerald": "SW9501",
+        "nombre_emerald": "Oat Milk",
+        "codigo_snap": "SW7516",
+        "nombre_snap": "Kestrel White",
+        "pagina": "266-C5"
+    },
+    "SW9502": {
+        "codigo_emerald": "SW9502",
+        "nombre_emerald": "Arrowroote",
+        "codigo_snap": "SW7011",
+        "nombre_snap": "Natural Choice",
+        "pagina": "254-C6"
+    },
+    "SW7011": {
+        "codigo_emerald": "SW9502",
+        "nombre_emerald": "Arrowroote",
+        "codigo_snap": "SW7011",
+        "nombre_snap": "Natural Choice",
+        "pagina": "254-C6"
+    },
+    "SW9503": {
+        "codigo_emerald": "SW9503",
+        "nombre_emerald": "Cheviot",
+        "codigo_snap": "SW7100",
+        "nombre_snap": "Arcade White",
+        "pagina": "260-C1"
+    },
+    "SW7100": {
+        "codigo_emerald": "SW9503",
+        "nombre_emerald": "Cheviot",
+        "codigo_snap": "SW7100",
+        "nombre_snap": "Arcade White",
+        "pagina": "260-C1"
+    },
+    "SW9504": {
+        "codigo_emerald": "SW9504",
+        "nombre_emerald": "Cold Foam",
+        "codigo_snap": "SW7002",
+        "nombre_snap": "Downy",
+        "pagina": "267-C3"
+    },
+    "SW7002": {
+        "codigo_emerald": "SW9504",
+        "nombre_emerald": "Cold Foam",
+        "codigo_snap": "SW7002",
+        "nombre_snap": "Downy",
+        "pagina": "267-C3"
+    },
+    "SW9505": {
+        "codigo_emerald": "SW9505",
+        "nombre_emerald": "Frost Bite",
+        "codigo_snap": "SW7562",
+        "nombre_snap": "Roman Column",
+        "pagina": "263-C1"
+    },
+    "SW7562": {
+        "codigo_emerald": "SW9505",
+        "nombre_emerald": "Frost Bite",
+        "codigo_snap": "SW7562",
+        "nombre_snap": "Roman Column",
+        "pagina": "263-C1"
+    },
+    "SW9506": {
+        "codigo_emerald": "SW9506",
+        "nombre_emerald": "Warm Winter",
+        "codigo_snap": "SW7568",
+        "nombre_snap": "Neutral Ground",
+        "pagina": "261-C5"
+    },
+    "SW7568": {
+        "codigo_emerald": "SW9506",
+        "nombre_emerald": "Warm Winter",
+        "codigo_snap": "SW7568",
+        "nombre_snap": "Neutral Ground",
+        "pagina": "261-C5"
+    },
+    "SW9507": {
+        "codigo_emerald": "SW9507",
+        "nombre_emerald": "Cream and Sugar",
+        "codigo_snap": "SW9119",
+        "nombre_snap": "Dirty Martini",
+        "pagina": "209-C1"
+    },
+    "SW9119": {
+        "codigo_emerald": "SW9507",
+        "nombre_emerald": "Cream and Sugar",
+        "codigo_snap": "SW9119",
+        "nombre_snap": "Dirty Martini",
+        "pagina": "209-C1"
+    },
+    "SW9508": {
+        "codigo_emerald": "SW9508",
+        "nombre_emerald": "Natural Wool",
+        "codigo_snap": "SW6106",
+        "nombre_snap": "Kilim Beige",
+        "pagina": "204-C1"
+    },
+    "SW6106": {
+        "codigo_emerald": "SW9508",
+        "nombre_emerald": "Natural Wool",
+        "codigo_snap": "SW6106",
+        "nombre_snap": "Kilim Beige",
+        "pagina": "204-C1"
+    },
+    "SW9509": {
+        "codigo_emerald": "SW9509",
+        "nombre_emerald": "Steamed Chai",
+        "codigo_snap": "SW7526",
+        "nombre_snap": "Maison Blanche",
+        "pagina": "288-C1"
+    },
+    "SW7526": {
+        "codigo_emerald": "SW9509",
+        "nombre_emerald": "Steamed Chai",
+        "codigo_snap": "SW7526",
+        "nombre_snap": "Maison Blanche",
+        "pagina": "288-C1"
+    },
+    "SW9510": {
+        "codigo_emerald": "SW9510",
+        "nombre_emerald": "Peace of Mind",
+        "codigo_snap": "SW7506",
+        "nombre_snap": "Loggia",
+        "pagina": "248-C2"
+    },
+    "SW7506": {
+        "codigo_emerald": "SW9510",
+        "nombre_emerald": "Peace of Mind",
+        "codigo_snap": "SW7506",
+        "nombre_snap": "Loggia",
+        "pagina": "248-C2"
+    },
+    "SW9511": {
+        "codigo_emerald": "SW9511",
+        "nombre_emerald": "Warm Oats",
+        "codigo_snap": "SW7541",
+        "nombre_snap": "Grecian Ivory",
+        "pagina": "247-C1"
+    },
+    "SW7541": {
+        "codigo_emerald": "SW9511",
+        "nombre_emerald": "Warm Oats",
+        "codigo_snap": "SW7541",
+        "nombre_snap": "Grecian Ivory",
+        "pagina": "247-C1"
+    },
+    "SW9512": {
+        "codigo_emerald": "SW9512",
+        "nombre_emerald": "Threaded Loom",
+        "codigo_snap": "SW7511",
+        "nombre_snap": "Bungalow Beige",
+        "pagina": "250-C2"
+    },
+    "SW7511": {
+        "codigo_emerald": "SW9512",
+        "nombre_emerald": "Threaded Loom",
+        "codigo_snap": "SW7511",
+        "nombre_snap": "Bungalow Beige",
+        "pagina": "250-C2"
+    },
+    "SW9513": {
+        "codigo_emerald": "SW9513",
+        "nombre_emerald": "Sleepy Owlet",
+        "codigo_snap": "SW7534",
+        "nombre_snap": "Outerbanks",
+        "pagina": "284-C4"
+    },
+    "SW7534": {
+        "codigo_emerald": "SW9513",
+        "nombre_emerald": "Sleepy Owlet",
+        "codigo_snap": "SW7534",
+        "nombre_snap": "Outerbanks",
+        "pagina": "284-C4"
+    },
+    "SW9514": {
+        "codigo_emerald": "SW9514",
+        "nombre_emerald": "Zinc Luster",
+        "codigo_snap": "SW6074",
+        "nombre_snap": "Spalding Gray",
+        "pagina": "242-C5"
+    },
+    "SW6074": {
+        "codigo_emerald": "SW9514",
+        "nombre_emerald": "Zinc Luster",
+        "codigo_snap": "SW6074",
+        "nombre_snap": "Spalding Gray",
+        "pagina": "242-C5"
+    },
+    "SW9515": {
+        "codigo_emerald": "SW9515",
+        "nombre_emerald": "Tungsten",
+        "codigo_snap": "SW7055",
+        "nombre_snap": "Enduring Bronze",
+        "pagina": "246-C7"
+    },
+    "SW7055": {
+        "codigo_emerald": "SW9515",
+        "nombre_emerald": "Tungsten",
+        "codigo_snap": "SW7055",
+        "nombre_snap": "Enduring Bronze",
+        "pagina": "246-C7"
+    },
+    "SW9516": {
+        "codigo_emerald": "SW9516",
+        "nombre_emerald": "Accolade",
+        "codigo_snap": "SW7632",
+        "nombre_snap": "Modern Gray",
+        "pagina": "283-C1"
+    },
+    "SW7632": {
+        "codigo_emerald": "SW9516",
+        "nombre_emerald": "Accolade",
+        "codigo_snap": "SW7632",
+        "nombre_snap": "Modern Gray",
+        "pagina": "283-C1"
+    },
+    "SW9517": {
+        "codigo_emerald": "SW9517",
+        "nombre_emerald": "Outrigger",
+        "codigo_snap": "SW7543",
+        "nombre_snap": "Avenue Tan",
+        "pagina": "286-C4"
+    },
+    "SW7543": {
+        "codigo_emerald": "SW9517",
+        "nombre_emerald": "Outrigger",
+        "codigo_snap": "SW7543",
+        "nombre_snap": "Avenue Tan",
+        "pagina": "286-C4"
+    },
+    "SW9518": {
+        "codigo_emerald": "SW9518",
+        "nombre_emerald": "Featherstone",
+        "codigo_snap": "SW2845",
+        "nombre_snap": "Bunglehouse Gray",
+        "pagina": "N/A"
+    },
+    "SW2845": {
+        "codigo_emerald": "SW9518",
+        "nombre_emerald": "Featherstone",
+        "codigo_snap": "SW2845",
+        "nombre_snap": "Bunglehouse Gray",
+        "pagina": "N/A"
+    },
+    "SW9519": {
+        "codigo_emerald": "SW9519",
+        "nombre_emerald": "Country Tweed",
+        "codigo_snap": "SW2820",
+        "nombre_snap": "Downing Earth",
+        "pagina": "N/A"
+    },
+    "SW2820": {
+        "codigo_emerald": "SW9519",
+        "nombre_emerald": "Country Tweed",
+        "codigo_snap": "SW2820",
+        "nombre_snap": "Downing Earth",
+        "pagina": "N/A"
+    },
+    "SW9520": {
+        "codigo_emerald": "SW9520",
+        "nombre_emerald": "Nocturne",
+        "codigo_snap": "SW7055",
+        "nombre_snap": "Enduring Bronze",
+        "pagina": "246-C7"
+    },
+    "SW9521": {
+        "codigo_emerald": "SW9521",
+        "nombre_emerald": "Simple Stone",
+        "codigo_snap": "SW7043",
+        "nombre_snap": "Worldly Gray",
+        "pagina": "245-C1"
+    },
+    "SW7043": {
+        "codigo_emerald": "SW9521",
+        "nombre_emerald": "Simple Stone",
+        "codigo_snap": "SW7043",
+        "nombre_snap": "Worldly Gray",
+        "pagina": "245-C1"
+    },
+    "SW9522": {
+        "codigo_emerald": "SW9522",
+        "nombre_emerald": "Meander",
+        "codigo_snap": "SW6073",
+        "nombre_snap": "Perfect Greige",
+        "pagina": "242-C3"
+    },
+    "SW6073": {
+        "codigo_emerald": "SW9522",
+        "nombre_emerald": "Meander",
+        "codigo_snap": "SW6073",
+        "nombre_snap": "Perfect Greige",
+        "pagina": "242-C3"
+    },
+    "SW9523": {
+        "codigo_emerald": "SW9523",
+        "nombre_emerald": "Canal Street",
+        "codigo_snap": "SW2845",
+        "nombre_snap": "Bunglehouse Gray",
+        "pagina": "N/A"
+    },
+    "SW9524": {
+        "codigo_emerald": "SW9524",
+        "nombre_emerald": "Crooked River",
+        "codigo_snap": "SW7046",
+        "nombre_snap": "Anonymous",
+        "pagina": "245-C5"
+    },
+    "SW7046": {
+        "codigo_emerald": "SW9524",
+        "nombre_emerald": "Crooked River",
+        "codigo_snap": "SW7046",
+        "nombre_snap": "Anonymous",
+        "pagina": "245-C5"
+    },
+    "SW9525": {
+        "codigo_emerald": "SW9525",
+        "nombre_emerald": "Hidden Trail",
+        "codigo_snap": "SW6167",
+        "nombre_snap": "Garden Gate",
+        "pagina": "212-C7"
+    },
+    "SW6167": {
+        "codigo_emerald": "SW9525",
+        "nombre_emerald": "Hidden Trail",
+        "codigo_snap": "SW6167",
+        "nombre_snap": "Garden Gate",
+        "pagina": "212-C7"
+    },
+    "SW9526": {
+        "codigo_emerald": "SW9526",
+        "nombre_emerald": "Woolen Mittens",
+        "codigo_snap": "SW7533",
+        "nombre_snap": "Khaki Shade",
+        "pagina": "285-C6"
+    },
+    "SW7533": {
+        "codigo_emerald": "SW9526",
+        "nombre_emerald": "Woolen Mittens",
+        "codigo_snap": "SW7533",
+        "nombre_snap": "Khaki Shade",
+        "pagina": "285-C6"
+    },
+    "SW9527": {
+        "codigo_emerald": "SW9527",
+        "nombre_emerald": "Worn Khaki",
+        "codigo_snap": "SW7739",
+        "nombre_snap": "Herbal Wash",
+        "pagina": "298-C7"
+    },
+    "SW7739": {
+        "codigo_emerald": "SW9527",
+        "nombre_emerald": "Worn Khaki",
+        "codigo_snap": "SW7739",
+        "nombre_snap": "Herbal Wash",
+        "pagina": "298-C7"
+    },
+    "SW9528": {
+        "codigo_emerald": "SW9528",
+        "nombre_emerald": "Vintage",
+        "codigo_snap": "SW0014",
+        "nombre_snap": "Sheraton Sage",
+        "pagina": "N/A"
+    },
+    "SW0014": {
+        "codigo_emerald": "SW9528",
+        "nombre_emerald": "Vintage",
+        "codigo_snap": "SW0014",
+        "nombre_snap": "Sheraton Sage",
+        "pagina": "N/A"
+    },
+    "SW9529": {
+        "codigo_emerald": "SW9529",
+        "nombre_emerald": "Twig Basket",
+        "codigo_snap": "SW6159",
+        "nombre_snap": "High Tea",
+        "pagina": "210-C6"
+    },
+    "SW6159": {
+        "codigo_emerald": "SW9529",
+        "nombre_emerald": "Twig Basket",
+        "codigo_snap": "SW6159",
+        "nombre_snap": "High Tea",
+        "pagina": "210-C6"
+    },
+    "SW9530": {
+        "codigo_emerald": "SW9530",
+        "nombre_emerald": "Momentum",
+        "codigo_snap": "SW7545",
+        "nombre_snap": "Pier",
+        "pagina": "277-C6"
+    },
+    "SW7545": {
+        "codigo_emerald": "SW9530",
+        "nombre_emerald": "Momentum",
+        "codigo_snap": "SW7545",
+        "nombre_snap": "Pier",
+        "pagina": "277-C6"
+    },
+    "SW9531": {
+        "codigo_emerald": "SW9531",
+        "nombre_emerald": "Stone Guardians",
+        "codigo_snap": "SW0011",
+        "nombre_snap": "Crewel Tan",
+        "pagina": "N/A"
+    },
+    "SW0011": {
+        "codigo_emerald": "SW9531",
+        "nombre_emerald": "Stone Guardians",
+        "codigo_snap": "SW0011",
+        "nombre_snap": "Crewel Tan",
+        "pagina": "N/A"
+    },
+    "SW9532": {
+        "codigo_emerald": "SW9532",
+        "nombre_emerald": "Earthy Ochre",
+        "codigo_snap": "SW6157",
+        "nombre_snap": "Favorite Tan",
+        "pagina": "210-C3"
+    },
+    "SW6157": {
+        "codigo_emerald": "SW9532",
+        "nombre_emerald": "Earthy Ochre",
+        "codigo_snap": "SW6157",
+        "nombre_snap": "Favorite Tan",
+        "pagina": "210-C3"
+    },
+    "SW9533": {
+        "codigo_emerald": "SW9533",
+        "nombre_emerald": "Rattan Palm",
+        "codigo_snap": "SW9123",
+        "nombre_snap": "Barro Verde",
+        "pagina": "209-C5"
+    },
+    "SW9123": {
+        "codigo_emerald": "SW9533",
+        "nombre_emerald": "Rattan Palm",
+        "codigo_snap": "SW9123",
+        "nombre_snap": "Barro Verde",
+        "pagina": "209-C5"
+    },
+    "SW9534": {
+        "codigo_emerald": "SW9534",
+        "nombre_emerald": "River Reed",
+        "codigo_snap": "SW2815",
+        "nombre_snap": "Renwick Olive",
+        "pagina": "N/A"
+    },
+    "SW2815": {
+        "codigo_emerald": "SW9534",
+        "nombre_emerald": "River Reed",
+        "codigo_snap": "SW2815",
+        "nombre_snap": "Renwick Olive",
+        "pagina": "N/A"
+    },
+    "SW9537": {
+        "codigo_emerald": "SW9537",
+        "nombre_emerald": "Sugared Almond",
+        "codigo_snap": "SW9097",
+        "nombre_snap": "Soft Fawn",
+        "pagina": "202-C4"
+    },
+    "SW9097": {
+        "codigo_emerald": "SW9537",
+        "nombre_emerald": "Sugared Almond",
+        "codigo_snap": "SW9097",
+        "nombre_snap": "Soft Fawn",
+        "pagina": "202-C4"
+    },
+    "SW9538": {
+        "codigo_emerald": "SW9538",
+        "nombre_emerald": "Tangled Twine",
+        "codigo_snap": "SW9113",
+        "nombre_snap": "Mudslide",
+        "pagina": "205-C5"
+    },
+    "SW9113": {
+        "codigo_emerald": "SW9538",
+        "nombre_emerald": "Tangled Twine",
+        "codigo_snap": "SW9113",
+        "nombre_snap": "Mudslide",
+        "pagina": "205-C5"
+    },
+    "SW9539": {
+        "codigo_emerald": "SW9539",
+        "nombre_emerald": "Shaker Peg",
+        "codigo_snap": "SW9114",
+        "nombre_snap": "Fallen Leaves",
+        "pagina": "205-C6"
+    },
+    "SW9114": {
+        "codigo_emerald": "SW9539",
+        "nombre_emerald": "Shaker Peg",
+        "codigo_snap": "SW9114",
+        "nombre_snap": "Fallen Leaves",
+        "pagina": "205-C6"
+    },
+    "SW9540": {
+        "codigo_emerald": "SW9540",
+        "nombre_emerald": "Timber Beam",
+        "codigo_snap": "SW6412",
+        "nombre_snap": "Eminent Bronze",
+        "pagina": "144-C7"
+    },
+    "SW6412": {
+        "codigo_emerald": "SW9540",
+        "nombre_emerald": "Timber Beam",
+        "codigo_snap": "SW6412",
+        "nombre_snap": "Eminent Bronze",
+        "pagina": "144-C7"
+    },
+    "SW9541": {
+        "codigo_emerald": "SW9541",
+        "nombre_emerald": "White Snow",
+        "codigo_snap": "SW7006",
+        "nombre_snap": "Extra White",
+        "pagina": "257-C1"
+    },
+    "SW7006": {
+        "codigo_emerald": "SW9541",
+        "nombre_emerald": "White Snow",
+        "codigo_snap": "SW7006",
+        "nombre_snap": "Extra White",
+        "pagina": "257-C1"
+    },
+    "SW9542": {
+        "codigo_emerald": "SW9542",
+        "nombre_emerald": "Natural White",
+        "codigo_snap": "SW7141",
+        "nombre_snap": "Featherly Liliac",
+        "pagina": "N/A"
+    },
+    "SW7141": {
+        "codigo_emerald": "SW9542",
+        "nombre_emerald": "Natural White",
+        "codigo_snap": "SW7141",
+        "nombre_snap": "Featherly Liliac",
+        "pagina": "N/A"
+    },
+    "SW9543": {
+        "codigo_emerald": "SW9543",
+        "nombre_emerald": "Gypsum",
+        "codigo_snap": "SW7004",
+        "nombre_snap": "Snowbound",
+        "pagina": "256-C2"
+    },
+    "SW7004": {
+        "codigo_emerald": "SW9543",
+        "nombre_emerald": "Gypsum",
+        "codigo_snap": "SW7004",
+        "nombre_snap": "Snowbound",
+        "pagina": "256-C2"
+    },
+    "SW9544": {
+        "codigo_emerald": "SW9544",
+        "nombre_emerald": "Dashing",
+        "codigo_snap": "SW7005",
+        "nombre_snap": "Pure White",
+        "pagina": "255-C1"
+    },
+    "SW7005": {
+        "codigo_emerald": "SW9544",
+        "nombre_emerald": "Dashing",
+        "codigo_snap": "SW7005",
+        "nombre_snap": "Pure White",
+        "pagina": "255-C1"
+    },
+    "SW9545": {
+        "codigo_emerald": "SW9545",
+        "nombre_emerald": "Ghosted",
+        "codigo_snap": "SW6000",
+        "nombre_snap": "Snowfall",
+        "pagina": "273-C5"
+    },
+    "SW6000": {
+        "codigo_emerald": "SW9545",
+        "nombre_emerald": "Ghosted",
+        "codigo_snap": "SW6000",
+        "nombre_snap": "Snowfall",
+        "pagina": "273-C5"
+    },
+    "SW9546": {
+        "codigo_emerald": "SW9546",
+        "nombre_emerald": "Lunar Lite",
+        "codigo_snap": "SW6000",
+        "nombre_snap": "Snowfall",
+        "pagina": "273-C5"
+    },
+    "SW9547": {
+        "codigo_emerald": "SW9547",
+        "nombre_emerald": "Vessel",
+        "codigo_snap": "SW6176",
+        "nombre_snap": "Liveable Green",
+        "pagina": "213-C1"
+    },
+    "SW6176": {
+        "codigo_emerald": "SW9547",
+        "nombre_emerald": "Vessel",
+        "codigo_snap": "SW6176",
+        "nombre_snap": "Liveable Green",
+        "pagina": "213-C1"
+    },
+    "SW9548": {
+        "codigo_emerald": "SW9548",
+        "nombre_emerald": "Sweater Weather",
+        "codigo_snap": "SW7651",
+        "nombre_snap": "Front Porch",
+        "pagina": "239-C3"
+    },
+    "SW7651": {
+        "codigo_emerald": "SW9548",
+        "nombre_emerald": "Sweater Weather",
+        "codigo_snap": "SW7651",
+        "nombre_snap": "Front Porch",
+        "pagina": "239-C3"
+    },
+    "SW9549": {
+        "codigo_emerald": "SW9549",
+        "nombre_emerald": "Touch of Grey",
+        "codigo_snap": "SW7671",
+        "nombre_snap": "On the Rocks",
+        "pagina": "255-C7"
+    },
+    "SW7671": {
+        "codigo_emerald": "SW9549",
+        "nombre_emerald": "Touch of Grey",
+        "codigo_snap": "SW7671",
+        "nombre_snap": "On the Rocks",
+        "pagina": "255-C7"
+    },
+    "SW9550": {
+        "codigo_emerald": "SW9550",
+        "nombre_emerald": "Mercurial",
+        "codigo_snap": "SW6183",
+        "nombre_snap": "Conservative Gray",
+        "pagina": "215-C1"
+    },
+    "SW6183": {
+        "codigo_emerald": "SW9550",
+        "nombre_emerald": "Mercurial",
+        "codigo_snap": "SW6183",
+        "nombre_snap": "Conservative Gray",
+        "pagina": "215-C1"
+    },
+    "SW9551": {
+        "codigo_emerald": "SW9551",
+        "nombre_emerald": "Skipping Rocks",
+        "codigo_snap": "SW6169",
+        "nombre_snap": "Sedate Gray",
+        "pagina": "211-C1"
+    },
+    "SW6169": {
+        "codigo_emerald": "SW9551",
+        "nombre_emerald": "Skipping Rocks",
+        "codigo_snap": "SW6169",
+        "nombre_snap": "Sedate Gray",
+        "pagina": "211-C1"
+    },
+    "SW9552": {
+        "codigo_emerald": "SW9552",
+        "nombre_emerald": "Antimony",
+        "codigo_snap": "SW7057",
+        "nombre_snap": "Silver Strand",
+        "pagina": "237-C1"
+    },
+    "SW7057": {
+        "codigo_emerald": "SW9552",
+        "nombre_emerald": "Antimony",
+        "codigo_snap": "SW7057",
+        "nombre_snap": "Silver Strand",
+        "pagina": "237-C1"
+    },
+    "SW9553": {
+        "codigo_emerald": "SW9553",
+        "nombre_emerald": "Allegory",
+        "codigo_snap": "SW6198",
+        "nombre_snap": "Sensible Hue",
+        "pagina": "216-C2"
+    },
+    "SW6198": {
+        "codigo_emerald": "SW9553",
+        "nombre_emerald": "Allegory",
+        "codigo_snap": "SW6198",
+        "nombre_snap": "Sensible Hue",
+        "pagina": "216-C2"
+    },
+    "SW9554": {
+        "codigo_emerald": "SW9554",
+        "nombre_emerald": "Going Grey",
+        "codigo_snap": "SW7081",
+        "nombre_snap": "Sensuous Gray",
+        "pagina": "227-C5"
+    },
+    "SW7081": {
+        "codigo_emerald": "SW9554",
+        "nombre_emerald": "Going Grey",
+        "codigo_snap": "SW7081",
+        "nombre_snap": "Sensuous Gray",
+        "pagina": "227-C5"
+    },
+    "SW9555": {
+        "codigo_emerald": "SW9555",
+        "nombre_emerald": "Storm Warning",
+        "codigo_snap": "SW7047",
+        "nombre_snap": "Porpoise",
+        "pagina": "245-C6"
+    },
+    "SW7047": {
+        "codigo_emerald": "SW9555",
+        "nombre_emerald": "Storm Warning",
+        "codigo_snap": "SW7047",
+        "nombre_snap": "Porpoise",
+        "pagina": "245-C6"
+    },
+    "SW9556": {
+        "codigo_emerald": "SW9556",
+        "nombre_emerald": "Intrepid Grey",
+        "codigo_snap": "SW6539",
+        "nombre_snap": "Soothing White",
+        "pagina": "N/A"
+    },
+    "SW6539": {
+        "codigo_emerald": "SW9556",
+        "nombre_emerald": "Intrepid Grey",
+        "codigo_snap": "SW6539",
+        "nombre_snap": "Soothing White",
+        "pagina": "N/A"
+    },
+    "SW9557": {
+        "codigo_emerald": "SW9557",
+        "nombre_emerald": "Autonomous",
+        "codigo_snap": "SW7657",
+        "nombre_snap": "Tinsmith",
+        "pagina": "239-C4"
+    },
+    "SW7657": {
+        "codigo_emerald": "SW9557",
+        "nombre_emerald": "Autonomous",
+        "codigo_snap": "SW7657",
+        "nombre_snap": "Tinsmith",
+        "pagina": "239-C4"
+    },
+    "SW9558": {
+        "codigo_emerald": "SW9558",
+        "nombre_emerald": "Castlegate",
+        "codigo_snap": "SW7073",
+        "nombre_snap": "Network Gray",
+        "pagina": "235-C3"
+    },
+    "SW7073": {
+        "codigo_emerald": "SW9558",
+        "nombre_emerald": "Castlegate",
+        "codigo_snap": "SW7073",
+        "nombre_snap": "Network Gray",
+        "pagina": "235-C3"
+    },
+    "SW9559": {
+        "codigo_emerald": "SW9559",
+        "nombre_emerald": "Scattered Showers",
+        "codigo_snap": "SW6256",
+        "nombre_snap": "Serious Gray",
+        "pagina": "234-C5"
+    },
+    "SW6256": {
+        "codigo_emerald": "SW9559",
+        "nombre_emerald": "Scattered Showers",
+        "codigo_snap": "SW6256",
+        "nombre_snap": "Serious Gray",
+        "pagina": "234-C5"
+    },
+    "SW9560": {
+        "codigo_emerald": "SW9560",
+        "nombre_emerald": "Night Out",
+        "codigo_snap": "SW7665",
+        "nombre_snap": "Wall Street",
+        "pagina": "233-C5"
+    },
+    "SW7665": {
+        "codigo_emerald": "SW9560",
+        "nombre_emerald": "Night Out",
+        "codigo_snap": "SW7665",
+        "nombre_snap": "Wall Street",
+        "pagina": "233-C5"
+    },
+    "SW9561": {
+        "codigo_emerald": "SW9561",
+        "nombre_emerald": "Guild Grey",
+        "codigo_snap": "SW7662",
+        "nombre_snap": "Evening Shadow",
+        "pagina": "233-C2"
+    },
+    "SW7662": {
+        "codigo_emerald": "SW9561",
+        "nombre_emerald": "Guild Grey",
+        "codigo_snap": "SW7662",
+        "nombre_snap": "Evening Shadow",
+        "pagina": "233-C2"
+    },
+    "SW9562": {
+        "codigo_emerald": "SW9562",
+        "nombre_emerald": "Fortitude",
+        "codigo_snap": "SW6197",
+        "nombre_snap": "Aloof Gray",
+        "pagina": "216-C1"
+    },
+    "SW6197": {
+        "codigo_emerald": "SW9562",
+        "nombre_emerald": "Fortitude",
+        "codigo_snap": "SW6197",
+        "nombre_snap": "Aloof Gray",
+        "pagina": "216-C1"
+    },
+    "SW9563": {
+        "codigo_emerald": "SW9563",
+        "nombre_emerald": "Bedrock",
+        "codigo_snap": "SW9167",
+        "nombre_snap": "Polished Concrete",
+        "pagina": "240-C4"
+    },
+    "SW9167": {
+        "codigo_emerald": "SW9563",
+        "nombre_emerald": "Bedrock",
+        "codigo_snap": "SW9167",
+        "nombre_snap": "Polished Concrete",
+        "pagina": "240-C4"
+    },
+    "SW9564": {
+        "codigo_emerald": "SW9564",
+        "nombre_emerald": "Before the Storm",
+        "codigo_snap": "SW2849",
+        "nombre_snap": "Westchester Gray",
+        "pagina": "N/A"
+    },
+    "SW2849": {
+        "codigo_emerald": "SW9564",
+        "nombre_emerald": "Before the Storm",
+        "codigo_snap": "SW2849",
+        "nombre_snap": "Westchester Gray",
+        "pagina": "N/A"
+    },
+    "SW9565": {
+        "codigo_emerald": "SW9565",
+        "nombre_emerald": "Forged Steel",
+        "codigo_snap": "SW7674",
+        "nombre_snap": "Peppercorn",
+        "pagina": "236-C7"
+    },
+    "SW7674": {
+        "codigo_emerald": "SW9565",
+        "nombre_emerald": "Forged Steel",
+        "codigo_snap": "SW7674",
+        "nombre_snap": "Peppercorn",
+        "pagina": "236-C7"
+    },
+    "SW9566": {
+        "codigo_emerald": "SW9566",
+        "nombre_emerald": "Grey Heron",
+        "codigo_snap": "SW7647",
+        "nombre_snap": "Crushed Ice",
+        "pagina": "255-C6"
+    },
+    "SW7647": {
+        "codigo_emerald": "SW9566",
+        "nombre_emerald": "Grey Heron",
+        "codigo_snap": "SW7647",
+        "nombre_snap": "Crushed Ice",
+        "pagina": "255-C6"
+    },
+    "SW9567": {
+        "codigo_emerald": "SW9567",
+        "nombre_emerald": "Viaduct",
+        "codigo_snap": "SW2844",
+        "nombre_snap": "Roycroft Mist Gray",
+        "pagina": "N/A"
+    },
+    "SW2844": {
+        "codigo_emerald": "SW9567",
+        "nombre_emerald": "Viaduct",
+        "codigo_snap": "SW2844",
+        "nombre_snap": "Roycroft Mist Gray",
+        "pagina": "N/A"
+    },
+    "SW9568": {
+        "codigo_emerald": "SW9568",
+        "nombre_emerald": "Smooth Stone",
+        "codigo_snap": "SW2821",
+        "nombre_snap": "Downing Stone",
+        "pagina": "N/A"
+    },
+    "SW2821": {
+        "codigo_emerald": "SW9568",
+        "nombre_emerald": "Smooth Stone",
+        "codigo_snap": "SW2821",
+        "nombre_snap": "Downing Stone",
+        "pagina": "N/A"
+    },
+    "SW9569": {
+        "codigo_emerald": "SW9569",
+        "nombre_emerald": "Alloy",
+        "codigo_snap": "SW7018",
+        "nombre_snap": "Dovetail",
+        "pagina": "244-C5"
+    },
+    "SW7018": {
+        "codigo_emerald": "SW9569",
+        "nombre_emerald": "Alloy",
+        "codigo_snap": "SW7018",
+        "nombre_snap": "Dovetail",
+        "pagina": "244-C5"
+    },
+    "SW9570": {
+        "codigo_emerald": "SW9570",
+        "nombre_emerald": "Ironclad",
+        "codigo_snap": "SW6202",
+        "nombre_snap": "Cast Iron",
+        "pagina": "216-C7"
+    },
+    "SW6202": {
+        "codigo_emerald": "SW9570",
+        "nombre_emerald": "Ironclad",
+        "codigo_snap": "SW6202",
+        "nombre_snap": "Cast Iron",
+        "pagina": "216-C7"
+    },
+    "SW9571": {
+        "codigo_emerald": "SW9571",
+        "nombre_emerald": "Solstice",
+        "codigo_snap": "SW9166",
+        "nombre_snap": "Drift of Mist",
+        "pagina": "238-C2"
+    },
+    "SW9166": {
+        "codigo_emerald": "SW9571",
+        "nombre_emerald": "Solstice",
+        "codigo_snap": "SW9166",
+        "nombre_snap": "Drift of Mist",
+        "pagina": "238-C2"
+    },
+    "SW9572": {
+        "codigo_emerald": "SW9572",
+        "nombre_emerald": "Warm Pewter",
+        "codigo_snap": "SW7643",
+        "nombre_snap": "Pussywillow",
+        "pagina": "283-C4"
+    },
+    "SW7643": {
+        "codigo_emerald": "SW9572",
+        "nombre_emerald": "Warm Pewter",
+        "codigo_snap": "SW7643",
+        "nombre_snap": "Pussywillow",
+        "pagina": "283-C4"
+    },
+    "SW9573": {
+        "codigo_emerald": "SW9573",
+        "nombre_emerald": "Hibernate",
+        "codigo_snap": "SW7017",
+        "nombre_snap": "Dorian Gray",
+        "pagina": "244-C3"
+    },
+    "SW7017": {
+        "codigo_emerald": "SW9573",
+        "nombre_emerald": "Hibernate",
+        "codigo_snap": "SW7017",
+        "nombre_snap": "Dorian Gray",
+        "pagina": "244-C3"
+    },
+    "SW9574": {
+        "codigo_emerald": "SW9574",
+        "nombre_emerald": "Hulett Ore",
+        "codigo_snap": "SW7019",
+        "nombre_snap": "Gauntlet Gray",
+        "pagina": "244-C6"
+    },
+    "SW7019": {
+        "codigo_emerald": "SW9574",
+        "nombre_emerald": "Hulett Ore",
+        "codigo_snap": "SW7019",
+        "nombre_snap": "Gauntlet Gray",
+        "pagina": "244-C6"
+    },
+    "SW9575": {
+        "codigo_emerald": "SW9575",
+        "nombre_emerald": "Metropolis",
+        "codigo_snap": "SW7505",
+        "nombre_snap": "Manor House",
+        "pagina": "240-C7"
+    },
+    "SW7505": {
+        "codigo_emerald": "SW9575",
+        "nombre_emerald": "Metropolis",
+        "codigo_snap": "SW7505",
+        "nombre_snap": "Manor House",
+        "pagina": "240-C7"
+    },
+    "SW9576": {
+        "codigo_emerald": "SW9576",
+        "nombre_emerald": "Whirlwind",
+        "codigo_snap": "SW6064",
+        "nombre_snap": "Reticence",
+        "pagina": "196-C1"
+    },
+    "SW6064": {
+        "codigo_emerald": "SW9576",
+        "nombre_emerald": "Whirlwind",
+        "codigo_snap": "SW6064",
+        "nombre_snap": "Reticence",
+        "pagina": "196-C1"
+    },
+    "SW9577": {
+        "codigo_emerald": "SW9577",
+        "nombre_emerald": "Soft Suede",
+        "codigo_snap": "SW7043",
+        "nombre_snap": "Worldly Gray",
+        "pagina": "245-C1"
+    },
+    "SW9578": {
+        "codigo_emerald": "SW9578",
+        "nombre_emerald": "Restoration",
+        "codigo_snap": "SW7639",
+        "nombre_snap": "Ethereal Mood",
+        "pagina": "247-C4"
+    },
+    "SW7639": {
+        "codigo_emerald": "SW9578",
+        "nombre_emerald": "Restoration",
+        "codigo_snap": "SW7639",
+        "nombre_snap": "Ethereal Mood",
+        "pagina": "247-C4"
+    },
+    "SW9579": {
+        "codigo_emerald": "SW9579",
+        "nombre_emerald": "Timeless Taupe",
+        "codigo_snap": "SW6074",
+        "nombre_snap": "Spalding Gray",
+        "pagina": "242-C5"
+    },
+    "SW9580": {
+        "codigo_emerald": "SW9580",
+        "nombre_emerald": "Cracked Pepper",
+        "codigo_snap": "SW7675",
+        "nombre_snap": "Sealskin",
+        "pagina": "277-C7"
+    },
+    "SW7675": {
+        "codigo_emerald": "SW9580",
+        "nombre_emerald": "Cracked Pepper",
+        "codigo_snap": "SW7675",
+        "nombre_snap": "Sealskin",
+        "pagina": "277-C7"
+    },
+    "SW9581": {
+        "codigo_emerald": "SW9581",
+        "nombre_emerald": "Cotton",
+        "codigo_snap": "SW7001",
+        "nombre_snap": "Marshmallow",
+        "pagina": "267-C1"
+    },
+    "SW7001": {
+        "codigo_emerald": "SW9581",
+        "nombre_emerald": "Cotton",
+        "codigo_snap": "SW7001",
+        "nombre_snap": "Marshmallow",
+        "pagina": "267-C1"
+    },
+    "SW9582": {
+        "codigo_emerald": "SW9582",
+        "nombre_emerald": "White Sand",
+        "codigo_snap": "SW7005",
+        "nombre_snap": "Pure White",
+        "pagina": "255-C1"
+    },
+    "SW9583": {
+        "codigo_emerald": "SW9583",
+        "nombre_emerald": "Sanctuary",
+        "codigo_snap": "SW7627",
+        "nombre_snap": "White Heron",
+        "pagina": "259-C5"
+    },
+    "SW7627": {
+        "codigo_emerald": "SW9583",
+        "nombre_emerald": "Sanctuary",
+        "codigo_snap": "SW7627",
+        "nombre_snap": "White Heron",
+        "pagina": "259-C5"
+    },
+    "SW9584": {
+        "codigo_emerald": "SW9584",
+        "nombre_emerald": "Mortar",
+        "codigo_snap": "SW7028",
+        "nombre_snap": "Incredible White",
+        "pagina": "256-C4"
+    },
+    "SW7028": {
+        "codigo_emerald": "SW9584",
+        "nombre_emerald": "Mortar",
+        "codigo_snap": "SW7028",
+        "nombre_snap": "Incredible White",
+        "pagina": "256-C4"
+    },
+    "SW9585": {
+        "codigo_emerald": "SW9585",
+        "nombre_emerald": "Sunbleached",
+        "codigo_snap": "SW6070",
+        "nombre_snap": "Heron Plume",
+        "pagina": "259-C1"
+    },
+    "SW6070": {
+        "codigo_emerald": "SW9585",
+        "nombre_emerald": "Sunbleached",
+        "codigo_snap": "SW6070",
+        "nombre_snap": "Heron Plume",
+        "pagina": "259-C1"
+    },
+    "SW9586": {
+        "codigo_emerald": "SW9586",
+        "nombre_emerald": "White Sesame",
+        "codigo_snap": "SW6098",
+        "nombre_snap": "Pacer White",
+        "pagina": "267-C7"
+    },
+    "SW6098": {
+        "codigo_emerald": "SW9586",
+        "nombre_emerald": "White Sesame",
+        "codigo_snap": "SW6098",
+        "nombre_snap": "Pacer White",
+        "pagina": "267-C7"
+    },
+    "SW9587": {
+        "codigo_emerald": "SW9587",
+        "nombre_emerald": "Mushroom",
+        "codigo_snap": "SW7036",
+        "nombre_snap": "Accessible Beige",
+        "pagina": "249-C1"
+    },
+    "SW7036": {
+        "codigo_emerald": "SW9587",
+        "nombre_emerald": "Mushroom",
+        "codigo_snap": "SW7036",
+        "nombre_snap": "Accessible Beige",
+        "pagina": "249-C1"
+    },
+    "SW9588": {
+        "codigo_emerald": "SW9588",
+        "nombre_emerald": "High Sierra",
+        "codigo_snap": "SW0054",
+        "nombre_snap": "Twilight Gray",
+        "pagina": "N/A"
+    },
+    "SW0054": {
+        "codigo_emerald": "SW9588",
+        "nombre_emerald": "High Sierra",
+        "codigo_snap": "SW0054",
+        "nombre_snap": "Twilight Gray",
+        "pagina": "N/A"
+    },
+    "SW9589": {
+        "codigo_emerald": "SW9589",
+        "nombre_emerald": "Limewash",
+        "codigo_snap": "SW9166",
+        "nombre_snap": "Drift of Mist",
+        "pagina": "238-C2"
+    },
+    "SW9590": {
+        "codigo_emerald": "SW9590",
+        "nombre_emerald": "Taupe of the Morning",
+        "codigo_snap": "SW7541",
+        "nombre_snap": "Grecian Ivory",
+        "pagina": "247-C1"
+    },
+    "SW9591": {
+        "codigo_emerald": "SW9591",
+        "nombre_emerald": "Whisper",
+        "codigo_snap": "SW7023",
+        "nombre_snap": "Requisite Gray",
+        "pagina": "241-C2"
+    },
+    "SW7023": {
+        "codigo_emerald": "SW9591",
+        "nombre_emerald": "Whisper",
+        "codigo_snap": "SW7023",
+        "nombre_snap": "Requisite Gray",
+        "pagina": "241-C2"
+    },
+    "SW9592": {
+        "codigo_emerald": "SW9592",
+        "nombre_emerald": "Illusion",
+        "codigo_snap": "SW6171",
+        "nombre_snap": "Chatroom",
+        "pagina": "211-C3"
+    },
+    "SW6171": {
+        "codigo_emerald": "SW9592",
+        "nombre_emerald": "Illusion",
+        "codigo_snap": "SW6171",
+        "nombre_snap": "Chatroom",
+        "pagina": "211-C3"
+    },
+    "SW9593": {
+        "codigo_emerald": "SW9593",
+        "nombre_emerald": "Lauriston Stone",
+        "codigo_snap": "SW7053",
+        "nombre_snap": "Adaptive Shade",
+        "pagina": "246-C5"
+    },
+    "SW7053": {
+        "codigo_emerald": "SW9593",
+        "nombre_emerald": "Lauriston Stone",
+        "codigo_snap": "SW7053",
+        "nombre_snap": "Adaptive Shade",
+        "pagina": "246-C5"
+    },
+    "SW9594": {
+        "codigo_emerald": "SW9594",
+        "nombre_emerald": "Settlement",
+        "codigo_snap": "SW7060",
+        "nombre_snap": "Attitude Gray",
+        "pagina": "237-C5"
+    },
+    "SW7060": {
+        "codigo_emerald": "SW9594",
+        "nombre_emerald": "Settlement",
+        "codigo_snap": "SW7060",
+        "nombre_snap": "Attitude Gray",
+        "pagina": "237-C5"
+    },
+    "SW9595": {
+        "codigo_emerald": "SW9595",
+        "nombre_emerald": "Braintree",
+        "codigo_snap": "SW7068",
+        "nombre_snap": "Grizzle Gray",
+        "pagina": "236-C6"
+    },
+    "SW7068": {
+        "codigo_emerald": "SW9595",
+        "nombre_emerald": "Braintree",
+        "codigo_snap": "SW7068",
+        "nombre_snap": "Grizzle Gray",
+        "pagina": "236-C6"
+    },
+    "SW9596": {
+        "codigo_emerald": "SW9596",
+        "nombre_emerald": "Pachyderm",
+        "codigo_snap": "SW7023",
+        "nombre_snap": "Requisite Gray",
+        "pagina": "241-C2"
+    },
+    "SW9597": {
+        "codigo_emerald": "SW9597",
+        "nombre_emerald": "Western Reserve",
+        "codigo_snap": "SW7045",
+        "nombre_snap": "Intellectual Gray",
+        "pagina": "245-C3"
+    },
+    "SW7045": {
+        "codigo_emerald": "SW9597",
+        "nombre_emerald": "Western Reserve",
+        "codigo_snap": "SW7045",
+        "nombre_snap": "Intellectual Gray",
+        "pagina": "245-C3"
+    },
+    "SW9598": {
+        "codigo_emerald": "SW9598",
+        "nombre_emerald": "Solitary Slate",
+        "codigo_snap": "SW7046",
+        "nombre_snap": "Anonymous",
+        "pagina": "245-C5"
+    },
+    "SW9599": {
+        "codigo_emerald": "SW9599",
+        "nombre_emerald": "Limestone",
+        "codigo_snap": "SW6202",
+        "nombre_snap": "Cast Iron",
+        "pagina": "216-C7"
+    },
+    "SW9600": {
+        "codigo_emerald": "SW9600",
+        "nombre_emerald": "Armory",
+        "codigo_snap": "SW7069",
+        "nombre_snap": "Iron Ore",
+        "pagina": "251-C7"
+    },
+    "SW7069": {
+        "codigo_emerald": "SW9600",
+        "nombre_emerald": "Armory",
+        "codigo_snap": "SW7069",
+        "nombre_snap": "Iron Ore",
+        "pagina": "251-C7"
+    },
+    "SW9601": {
+        "codigo_emerald": "SW9601",
+        "nombre_emerald": "Symmetry",
+        "codigo_snap": "SW6078",
+        "nombre_snap": "Realist Beige",
+        "pagina": "198-C1"
+    },
+    "SW6078": {
+        "codigo_emerald": "SW9601",
+        "nombre_emerald": "Symmetry",
+        "codigo_snap": "SW6078",
+        "nombre_snap": "Realist Beige",
+        "pagina": "198-C1"
+    },
+    "SW9602": {
+        "codigo_emerald": "SW9602",
+        "nombre_emerald": "Studio Beige",
+        "codigo_snap": "SW0002",
+        "nombre_snap": "Chelsea Mauve",
+        "pagina": "N/A"
+    },
+    "SW0002": {
+        "codigo_emerald": "SW9602",
+        "nombre_emerald": "Studio Beige",
+        "codigo_snap": "SW0002",
+        "nombre_snap": "Chelsea Mauve",
+        "pagina": "N/A"
+    },
+    "SW9603": {
+        "codigo_emerald": "SW9603",
+        "nombre_emerald": "Quarry Stone",
+        "codigo_snap": "SW9172",
+        "nombre_snap": "Studio Clay",
+        "pagina": "246-C4"
+    },
+    "SW9172": {
+        "codigo_emerald": "SW9603",
+        "nombre_emerald": "Quarry Stone",
+        "codigo_snap": "SW9172",
+        "nombre_snap": "Studio Clay",
+        "pagina": "246-C4"
+    },
+    "SW9604": {
+        "codigo_emerald": "SW9604",
+        "nombre_emerald": "Tea Leaf",
+        "codigo_snap": "SW7520",
+        "nombre_snap": "Plantation Shutters",
+        "pagina": "277-C1"
+    },
+    "SW7520": {
+        "codigo_emerald": "SW9604",
+        "nombre_emerald": "Tea Leaf",
+        "codigo_snap": "SW7520",
+        "nombre_snap": "Plantation Shutters",
+        "pagina": "277-C1"
+    },
+    "SW9605": {
+        "codigo_emerald": "SW9605",
+        "nombre_emerald": "Clove",
+        "codigo_snap": "SW6174",
+        "nombre_snap": "Andiron",
+        "pagina": "278-C6"
+    },
+    "SW6174": {
+        "codigo_emerald": "SW9605",
+        "nombre_emerald": "Clove",
+        "codigo_snap": "SW6174",
+        "nombre_snap": "Andiron",
+        "pagina": "278-C6"
+    },
+    "SW9606": {
+        "codigo_emerald": "SW9606",
+        "nombre_emerald": "Slumber Sloth",
+        "codigo_snap": "SW7043",
+        "nombre_snap": "Worldly Gray",
+        "pagina": "245-C1"
+    },
+    "SW9607": {
+        "codigo_emerald": "SW9607",
+        "nombre_emerald": "Tanglewood",
+        "codigo_snap": "SW7744",
+        "nombre_snap": "Zeus",
+        "pagina": "286-C6"
+    },
+    "SW7744": {
+        "codigo_emerald": "SW9607",
+        "nombre_emerald": "Tanglewood",
+        "codigo_snap": "SW7744",
+        "nombre_snap": "Zeus",
+        "pagina": "286-C6"
+    },
+    "SW9608": {
+        "codigo_emerald": "SW9608",
+        "nombre_emerald": "Habitat",
+        "codigo_snap": "SW7032",
+        "nombre_snap": "Warm Stone",
+        "pagina": "243-C5"
+    },
+    "SW7032": {
+        "codigo_emerald": "SW9608",
+        "nombre_emerald": "Habitat",
+        "codigo_snap": "SW7032",
+        "nombre_snap": "Warm Stone",
+        "pagina": "243-C5"
+    },
+    "SW9609": {
+        "codigo_emerald": "SW9609",
+        "nombre_emerald": "Landmark",
+        "codigo_snap": "SW6075",
+        "nombre_snap": "Garret Gray",
+        "pagina": "242-C6"
+    },
+    "SW6075": {
+        "codigo_emerald": "SW9609",
+        "nombre_emerald": "Landmark",
+        "codigo_snap": "SW6075",
+        "nombre_snap": "Garret Gray",
+        "pagina": "242-C6"
+    },
+    "SW9611": {
+        "codigo_emerald": "SW9611",
+        "nombre_emerald": "Minimalist",
+        "codigo_snap": "SW7547",
+        "nombre_snap": "Sandbar",
+        "pagina": "284-C2"
+    },
+    "SW7547": {
+        "codigo_emerald": "SW9611",
+        "nombre_emerald": "Minimalist",
+        "codigo_snap": "SW7547",
+        "nombre_snap": "Sandbar",
+        "pagina": "284-C2"
+    },
+    "SW9612": {
+        "codigo_emerald": "SW9612",
+        "nombre_emerald": "Perfect Khaki",
+        "codigo_snap": "SW7038",
+        "nombre_snap": "Tony Taupe",
+        "pagina": "249-C3"
+    },
+    "SW7038": {
+        "codigo_emerald": "SW9612",
+        "nombre_emerald": "Perfect Khaki",
+        "codigo_snap": "SW7038",
+        "nombre_snap": "Tony Taupe",
+        "pagina": "249-C3"
+    },
+    "SW9613": {
+        "codigo_emerald": "SW9613",
+        "nombre_emerald": "Terrain",
+        "codigo_snap": "SW6172",
+        "nombre_snap": "Hardware",
+        "pagina": "211-C5"
+    },
+    "SW6172": {
+        "codigo_emerald": "SW9613",
+        "nombre_emerald": "Terrain",
+        "codigo_snap": "SW6172",
+        "nombre_snap": "Hardware",
+        "pagina": "211-C5"
+    },
+    "SW9614": {
+        "codigo_emerald": "SW9614",
+        "nombre_emerald": "Carriage Stone",
+        "codigo_snap": "SW0038",
+        "nombre_snap": "Library Pewter",
+        "pagina": "N/A"
+    },
+    "SW0038": {
+        "codigo_emerald": "SW9614",
+        "nombre_emerald": "Carriage Stone",
+        "codigo_snap": "SW0038",
+        "nombre_snap": "Library Pewter",
+        "pagina": "N/A"
+    },
+    "SW9615": {
+        "codigo_emerald": "SW9615",
+        "nombre_emerald": "Prospect",
+        "codigo_snap": "SW6167",
+        "nombre_snap": "Garden Gate",
+        "pagina": "212-C7"
+    },
+    "SW9616": {
+        "codigo_emerald": "SW9616",
+        "nombre_emerald": "Dumpling",
+        "codigo_snap": "SW7541",
+        "nombre_snap": "Grecian Ivory",
+        "pagina": "247-C1"
+    },
+    "SW9617": {
+        "codigo_emerald": "SW9617",
+        "nombre_emerald": "Beachcomber",
+        "codigo_snap": "SW7527",
+        "nombre_snap": "Nantucket Dune",
+        "pagina": "285-C2"
+    },
+    "SW7527": {
+        "codigo_emerald": "SW9617",
+        "nombre_emerald": "Beachcomber",
+        "codigo_snap": "SW7527",
+        "nombre_snap": "Nantucket Dune",
+        "pagina": "285-C2"
+    },
+    "SW9618": {
+        "codigo_emerald": "SW9618",
+        "nombre_emerald": "Woodbridge",
+        "codigo_snap": "SW9084",
+        "nombre_snap": "Cocoa Whip",
+        "pagina": "198-C4"
+    },
+    "SW9084": {
+        "codigo_emerald": "SW9618",
+        "nombre_emerald": "Woodbridge",
+        "codigo_snap": "SW9084",
+        "nombre_snap": "Cocoa Whip",
+        "pagina": "198-C4"
+    },
+    "SW9619": {
+        "codigo_emerald": "SW9619",
+        "nombre_emerald": "Teakwood",
+        "codigo_snap": "SW7737",
+        "nombre_snap": "Meadow Trail",
+        "pagina": "286-C7"
+    },
+    "SW7737": {
+        "codigo_emerald": "SW9619",
+        "nombre_emerald": "Teakwood",
+        "codigo_snap": "SW7737",
+        "nombre_snap": "Meadow Trail",
+        "pagina": "286-C7"
+    },
+    "SW9620": {
+        "codigo_emerald": "SW9620",
+        "nombre_emerald": "Prelude",
+        "codigo_snap": "SW6167",
+        "nombre_snap": "Garden Gate",
+        "pagina": "212-C7"
+    },
+    "SW9621": {
+        "codigo_emerald": "SW9621",
+        "nombre_emerald": "Clean Slate",
+        "codigo_snap": "SW6532",
+        "nombre_snap": "Aura White",
+        "pagina": "N/A"
+    },
+    "SW6532": {
+        "codigo_emerald": "SW9621",
+        "nombre_emerald": "Clean Slate",
+        "codigo_snap": "SW6532",
+        "nombre_snap": "Aura White",
+        "pagina": "N/A"
+    },
+    "SW9622": {
+        "codigo_emerald": "SW9622",
+        "nombre_emerald": "White Sail",
+        "codigo_snap": "SW6553",
+        "nombre_snap": "Heavenly White",
+        "pagina": "N/A"
+    },
+    "SW6553": {
+        "codigo_emerald": "SW9622",
+        "nombre_emerald": "White Sail",
+        "codigo_snap": "SW6553",
+        "nombre_snap": "Heavenly White",
+        "pagina": "N/A"
+    },
+    "SW9623": {
+        "codigo_emerald": "SW9623",
+        "nombre_emerald": "Snowbelt",
+        "codigo_snap": "SW7006",
+        "nombre_snap": "Extra White",
+        "pagina": "257-C1"
+    },
+    "SW9624": {
+        "codigo_emerald": "SW9624",
+        "nombre_emerald": "Winsome Grey",
+        "codigo_snap": "SW6819",
+        "nombre_snap": "Minuet White",
+        "pagina": "N/A"
+    },
+    "SW6819": {
+        "codigo_emerald": "SW9624",
+        "nombre_emerald": "Winsome Grey",
+        "codigo_snap": "SW6819",
+        "nombre_snap": "Minuet White",
+        "pagina": "N/A"
+    },
+    "SW9625": {
+        "codigo_emerald": "SW9625",
+        "nombre_emerald": "Grey Mist",
+        "codigo_snap": "SW6182",
+        "nombre_snap": "Ethereal White",
+        "pagina": "258-C5"
+    },
+    "SW6182": {
+        "codigo_emerald": "SW9625",
+        "nombre_emerald": "Grey Mist",
+        "codigo_snap": "SW6182",
+        "nombre_snap": "Ethereal White",
+        "pagina": "258-C5"
+    },
+    "SW9626": {
+        "codigo_emerald": "SW9626",
+        "nombre_emerald": "Glacier Bay",
+        "codigo_snap": "SW6231",
+        "nombre_snap": "Rock Candy",
+        "pagina": "257-C6"
+    },
+    "SW6231": {
+        "codigo_emerald": "SW9626",
+        "nombre_emerald": "Glacier Bay",
+        "codigo_snap": "SW6231",
+        "nombre_snap": "Rock Candy",
+        "pagina": "257-C6"
+    },
+    "SW9627": {
+        "codigo_emerald": "SW9627",
+        "nombre_emerald": "Pacific Fog",
+        "codigo_snap": "SW7666",
+        "nombre_snap": "Fleur de Sel",
+        "pagina": "258-C3"
+    },
+    "SW7666": {
+        "codigo_emerald": "SW9627",
+        "nombre_emerald": "Pacific Fog",
+        "codigo_snap": "SW7666",
+        "nombre_snap": "Fleur de Sel",
+        "pagina": "258-C3"
+    },
+    "SW9628": {
+        "codigo_emerald": "SW9628",
+        "nombre_emerald": "Winter Walk",
+        "codigo_snap": "SW7647",
+        "nombre_snap": "Crushed Ice",
+        "pagina": "255-C6"
+    },
+    "SW9629": {
+        "codigo_emerald": "SW9629",
+        "nombre_emerald": "Constellation",
+        "codigo_snap": "SW7654",
+        "nombre_snap": "Lattice",
+        "pagina": "239-C2"
+    },
+    "SW7654": {
+        "codigo_emerald": "SW9629",
+        "nombre_emerald": "Constellation",
+        "codigo_snap": "SW7654",
+        "nombre_snap": "Lattice",
+        "pagina": "239-C2"
+    },
+    "SW9630": {
+        "codigo_emerald": "SW9630",
+        "nombre_emerald": "Moorstone",
+        "codigo_snap": "SW7671",
+        "nombre_snap": "On the Rocks",
+        "pagina": "255-C7"
+    },
+    "SW9631": {
+        "codigo_emerald": "SW9631",
+        "nombre_emerald": "Mantra",
+        "codigo_snap": "SW7070",
+        "nombre_snap": "Site White",
+        "pagina": "257-C7"
+    },
+    "SW7070": {
+        "codigo_emerald": "SW9631",
+        "nombre_emerald": "Mantra",
+        "codigo_snap": "SW7070",
+        "nombre_snap": "Site White",
+        "pagina": "257-C7"
+    },
+    "SW9632": {
+        "codigo_emerald": "SW9632",
+        "nombre_emerald": "Serenely",
+        "codigo_snap": "SW9136",
+        "nombre_snap": "Lullaby",
+        "pagina": "221-C1"
+    },
+    "SW9136": {
+        "codigo_emerald": "SW9632",
+        "nombre_emerald": "Serenely",
+        "codigo_snap": "SW9136",
+        "nombre_snap": "Lullaby",
+        "pagina": "221-C1"
+    },
+    "SW9633": {
+        "codigo_emerald": "SW9633",
+        "nombre_emerald": "Silver Lake",
+        "codigo_snap": "SW9137",
+        "nombre_snap": "Niebla Azul",
+        "pagina": "221-C2"
+    },
+    "SW9137": {
+        "codigo_emerald": "SW9633",
+        "nombre_emerald": "Silver Lake",
+        "codigo_snap": "SW9137",
+        "nombre_snap": "Niebla Azul",
+        "pagina": "221-C2"
+    },
+    "SW9634": {
+        "codigo_emerald": "SW9634",
+        "nombre_emerald": "Morning at Sea",
+        "codigo_snap": "SW9135",
+        "nombre_snap": "Whirlpool",
+        "pagina": "220-C4"
+    },
+    "SW9135": {
+        "codigo_emerald": "SW9634",
+        "nombre_emerald": "Morning at Sea",
+        "codigo_snap": "SW9135",
+        "nombre_snap": "Whirlpool",
+        "pagina": "220-C4"
+    },
+    "SW9635": {
+        "codigo_emerald": "SW9635",
+        "nombre_emerald": "Stargazer",
+        "codigo_snap": "SW6243",
+        "nombre_snap": "Distance",
+        "pagina": "224-C6"
+    },
+    "SW6243": {
+        "codigo_emerald": "SW9635",
+        "nombre_emerald": "Stargazer",
+        "codigo_snap": "SW6243",
+        "nombre_snap": "Distance",
+        "pagina": "224-C6"
+    },
+    "SW9636": {
+        "codigo_emerald": "SW9636",
+        "nombre_emerald": "Windchill",
+        "codigo_snap": "SW7661",
+        "nombre_snap": "Reflection",
+        "pagina": "233-C1"
+    },
+    "SW7661": {
+        "codigo_emerald": "SW9636",
+        "nombre_emerald": "Windchill",
+        "codigo_snap": "SW7661",
+        "nombre_snap": "Reflection",
+        "pagina": "233-C1"
+    },
+    "SW9637": {
+        "codigo_emerald": "SW9637",
+        "nombre_emerald": "Mineral",
+        "codigo_snap": "SW7072",
+        "nombre_snap": "Online",
+        "pagina": "235-C2"
+    },
+    "SW7072": {
+        "codigo_emerald": "SW9637",
+        "nombre_emerald": "Mineral",
+        "codigo_snap": "SW7072",
+        "nombre_snap": "Online",
+        "pagina": "235-C2"
+    },
+    "SW9638": {
+        "codigo_emerald": "SW9638",
+        "nombre_emerald": "Breakwater",
+        "codigo_snap": "SW7059",
+        "nombre_snap": "Unusual Gray",
+        "pagina": "237-C3"
+    },
+    "SW7059": {
+        "codigo_emerald": "SW9638",
+        "nombre_emerald": "Breakwater",
+        "codigo_snap": "SW7059",
+        "nombre_snap": "Unusual Gray",
+        "pagina": "237-C3"
+    },
+    "SW9639": {
+        "codigo_emerald": "SW9639",
+        "nombre_emerald": "Rain Cloud",
+        "codigo_snap": "SW9141",
+        "nombre_snap": "Waterloo",
+        "pagina": "221-C6"
+    },
+    "SW9141": {
+        "codigo_emerald": "SW9639",
+        "nombre_emerald": "Rain Cloud",
+        "codigo_snap": "SW9141",
+        "nombre_snap": "Waterloo",
+        "pagina": "221-C6"
+    },
+    "SW9640": {
+        "codigo_emerald": "SW9640",
+        "nombre_emerald": "Sea Mariner",
+        "codigo_snap": "SW7615",
+        "nombre_snap": "Sea Serpent",
+        "pagina": "234-C7"
+    },
+    "SW7615": {
+        "codigo_emerald": "SW9640",
+        "nombre_emerald": "Sea Mariner",
+        "codigo_snap": "SW7615",
+        "nombre_snap": "Sea Serpent",
+        "pagina": "234-C7"
+    },
+    "SW9641": {
+        "codigo_emerald": "SW9641",
+        "nombre_emerald": "Dew Drop",
+        "codigo_snap": "SW6224",
+        "nombre_snap": "Mountain Air",
+        "pagina": "273-C1"
+    },
+    "SW6224": {
+        "codigo_emerald": "SW9641",
+        "nombre_emerald": "Dew Drop",
+        "codigo_snap": "SW6224",
+        "nombre_snap": "Mountain Air",
+        "pagina": "273-C1"
+    },
+    "SW9642": {
+        "codigo_emerald": "SW9642",
+        "nombre_emerald": "Silver Tipped Sage",
+        "codigo_snap": "SW6254",
+        "nombre_snap": "Lazy Gray",
+        "pagina": "234-C2"
+    },
+    "SW6254": {
+        "codigo_emerald": "SW9642",
+        "nombre_emerald": "Silver Tipped Sage",
+        "codigo_snap": "SW6254",
+        "nombre_snap": "Lazy Gray",
+        "pagina": "234-C2"
+    },
+    "SW9643": {
+        "codigo_emerald": "SW9643",
+        "nombre_emerald": "Eventide",
+        "codigo_snap": "SW7616",
+        "nombre_snap": "Breezy",
+        "pagina": "281-C2"
+    },
+    "SW7616": {
+        "codigo_emerald": "SW9643",
+        "nombre_emerald": "Eventide",
+        "codigo_snap": "SW7616",
+        "nombre_snap": "Breezy",
+        "pagina": "281-C2"
+    },
+    "SW9644": {
+        "codigo_emerald": "SW9644",
+        "nombre_emerald": "Portsmouth",
+        "codigo_snap": "SW2819",
+        "nombre_snap": "Downing Slate",
+        "pagina": "N/A"
+    },
+    "SW2819": {
+        "codigo_emerald": "SW9644",
+        "nombre_emerald": "Portsmouth",
+        "codigo_snap": "SW2819",
+        "nombre_snap": "Downing Slate",
+        "pagina": "N/A"
+    },
+    "SW9645": {
+        "codigo_emerald": "SW9645",
+        "nombre_emerald": "Big Dipper",
+        "codigo_snap": "SW7076",
+        "nombre_snap": "Cyberspace",
+        "pagina": "235-C7"
+    },
+    "SW7076": {
+        "codigo_emerald": "SW9645",
+        "nombre_emerald": "Big Dipper",
+        "codigo_snap": "SW7076",
+        "nombre_snap": "Cyberspace",
+        "pagina": "235-C7"
+    },
+    "SW9646": {
+        "codigo_emerald": "SW9646",
+        "nombre_emerald": "Create",
+        "codigo_snap": "SW7057",
+        "nombre_snap": "Silver Strand",
+        "pagina": "237-C1"
+    },
+    "SW9647": {
+        "codigo_emerald": "SW9647",
+        "nombre_emerald": "Soft Sage",
+        "codigo_snap": "SW7016",
+        "nombre_snap": "Mindful Gray",
+        "pagina": "244-C2"
+    },
+    "SW7016": {
+        "codigo_emerald": "SW9647",
+        "nombre_emerald": "Soft Sage",
+        "codigo_snap": "SW7016",
+        "nombre_snap": "Mindful Gray",
+        "pagina": "244-C2"
+    },
+    "SW9648": {
+        "codigo_emerald": "SW9648",
+        "nombre_emerald": "Frosted Fern",
+        "codigo_snap": "SW7640",
+        "nombre_snap": "Fawn Brindle",
+        "pagina": "247-C5"
+    },
+    "SW7640": {
+        "codigo_emerald": "SW9648",
+        "nombre_emerald": "Frosted Fern",
+        "codigo_snap": "SW7640",
+        "nombre_snap": "Fawn Brindle",
+        "pagina": "247-C5"
+    },
+    "SW9649": {
+        "codigo_emerald": "SW9649",
+        "nombre_emerald": "Willowleaf",
+        "codigo_snap": "SW7743",
+        "nombre_snap": "Mountain Road",
+        "pagina": "247-C7"
+    },
+    "SW7743": {
+        "codigo_emerald": "SW9649",
+        "nombre_emerald": "Willowleaf",
+        "codigo_snap": "SW7743",
+        "nombre_snap": "Mountain Road",
+        "pagina": "247-C7"
+    },
+    "SW9650": {
+        "codigo_emerald": "SW9650",
+        "nombre_emerald": "Succulent",
+        "codigo_snap": "SW7068",
+        "nombre_snap": "Grizzle Gray",
+        "pagina": "236-C6"
+    },
+    "SW9651": {
+        "codigo_emerald": "SW9651",
+        "nombre_emerald": "Sea Spray",
+        "codigo_snap": "SW7057",
+        "nombre_snap": "Silver Strand",
+        "pagina": "237-C1"
+    },
+    "SW9652": {
+        "codigo_emerald": "SW9652",
+        "nombre_emerald": "Hazel Gaze",
+        "codigo_snap": "SW6184",
+        "nombre_snap": "Austere Gray",
+        "pagina": "215-C2"
+    },
+    "SW6184": {
+        "codigo_emerald": "SW9652",
+        "nombre_emerald": "Hazel Gaze",
+        "codigo_snap": "SW6184",
+        "nombre_snap": "Austere Gray",
+        "pagina": "215-C2"
+    },
+    "SW9653": {
+        "codigo_emerald": "SW9653",
+        "nombre_emerald": "Forever Green",
+        "codigo_snap": "SW6206",
+        "nombre_snap": "Oyster Bay",
+        "pagina": "217-C3"
+    },
+    "SW6206": {
+        "codigo_emerald": "SW9653",
+        "nombre_emerald": "Forever Green",
+        "codigo_snap": "SW6206",
+        "nombre_snap": "Oyster Bay",
+        "pagina": "217-C3"
+    },
+    "SW9654": {
+        "codigo_emerald": "SW9654",
+        "nombre_emerald": "Taiga",
+        "codigo_snap": "SW6207",
+        "nombre_snap": "Retreat",
+        "pagina": "217-C5"
+    },
+    "SW6207": {
+        "codigo_emerald": "SW9654",
+        "nombre_emerald": "Taiga",
+        "codigo_snap": "SW6207",
+        "nombre_snap": "Retreat",
+        "pagina": "217-C5"
+    },
+    "SW9655": {
+        "codigo_emerald": "SW9655",
+        "nombre_emerald": "Mountain Pass",
+        "codigo_snap": "SW6236",
+        "nombre_snap": "Grays Harbor",
+        "pagina": "222-C6"
+    },
+    "SW6236": {
+        "codigo_emerald": "SW9655",
+        "nombre_emerald": "Mountain Pass",
+        "codigo_snap": "SW6236",
+        "nombre_snap": "Grays Harbor",
+        "pagina": "222-C6"
+    },
+    "SW9656": {
+        "codigo_emerald": "SW9656",
+        "nombre_emerald": "Pine Frost",
+        "codigo_snap": "SW7653",
+        "nombre_snap": "Silverpointe",
+        "pagina": "239-C1"
+    },
+    "SW7653": {
+        "codigo_emerald": "SW9656",
+        "nombre_emerald": "Pine Frost",
+        "codigo_snap": "SW7653",
+        "nombre_snap": "Silverpointe",
+        "pagina": "239-C1"
+    },
+    "SW9657": {
+        "codigo_emerald": "SW9657",
+        "nombre_emerald": "Piedmont",
+        "codigo_snap": "SW6211",
+        "nombre_snap": "Rainwashed",
+        "pagina": "218-C1"
+    },
+    "SW6211": {
+        "codigo_emerald": "SW9657",
+        "nombre_emerald": "Piedmont",
+        "codigo_snap": "SW6211",
+        "nombre_snap": "Rainwashed",
+        "pagina": "218-C1"
+    },
+    "SW9658": {
+        "codigo_emerald": "SW9658",
+        "nombre_emerald": "Fresh Eucalyptus",
+        "codigo_snap": "SW6248",
+        "nombre_snap": "Jubilee",
+        "pagina": "225-C3"
+    },
+    "SW6248": {
+        "codigo_emerald": "SW9658",
+        "nombre_emerald": "Fresh Eucalyptus",
+        "codigo_snap": "SW6248",
+        "nombre_snap": "Jubilee",
+        "pagina": "225-C3"
+    },
+    "SW9659": {
+        "codigo_emerald": "SW9659",
+        "nombre_emerald": "Marine",
+        "codigo_snap": "SW0017",
+        "nombre_snap": "Calico",
+        "pagina": "N/A"
+    },
+    "SW0017": {
+        "codigo_emerald": "SW9659",
+        "nombre_emerald": "Marine",
+        "codigo_snap": "SW0017",
+        "nombre_snap": "Calico",
+        "pagina": "N/A"
+    },
+    "SW9660": {
+        "codigo_emerald": "SW9660",
+        "nombre_emerald": "Tarragon",
+        "codigo_snap": "SW7615",
+        "nombre_snap": "Sea Serpent",
+        "pagina": "234-C7"
+    },
+    "SW9661": {
+        "codigo_emerald": "SW9661",
+        "nombre_emerald": "Radiant Dawn",
+        "codigo_snap": "SW6112",
+        "nombre_snap": "Biscuit",
+        "pagina": "265-C3"
+    },
+    "SW6112": {
+        "codigo_emerald": "SW9661",
+        "nombre_emerald": "Radiant Dawn",
+        "codigo_snap": "SW6112",
+        "nombre_snap": "Biscuit",
+        "pagina": "265-C3"
+    },
+    "SW9662": {
+        "codigo_emerald": "SW9662",
+        "nombre_emerald": "Fresh Zest",
+        "codigo_snap": "SW7561",
+        "nombre_snap": "Lemon Meringue",
+        "pagina": "295-C1"
+    },
+    "SW7561": {
+        "codigo_emerald": "SW9662",
+        "nombre_emerald": "Fresh Zest",
+        "codigo_snap": "SW7561",
+        "nombre_snap": "Lemon Meringue",
+        "pagina": "295-C1"
+    },
+    "SW9663": {
+        "codigo_emerald": "SW9663",
+        "nombre_emerald": "Honeypot",
+        "codigo_snap": "SW6673",
+        "nombre_snap": "Banana Cream",
+        "pagina": "133-C1"
+    },
+    "SW6673": {
+        "codigo_emerald": "SW9663",
+        "nombre_emerald": "Honeypot",
+        "codigo_snap": "SW6673",
+        "nombre_snap": "Banana Cream",
+        "pagina": "133-C1"
+    },
+    "SW9664": {
+        "codigo_emerald": "SW9664",
+        "nombre_emerald": "Sun Salutation",
+        "codigo_snap": "SW6660",
+        "nombre_snap": "Honey Blush",
+        "pagina": "123-C2"
+    },
+    "SW6660": {
+        "codigo_emerald": "SW9664",
+        "nombre_emerald": "Sun Salutation",
+        "codigo_snap": "SW6660",
+        "nombre_snap": "Honey Blush",
+        "pagina": "123-C2"
+    },
+    "SW9665": {
+        "codigo_emerald": "SW9665",
+        "nombre_emerald": "Sunny Side Up",
+        "codigo_snap": "SW6901",
+        "nombre_snap": "Daffodil",
+        "pagina": "269-C7"
+    },
+    "SW6901": {
+        "codigo_emerald": "SW9665",
+        "nombre_emerald": "Sunny Side Up",
+        "codigo_snap": "SW6901",
+        "nombre_snap": "Daffodil",
+        "pagina": "269-C7"
+    },
+    "SW9666": {
+        "codigo_emerald": "SW9666",
+        "nombre_emerald": "Barely Pear",
+        "codigo_snap": "SW7101",
+        "nombre_snap": "Futon",
+        "pagina": "267-C4"
+    },
+    "SW7101": {
+        "codigo_emerald": "SW9666",
+        "nombre_emerald": "Barely Pear",
+        "codigo_snap": "SW7101",
+        "nombre_snap": "Futon",
+        "pagina": "267-C4"
+    },
+    "SW9667": {
+        "codigo_emerald": "SW9667",
+        "nombre_emerald": "Carambola",
+        "codigo_snap": "SW6707",
+        "nombre_snap": "Narcissus",
+        "pagina": "N/A"
+    },
+    "SW6707": {
+        "codigo_emerald": "SW9667",
+        "nombre_emerald": "Carambola",
+        "codigo_snap": "SW6707",
+        "nombre_snap": "Narcissus",
+        "pagina": "N/A"
+    },
+    "SW9668": {
+        "codigo_emerald": "SW9668",
+        "nombre_emerald": "Wild Lime",
+        "codigo_snap": "SW6414",
+        "nombre_snap": "Rice Paddy",
+        "pagina": "145-C1"
+    },
+    "SW6414": {
+        "codigo_emerald": "SW9668",
+        "nombre_emerald": "Wild Lime",
+        "codigo_snap": "SW6414",
+        "nombre_snap": "Rice Paddy",
+        "pagina": "145-C1"
+    },
+    "SW9669": {
+        "codigo_emerald": "SW9669",
+        "nombre_emerald": "Glade Green",
+        "codigo_snap": "SW0042",
+        "nombre_snap": "Ruskin Room Green",
+        "pagina": "N/A"
+    },
+    "SW0042": {
+        "codigo_emerald": "SW9669",
+        "nombre_emerald": "Glade Green",
+        "codigo_snap": "SW0042",
+        "nombre_snap": "Ruskin Room Green",
+        "pagina": "N/A"
+    },
+    "SW9670": {
+        "codigo_emerald": "SW9670",
+        "nombre_emerald": "Olivetone",
+        "codigo_snap": "SW0065",
+        "nombre_snap": "Vogue Green",
+        "pagina": "N/A"
+    },
+    "SW0065": {
+        "codigo_emerald": "SW9670",
+        "nombre_emerald": "Olivetone",
+        "codigo_snap": "SW0065",
+        "nombre_snap": "Vogue Green",
+        "pagina": "N/A"
+    },
+    "SW9671": {
+        "codigo_emerald": "SW9671",
+        "nombre_emerald": "Serendipity",
+        "codigo_snap": "SW6819",
+        "nombre_snap": "Minuet White",
+        "pagina": "N/A"
+    },
+    "SW9672": {
+        "codigo_emerald": "SW9672",
+        "nombre_emerald": "Wavecrest",
+        "codigo_snap": "SW6729",
+        "nombre_snap": "Lacewing",
+        "pagina": "150-C1"
+    },
+    "SW6729": {
+        "codigo_emerald": "SW9672",
+        "nombre_emerald": "Wavecrest",
+        "codigo_snap": "SW6729",
+        "nombre_snap": "Lacewing",
+        "pagina": "150-C1"
+    },
+    "SW9673": {
+        "codigo_emerald": "SW9673",
+        "nombre_emerald": "Valleyview",
+        "codigo_snap": "SW6730",
+        "nombre_snap": "Romaine",
+        "pagina": "150-C2"
+    },
+    "SW6730": {
+        "codigo_emerald": "SW9673",
+        "nombre_emerald": "Valleyview",
+        "codigo_snap": "SW6730",
+        "nombre_snap": "Romaine",
+        "pagina": "150-C2"
+    },
+    "SW9674": {
+        "codigo_emerald": "SW9674",
+        "nombre_emerald": "Leaflet",
+        "codigo_snap": "SW7742",
+        "nombre_snap": "Agate Green",
+        "pagina": "158-C4"
+    },
+    "SW7742": {
+        "codigo_emerald": "SW9674",
+        "nombre_emerald": "Leaflet",
+        "codigo_snap": "SW7742",
+        "nombre_snap": "Agate Green",
+        "pagina": "158-C4"
+    },
+    "SW9675": {
+        "codigo_emerald": "SW9675",
+        "nombre_emerald": "Westhaven",
+        "codigo_snap": "SW6468",
+        "nombre_snap": "Hunt Club",
+        "pagina": "160-C7"
+    },
+    "SW6468": {
+        "codigo_emerald": "SW9675",
+        "nombre_emerald": "Westhaven",
+        "codigo_snap": "SW6468",
+        "nombre_snap": "Hunt Club",
+        "pagina": "160-C7"
+    },
+    "SW9676": {
+        "codigo_emerald": "SW9676",
+        "nombre_emerald": "Green Glimpse",
+        "codigo_snap": "SW6553",
+        "nombre_snap": "Heavenly White",
+        "pagina": "N/A"
+    },
+    "SW9677": {
+        "codigo_emerald": "SW9677",
+        "nombre_emerald": "Kingston",
+        "codigo_snap": "SW6210",
+        "nombre_snap": "Window Pane",
+        "pagina": "271-C3"
+    },
+    "SW6210": {
+        "codigo_emerald": "SW9677",
+        "nombre_emerald": "Kingston",
+        "codigo_snap": "SW6210",
+        "nombre_snap": "Window Pane",
+        "pagina": "271-C3"
+    },
+    "SW9678": {
+        "codigo_emerald": "SW9678",
+        "nombre_emerald": "Holly Glen",
+        "codigo_snap": "SW6205",
+        "nombre_snap": "Comfort Gray",
+        "pagina": "217-C2"
+    },
+    "SW6205": {
+        "codigo_emerald": "SW9678",
+        "nombre_emerald": "Holly Glen",
+        "codigo_snap": "SW6205",
+        "nombre_snap": "Comfort Gray",
+        "pagina": "217-C2"
+    },
+    "SW9679": {
+        "codigo_emerald": "SW9679",
+        "nombre_emerald": "Juniper",
+        "codigo_snap": "SW0018",
+        "nombre_snap": "Teal Stencil",
+        "pagina": "N/A"
+    },
+    "SW0018": {
+        "codigo_emerald": "SW9679",
+        "nombre_emerald": "Juniper",
+        "codigo_snap": "SW0018",
+        "nombre_snap": "Teal Stencil",
+        "pagina": "N/A"
+    },
+    "SW9681": {
+        "codigo_emerald": "SW9681",
+        "nombre_emerald": "Rainsong",
+        "codigo_snap": "SW7136",
+        "nombre_snap": "Chapaeu Violet",
+        "pagina": "N/A"
+    },
+    "SW7136": {
+        "codigo_emerald": "SW9681",
+        "nombre_emerald": "Rainsong",
+        "codigo_snap": "SW7136",
+        "nombre_snap": "Chapaeu Violet",
+        "pagina": "N/A"
+    },
+    "SW9682": {
+        "codigo_emerald": "SW9682",
+        "nombre_emerald": "Silent Ripple",
+        "codigo_snap": "SW6798",
+        "nombre_snap": "Iceberg",
+        "pagina": "272-C6"
+    },
+    "SW6798": {
+        "codigo_emerald": "SW9682",
+        "nombre_emerald": "Silent Ripple",
+        "codigo_snap": "SW6798",
+        "nombre_snap": "Iceberg",
+        "pagina": "272-C6"
+    },
+    "SW9683": {
+        "codigo_emerald": "SW9683",
+        "nombre_emerald": "Lakeside",
+        "codigo_snap": "SW6248",
+        "nombre_snap": "Jubilee",
+        "pagina": "225-C3"
+    },
+    "SW9684": {
+        "codigo_emerald": "SW9684",
+        "nombre_emerald": "Azure Tide",
+        "codigo_snap": "SW6530",
+        "nombre_snap": "Revel Blue",
+        "pagina": "178-C6"
+    },
+    "SW6530": {
+        "codigo_emerald": "SW9684",
+        "nombre_emerald": "Azure Tide",
+        "codigo_snap": "SW6530",
+        "nombre_snap": "Revel Blue",
+        "pagina": "178-C6"
+    },
+    "SW9685": {
+        "codigo_emerald": "SW9685",
+        "nombre_emerald": "After the Storm",
+        "codigo_snap": "SW6258",
+        "nombre_snap": "Tricorn Black",
+        "pagina": "251-C1"
+    },
+    "SW6258": {
+        "codigo_emerald": "SW9685",
+        "nombre_emerald": "After the Storm",
+        "codigo_snap": "SW6258",
+        "nombre_snap": "Tricorn Black",
+        "pagina": "251-C1"
+    },
+    "SW9686": {
+        "codigo_emerald": "SW9686",
+        "nombre_emerald": "Opalescent",
+        "codigo_snap": "SW6532",
+        "nombre_snap": "Aura White",
+        "pagina": "N/A"
+    },
+    "SW9687": {
+        "codigo_emerald": "SW9687",
+        "nombre_emerald": "Blue Iris",
+        "codigo_snap": "SW7070",
+        "nombre_snap": "Site White",
+        "pagina": "257-C7"
+    },
+    "SW9688": {
+        "codigo_emerald": "SW9688",
+        "nombre_emerald": "Modern Lavender",
+        "codigo_snap": "SW6255",
+        "nombre_snap": "Morning Fog",
+        "pagina": "234-C3"
+    },
+    "SW6255": {
+        "codigo_emerald": "SW9688",
+        "nombre_emerald": "Modern Lavender",
+        "codigo_snap": "SW6255",
+        "nombre_snap": "Morning Fog",
+        "pagina": "234-C3"
+    },
+    "SW9689": {
+        "codigo_emerald": "SW9689",
+        "nombre_emerald": "Ripe Berry",
+        "codigo_snap": "SW6551",
+        "nombre_snap": "Purple Passage",
+        "pagina": "188-C6"
+    },
+    "SW6551": {
+        "codigo_emerald": "SW9689",
+        "nombre_emerald": "Ripe Berry",
+        "codigo_snap": "SW6551",
+        "nombre_snap": "Purple Passage",
+        "pagina": "188-C6"
+    },
+    "SW9690": {
+        "codigo_emerald": "SW9690",
+        "nombre_emerald": "Mountain Fig",
+        "codigo_snap": "SW9179",
+        "nombre_snap": "Anchors Aweigh",
+        "pagina": "253-C7"
+    },
+    "SW9179": {
+        "codigo_emerald": "SW9690",
+        "nombre_emerald": "Mountain Fig",
+        "codigo_snap": "SW9179",
+        "nombre_snap": "Anchors Aweigh",
+        "pagina": "253-C7"
+    },
+    "SW9691": {
+        "codigo_emerald": "SW9691",
+        "nombre_emerald": "Crystalline",
+        "codigo_snap": "SW6280",
+        "nombre_snap": "Mauve Tinge",
+        "pagina": "N/A"
+    },
+    "SW6280": {
+        "codigo_emerald": "SW9691",
+        "nombre_emerald": "Crystalline",
+        "codigo_snap": "SW6280",
+        "nombre_snap": "Mauve Tinge",
+        "pagina": "N/A"
+    },
+    "SW9692": {
+        "codigo_emerald": "SW9692",
+        "nombre_emerald": "Cotton Candy",
+        "codigo_snap": "SW6595",
+        "nombre_snap": "Amour Pink",
+        "pagina": "N/A"
+    },
+    "SW6595": {
+        "codigo_emerald": "SW9692",
+        "nombre_emerald": "Cotton Candy",
+        "codigo_snap": "SW6595",
+        "nombre_snap": "Amour Pink",
+        "pagina": "N/A"
+    },
+    "SW9693": {
+        "codigo_emerald": "SW9693",
+        "nombre_emerald": "Rose Pink",
+        "codigo_snap": "SW6302",
+        "nombre_snap": "Innocence",
+        "pagina": "111-C1"
+    },
+    "SW6302": {
+        "codigo_emerald": "SW9693",
+        "nombre_emerald": "Rose Pink",
+        "codigo_snap": "SW6302",
+        "nombre_snap": "Innocence",
+        "pagina": "111-C1"
+    },
+    "SW9694": {
+        "codigo_emerald": "SW9694",
+        "nombre_emerald": "Wild Poppy",
+        "codigo_snap": "SW6326",
+        "nombre_snap": "Henna Shade",
+        "pagina": "114-C5"
+    },
+    "SW6326": {
+        "codigo_emerald": "SW9694",
+        "nombre_emerald": "Wild Poppy",
+        "codigo_snap": "SW6326",
+        "nombre_snap": "Henna Shade",
+        "pagina": "114-C5"
+    },
+    "SW9695": {
+        "codigo_emerald": "SW9695",
+        "nombre_emerald": "Beetroot",
+        "codigo_snap": "SW7586",
+        "nombre_snap": "Stolen Kiss",
+        "pagina": "275-C1"
+    },
+    "SW7586": {
+        "codigo_emerald": "SW9695",
+        "nombre_emerald": "Beetroot",
+        "codigo_snap": "SW7586",
+        "nombre_snap": "Stolen Kiss",
+        "pagina": "275-C1"
+    },
+    "SW9696": {
+        "codigo_emerald": "SW9696",
+        "nombre_emerald": "Pale Pink",
+        "codigo_snap": "SW7008",
+        "nombre_snap": "Alabaster",
+        "pagina": "255-C2"
+    },
+    "SW7008": {
+        "codigo_emerald": "SW9696",
+        "nombre_emerald": "Pale Pink",
+        "codigo_snap": "SW7008",
+        "nombre_snap": "Alabaster",
+        "pagina": "255-C2"
+    },
+    "SW9697": {
+        "codigo_emerald": "SW9697",
+        "nombre_emerald": "Lotus Petal",
+        "codigo_snap": "SW6602",
+        "nombre_snap": "Angelic",
+        "pagina": "N/A"
+    },
+    "SW6602": {
+        "codigo_emerald": "SW9697",
+        "nombre_emerald": "Lotus Petal",
+        "codigo_snap": "SW6602",
+        "nombre_snap": "Angelic",
+        "pagina": "N/A"
+    },
+    "SW9698": {
+        "codigo_emerald": "SW9698",
+        "nombre_emerald": "Corallite",
+        "codigo_snap": "SW7683",
+        "nombre_snap": "Buff",
+        "pagina": "296-C1"
+    },
+    "SW7683": {
+        "codigo_emerald": "SW9698",
+        "nombre_emerald": "Corallite",
+        "codigo_snap": "SW7683",
+        "nombre_snap": "Buff",
+        "pagina": "296-C1"
+    },
+    "SW9699": {
+        "codigo_emerald": "SW9699",
+        "nombre_emerald": "Stone Fruit",
+        "codigo_snap": "SW6873",
+        "nombre_snap": "Coral Bead",
+        "pagina": "N/A"
+    },
+    "SW6873": {
+        "codigo_emerald": "SW9699",
+        "nombre_emerald": "Stone Fruit",
+        "codigo_snap": "SW6873",
+        "nombre_snap": "Coral Bead",
+        "pagina": "N/A"
+    },
+    "SW9700": {
+        "codigo_emerald": "SW9700",
+        "nombre_emerald": "Full Bloom",
+        "codigo_snap": "SW6599",
+        "nombre_snap": "Begonia",
+        "pagina": "107-C4"
+    },
+    "SW6599": {
+        "codigo_emerald": "SW9700",
+        "nombre_emerald": "Full Bloom",
+        "codigo_snap": "SW6599",
+        "nombre_snap": "Begonia",
+        "pagina": "107-C4"
+    }
+}
