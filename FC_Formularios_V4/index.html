@@ -745,6 +745,17 @@
         </div>
       </details>
     </div>
+
+<details class="config-group" open style="border: 2px solid var(--alerta);">
+        <summary style="color: var(--alerta);">🚨 Mantenimiento (Celulares)</summary>
+        <div class="config-content">
+          <p style="font-size: 0.85rem; color: var(--txt-suave); margin-top: 0;">
+            Si actualizaste la app y un celular no muestra los cambios, presiona este botón en ese celular.
+          </p>
+          <button class="btn peligro" onclick="forzarActualizacion()">🔄 Forzar Actualización de la App</button>
+        </div>
+      </details>
+    
   </div>
 
   <!-- MODAL PARA NUEVA FÓRMULA PROPIA (CUSTOM) -->
@@ -871,17 +882,7 @@
       </label>
       <button class="btn secundario" onclick="cerrarModalEtiqueta()">Cancelar</button>
       <button class="btn exito" onclick="dispararDYMO()" id="btnImprimirDYMO">🖨️ Imprimir en DYMO (PC)</button>
-    </div>
- <details class="config-group" open style="border: 2px solid var(--alerta);">
-        <summary style="color: var(--alerta);">🚨 Mantenimiento (Celulares)</summary>
-        <div class="config-content">
-          <p style="font-size: 0.85rem; color: var(--txt-suave); margin-top: 0;">
-            Si actualizaste la app y un celular no muestra los cambios, presiona este botón en ese celular.
-          </p>
-          <button class="btn peligro" onclick="forzarActualizacion()">🔄 Forzar Actualización de la App</button>
-        </div>
-      </details>
-    
+    </div>   
   </div>
 
   <script>
